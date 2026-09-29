@@ -8,7 +8,7 @@ summary: ''
 climbing:
 - name: Cima del Bal
   color: yellow
-  grade: ''
+  grade: PD−
   km: 8.11
   link: ''
 - name: Monte Aiga

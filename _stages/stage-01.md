@@ -7,13 +7,13 @@ date_label: Saturday 25 July
 summary: ''
 climbing:
 - name: Punta Tino Prato
-  color: green
-  grade: ''
+  color: yellow
+  grade: PD−
   km: 7.92
   link: ''
 - name: Castello delle Aquile
   color: yellow
-  grade: ''
+  grade: PD
   km: 10.62
   link: ''
 gallery: []

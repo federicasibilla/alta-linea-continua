@@ -8,7 +8,7 @@ summary: ''
 climbing:
 - name: Monte Corborant
   color: green
-  grade: ''
+  grade: F
   km: 11.67
   link: ''
 gallery: []

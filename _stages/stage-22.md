@@ -8,7 +8,7 @@ summary: ''
 climbing:
 - name: Aiguillette
   color: green
-  grade: ''
+  grade: F+
   km: 3.76
   link: ''
 gallery: []

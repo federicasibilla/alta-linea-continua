@@ -8,7 +8,7 @@ summary: ''
 climbing:
 - name: Cima di Leccia
   color: yellow
-  grade: ''
+  grade: PD+
   km: 7.58
   link: ''
 gallery: []
