@@ -17,8 +17,8 @@ content:
         type: string
         hidden: true
         default: Alta Linea Continua
-      - name: kicker
-        label: Line above the title
+      - name: tagline
+        label: Line under the title
         type: string
       - name: intro_title
         label: Introduction headline

@@ -71,13 +71,17 @@
     load(function (geo) {
       var map = makeMap(el), groups = {}, bounds = L.latLngBounds([]);
       var listLinks = document.querySelectorAll(".list a[data-n]");
+      var current = -1, spineApi = null;
       function highlight(n) {
+        if (n === current) return;
+        current = n;
         Object.keys(groups).forEach(function (k) {
           var on = +k === n;
-          groups[k].line.setStyle({ color: on ? COL.accent : COL.route, weight: on ? 6 : 3.2, opacity: on ? 1 : 0.85 });
+          groups[k].line.setStyle({ color: on ? COL.accent : COL.route, weight: on ? 6 : 3.2, opacity: on ? 1 : (n >= 0 ? 0.35 : 0.85) });
           if (on) groups[k].line.bringToFront();
         });
         listLinks.forEach(function (a) { a.classList.toggle("on", +a.dataset.n === n); });
+        if (spineApi) spineApi.set(n);
       }
       geo.forEach(function (s) {
         var meta = META[s.n] || { n: s.n, start: "", end: "", date: "", url: "#" };
@@ -95,12 +99,66 @@
       });
       geo.forEach(function (s) { if (META[s.n]) addClimbMarkers(map, s, META[s.n], 17); });
       map.fitBounds(bounds, { padding: [24, 24] });
+      var sp = document.getElementById("spine");
+      if (sp) spineApi = spine(sp, geo, highlight);
       listLinks.forEach(function (a) {
         a.addEventListener("mouseenter", function () { highlight(+a.dataset.n); });
         a.addEventListener("mouseleave", function () { highlight(-1); });
       });
     });
   }
+
+  /* ---------- the continuous line (home page) ---------- */
+  function spine(el, geo, highlight) {
+    var W = 1000, H = 150, TOP = 6, off = 0, segs = [];
+    geo.forEach(function (s) { var end = s.profile[s.profile.length - 1][0]; segs.push({ s: s, off: off, len: end }); off += end; });
+    var TOT = off, amin = Infinity, amax = -Infinity;
+    geo.forEach(function (s) { s.profile.forEach(function (p) { if (p[1] < amin) amin = p[1]; if (p[1] > amax) amax = p[1]; }); });
+    var X = function (km) { return km / TOT * W; };
+    var Y = function (a) { return TOP + (1 - (a - amin) / (amax - amin)) * (H - TOP - 4); };
+    var svg = '<svg viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" role="img" aria-label="Elevation profile of the whole route">';
+    segs.forEach(function (g, i) { if (i) { var x = X(g.off); svg += '<line class="tick" x1="' + x + '" x2="' + x + '" y1="' + (H - 7) + '" y2="' + H + '"/>'; } });
+    segs.forEach(function (g) {
+      var pr = g.s.profile, step = Math.max(1, Math.round(pr.length / 160));
+      var pts = pr.filter(function (p, i) { return i % step === 0 || i === pr.length - 1; });
+      var d = pts.map(function (p, i) { return (i ? "L" : "M") + X(g.off + p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1); }).join("");
+      svg += '<g class="seg" data-n="' + g.s.n + '"><path class="seg-fill" d="' + d + "L" + X(g.off + g.len).toFixed(1) + "," + H + "L" + X(g.off).toFixed(1) + "," + H + 'Z"/><path class="seg-line" d="' + d + '"/></g>';
+    });
+    segs.forEach(function (g) { svg += '<rect class="hit" data-n="' + g.s.n + '" x="' + X(g.off).toFixed(1) + '" y="0" width="' + Math.max(1, X(g.len)).toFixed(1) + '" height="' + H + '"/>'; });
+    el.innerHTML = svg + "</svg>";
+    var cap = document.getElementById("cap");
+    var idle = cap ? '<span class="d">' + esc(cap.dataset.idleTop || "") + "</span><b>" + esc(cap.dataset.idle || "") + "</b>" : "";
+    if (cap) cap.innerHTML = idle;
+    el.querySelectorAll(".hit").forEach(function (r) {
+      var n = +r.dataset.n, meta = META[n];
+      r.addEventListener("mouseenter", function () { highlight(n); });
+      r.addEventListener("mouseleave", function () { highlight(-1); });
+      r.addEventListener("click", function () { if (meta) window.location.href = meta.url; });
+    });
+    var byN = {}; geo.forEach(function (s) { byN[s.n] = s; });
+    return {
+      set: function (n) {
+        el.classList.toggle("dim", n >= 0);
+        el.querySelectorAll(".seg").forEach(function (g) { g.classList.toggle("on", +g.dataset.n === n); });
+        if (!cap) return;
+        if (n < 0) { cap.innerHTML = idle; return; }
+        var s = byN[n], m = META[n] || {};
+        cap.innerHTML = '<span class="d">Stage ' + n + " · " + esc(m.date || "") + " · " + s.km + " km · +" + s.up + " m · high point " + s.max + " m</span><b>" + esc(m.start || "") + " → " + esc(m.end || "") + "</b>";
+      }
+    };
+  }
+  function fitName() {
+    var n1 = document.getElementById("n1"), n2 = document.getElementById("n2");
+    if (!n1 || !n2) return;
+    n2.style.fontSize = "";
+    var r = document.createRange();
+    r.selectNodeContents(n1); var w1 = r.getBoundingClientRect().width;
+    r.selectNodeContents(n2); var w2 = r.getBoundingClientRect().width;
+    if (w2) n2.style.fontSize = (parseFloat(getComputedStyle(n2).fontSize) * w1 / w2).toFixed(2) + "px";
+  }
+  fitName();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
+  window.addEventListener("resize", fitName);
 
   /* ---------- single stage ---------- */
   function stage(el) {

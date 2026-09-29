@@ -3,17 +3,14 @@ layout: default
 ---
 {%- assign tkm = 0 -%}{%- assign tup = 0 -%}{%- assign tmax = 0 -%}
 {%- for s in site.data.stats -%}{%- assign tkm = tkm | plus: s.km -%}{%- assign tup = tup | plus: s.up -%}{%- if s.max > tmax -%}{%- assign tmax = s.max -%}{%- endif -%}{%- endfor -%}
-<div class="hero">
-  <div class="eyebrow">{{ page.kicker }}</div>
-  <h1>Alta Linea <em>Continua</em></h1>
-  <div class="stats">
-    <span><b>{{ site.stages | size }}</b>stages</span>
-    <span><b>{{ tkm | round }} km</b>walked</span>
-    <span><b>{{ tup | divided_by: 1000 | floor }},{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} m</b>of ascent</span>
-    <span><b>{{ tmax }} m</b>highest point</span>
-  </div>
-  <div class="eyebrow">{{ site.authors }}</div>
-</div>
+<section class="hero">
+  <div class="eyebrow kicker">{{ site.authors }}</div>
+  <h1 class="name" id="n1">Alta Linea</h1>
+  <div class="spine" id="spine" aria-label="Elevation profile of the whole route"></div>
+  <div class="ends" aria-hidden="true"><span>Pian delle Gorre</span><span>Pian del Re</span></div>
+  <div class="name it" id="n2" aria-hidden="true">Continua</div>
+  <div class="cap" id="cap" aria-live="polite" data-idle-top="{{ site.stages | size }} stages · {{ tkm | round }} km · {{ tup | divided_by: 1000 | floor }},{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} m of ascent" data-idle="{{ page.tagline | default: 'From Marguareis to Monviso' }}"></div>
+</section>
 
 <div class="atlas">
   <div>

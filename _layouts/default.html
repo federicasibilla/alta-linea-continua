@@ -20,12 +20,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 27 L12 9 L17 17 L21 11 L30 27 Z' fill='%23C4302B'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 27 L12 9 L17 17 L21 11 L30 27 Z' fill='%231F5E6E'/%3E%3C/svg%3E">
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="{{ '/' | relative_url }}">Alta Linea <b>Continua</b></a>
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Alta Linea Continua, home"><span class="t">Alta Linea</span>{% include mini-profile.svg %}<span class="t it">Continua</span></a>
     <nav>
       <a href="{{ '/' | relative_url }}" {% if page.layout == 'home' %}aria-current="page"{% endif %}>The project</a>
       <a href="{{ '/stages/' | relative_url }}" {% if page.layout == 'stages' or page.collection == 'stages' %}aria-current="page"{% endif %}>Stages</a>

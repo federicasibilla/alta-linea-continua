@@ -1,7 +1,7 @@
 ---
 layout: home
 headline: Alta Linea Continua
-kicker: Ligurian, Maritime & Cottian Alps · 24 July – 18 August 2026
+tagline: From Marguareis to Monviso
 intro_title: ""
 cover: ""
 cover_caption: ""

@@ -2,7 +2,7 @@
    Layout: a narrow editorial column; the map is the "sheet" of the atlas; stages read like a logbook. */
 :root{
   --bg:#F2F3F1; --paper:#FAFAF8; --ink:#1E2328; --muted:#6B7278; --line:#D5D8D5;
-  --route:#3C4349; --accent:#C4302B; --accent-soft:rgba(196,48,43,.10);
+  --route:#3C4349; --accent:#1F5E6E; --accent-soft:rgba(31,94,110,.10); --accent-fill:rgba(31,94,110,.07);
   --green:#3F8F5B; --yellow:#E3B21C; --edge:#1E2328;
   --f-display:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
   --f-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
@@ -11,7 +11,7 @@
 }
 @media (prefers-color-scheme:dark){:root{
   --bg:#15181B; --paper:#1B1F23; --ink:#E6E7E4; --muted:#979DA2; --line:#2E3338;
-  --route:#D9DBD7; --accent:#E2554C; --accent-soft:rgba(226,85,76,.14);
+  --route:#D9DBD7; --accent:#6FAAB8; --accent-soft:rgba(111,170,184,.14); --accent-fill:rgba(111,170,184,.10);
   --green:#5DBB7E; --yellow:#F0C53A; --edge:#15181B; color-scheme:dark}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -22,8 +22,12 @@ img{max-width:100%;height:auto;display:block}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 header.top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-block:22px;border-bottom:1px solid var(--line)}
-.brand{font:500 12px/1 var(--f-data);letter-spacing:.18em;text-transform:uppercase;text-decoration:none}
-.brand b{color:var(--accent);font-weight:500}
+.brand{display:inline-grid;width:116px;text-decoration:none;color:var(--ink)}
+.brand .t{font:400 22px/.9 var(--f-display);white-space:nowrap;text-align:center}
+.brand .t.it{font-style:italic}
+.brand svg{display:block;width:100%;height:14px;margin:3px 0 4px}
+.pf-fill{fill:var(--accent-fill)} .pf-line{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+header.top{align-items:center}
 nav{display:flex;gap:22px;flex-wrap:wrap}
 header nav a{font:400 13px/1 var(--f-body);letter-spacing:.06em;text-decoration:none;color:var(--muted);padding-block:4px;border-bottom:1px solid transparent}
 header nav a[aria-current="page"],header nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
@@ -35,7 +39,24 @@ h1 em{font-style:italic;color:var(--accent)}
 h2{font-size:clamp(28px,4.2vw,44px);line-height:1.08}
 h3{font-size:26px;line-height:1.15}
 
-.hero{padding-block:56px 36px;display:grid;gap:22px}
+.hero{padding-block:44px 30px;text-align:center}
+.hero .kicker{margin-bottom:22px}
+.name{font:400 clamp(52px,10vw,118px)/.86 var(--f-display);white-space:nowrap;margin:0;letter-spacing:-.005em}
+.name.it{font-style:italic}
+.spine{margin-block:clamp(14px,2.4vw,26px) 0}
+.spine svg{display:block;width:100%;height:clamp(90px,14vw,150px);overflow:visible}
+.spine .seg-fill{fill:var(--accent-fill);transition:fill .2s,opacity .2s}
+.spine .seg-line{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linejoin:round;vector-effect:non-scaling-stroke;transition:opacity .2s,stroke-width .2s}
+.spine .tick{stroke:var(--muted);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.35}
+.spine .hit{fill:transparent;cursor:pointer}
+.spine.dim .seg:not(.on) .seg-line{opacity:.28}
+.spine.dim .seg:not(.on) .seg-fill{opacity:.35}
+.spine .seg.on .seg-fill{fill:var(--accent-soft)}
+.spine .seg.on .seg-line{stroke-width:2.6}
+.ends{display:flex;justify-content:space-between;font:400 10.5px var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:4px 0 clamp(10px,2vw,20px)}
+.cap{min-height:3.4em;font-size:14px;color:var(--muted);text-align:center;margin-top:18px}
+.cap b{display:block;font:400 24px/1.2 var(--f-display);color:var(--ink)}
+.cap .d{font:400 11px var(--f-data);letter-spacing:.14em;text-transform:uppercase}
 .pagehead,.stagehead{padding-block:44px 22px;display:grid;gap:14px}
 .stagehead h1{font-size:clamp(36px,6vw,68px)}
 .stats{display:flex;flex-wrap:wrap;gap:10px 36px;font:400 13px/1.3 var(--f-data);color:var(--muted);font-variant-numeric:tabular-nums}
@@ -64,7 +85,7 @@ h3{font-size:26px;line-height:1.15}
 .tri.yellow{border-bottom-color:var(--yellow)}
 
 /* stage list */
-.atlas{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px;align-items:start;margin-bottom:10px}
+.atlas{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px;align-items:start;margin-bottom:10px;border-top:1px solid var(--line);padding-top:32px}
 .atlas .list{max-height:min(78vh,760px);overflow-y:auto;border-top:1px solid var(--line)}
 @media (max-width:880px){.atlas{grid-template-columns:1fr}.atlas .list{max-height:none}}
 .list{list-style:none;margin:0;padding:0}
