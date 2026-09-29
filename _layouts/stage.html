@@ -59,9 +59,8 @@ layout: default
       <div class="dl">
         <a class="btn" href="{{ '/assets/tracks/' | append: st.slug | append: '.gpx' | relative_url }}" download>GPX</a>
         <a class="btn" href="{{ '/assets/tracks/' | append: st.slug | append: '.kml' | relative_url }}" download>KML · Google Earth</a>
-        {%- for f in st.fits %}<a class="btn" href="{{ '/assets/tracks/' | append: f | relative_url }}" download>FIT{% if st.fits.size > 1 %} {{ forloop.index }}{% endif %}</a>{% endfor %}
       </div>
-      <p class="note">GPX works with most apps and GPS units (Komoot, Gaia, OsmAnd, Garmin). KML opens in Google Earth. FIT is the original Garmin file.</p>
+      <p class="note">GPX works with most apps and GPS units (Komoot, Gaia, OsmAnd, Garmin). KML opens in Google Earth.</p>
     </aside>
   </div>
 
