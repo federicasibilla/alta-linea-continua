@@ -3,6 +3,7 @@ layout: home
 headline: Alta Linea Continua
 tagline: From Marguareis to Monviso
 intro_title: Concept
+cover: /alta-linea-continua/assets/images/IMG_8064 (2) (3)-1.png
 ---
 Alta Linea Continua is first of all a concept, and the route that results from it emerges by constraining the concept with reality. 
 
