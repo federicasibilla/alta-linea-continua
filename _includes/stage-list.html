@@ -1,0 +1,12 @@
+<ol class="list">
+{%- assign ordered = site.stages | sort: "number" -%}
+{%- for s in ordered -%}
+{%- assign st = site.data.stats[s.number] -%}
+<li><a href="{{ s.url | relative_url }}" data-n="{{ s.number }}">
+  <span class="n">{{ s.number }}</span>
+  <span class="d">{{ s.date_label }}</span>
+  <span class="r">{{ s.start }} → {{ s.end }}{% for c in s.climbing %}<span class="tri {{ c.color }}" title="{{ c.name }}{% if c.grade != '' %} · {{ c.grade }}{% endif %}"></span>{% endfor %}</span>
+  <span class="k">{{ st.km }} km · +{{ st.up }} m</span>
+</a></li>
+{%- endfor -%}
+</ol>

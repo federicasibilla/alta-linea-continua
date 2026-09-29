@@ -1,0 +1,38 @@
+---
+layout: default
+---
+{%- assign tkm = 0 -%}{%- assign tup = 0 -%}{%- assign tmax = 0 -%}
+{%- for s in site.data.stats -%}{%- assign tkm = tkm | plus: s.km -%}{%- assign tup = tup | plus: s.up -%}{%- if s.max > tmax -%}{%- assign tmax = s.max -%}{%- endif -%}{%- endfor -%}
+<div class="hero">
+  <div class="eyebrow">{{ page.kicker }}</div>
+  <h1>Alta Linea <em>Continua</em></h1>
+  <div class="stats">
+    <span><b>{{ site.stages | size }}</b>stages</span>
+    <span><b>{{ tkm | round }} km</b>walked</span>
+    <span><b>{{ tup | divided_by: 1000 | floor }},{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} m</b>of ascent</span>
+    <span><b>{{ tmax }} m</b>highest point</span>
+  </div>
+  <div class="eyebrow">{{ site.authors }}</div>
+</div>
+
+<div class="atlas">
+  <div>
+    <div class="map" id="atlas-map" aria-label="Map of the whole route"></div>
+    <div class="maphint"><span>Hover over the line to see each stage · click to open it</span><span>Pian delle Gorre → Pian del Re</span></div>
+    {% include legend.html %}
+  </div>
+  {% include stage-list.html %}
+</div>
+
+<section class="intro">
+  <div class="prose">
+    <div class="eyebrow">The idea</div>
+    {%- if page.intro_title and page.intro_title != "" %}<h2>{{ page.intro_title }}</h2>{% endif -%}
+    {%- assign body = content | strip -%}
+    {%- if body != "" -%}<div class="rich">{{ content }}</div>
+    {%- else -%}{% include placeholder.html label="Your text" text="How the idea was born, who you are, why one continuous line from the Ligurian Alps to Monviso. Edit “Home” in the editor." %}{%- endif -%}
+  </div>
+  {%- if page.cover and page.cover != "" -%}
+  <figure class="cover"><img src="{{ page.cover }}" alt="{{ page.cover_caption | default: 'Cover photo' | escape }}">{% if page.cover_caption != "" %}<figcaption>{{ page.cover_caption }}</figcaption>{% endif %}</figure>
+  {%- elsif site.data.settings.show_placeholders -%}<div class="photo">YOUR COVER PHOTO</div>{%- endif -%}
+</section>

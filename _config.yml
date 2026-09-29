@@ -1,0 +1,20 @@
+title: Alta Linea Continua
+description: One continuous line across the Ligurian, Maritime and Cottian Alps, from Pian delle Gorre to Pian del Re. Federica & Ema, summer 2026.
+authors: Federica & Ema
+url: "https://federicasibilla.github.io"
+baseurl: "/alta-linea-continua"
+lang: en
+
+collections:
+  stages:
+    output: true
+    permalink: /stages/:name/
+
+defaults:
+  - scope: { path: "", type: stages }
+    values: { layout: stage }
+
+markdown: kramdown
+kramdown:
+  input: GFM
+exclude: [README.md, .pages.yml, Gemfile, Gemfile.lock, vendor]

@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<div class="pagehead">
+  <div class="eyebrow">{{ site.stages | size }} stages · 24 July – 18 August 2026</div>
+  <h1>The <em>stages</em></h1>
+</div>
+<div class="map tall" id="atlas-map" aria-label="Map of the whole route"></div>
+{% include legend.html %}
+<div class="dl-all"><a class="btn" href="{{ '/assets/tracks/alta-linea-continua-full-route.gpx' | relative_url }}" download>Download the full route · GPX</a></div>
+{% include stage-list.html %}

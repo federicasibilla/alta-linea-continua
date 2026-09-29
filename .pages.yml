@@ -1,0 +1,179 @@
+media:
+  input: assets/images
+  output: /alta-linea-continua/assets/images
+  categories: [image]
+
+content:
+  - name: home
+    label: Home page
+    type: file
+    path: index.md
+    fields:
+      - name: layout
+        type: string
+        hidden: true
+        default: home
+      - name: headline
+        type: string
+        hidden: true
+        default: Alta Linea Continua
+      - name: kicker
+        label: Line above the title
+        type: string
+      - name: intro_title
+        label: Introduction headline
+        type: string
+      - name: body
+        label: Introduction text
+        description: Write freely. Use the toolbar for headings, bold, links and to insert photos anywhere in the text.
+        type: rich-text
+      - name: cover
+        label: Cover photo
+        type: image
+      - name: cover_caption
+        label: Cover photo caption
+        type: string
+
+  - name: stages
+    label: Stages
+    type: collection
+    path: _stages
+    view:
+      fields: [number, start, end, date_label]
+      primary: start
+      sort: [number]
+      default:
+        sort: number
+        order: asc
+    operations:
+      create: false
+      delete: false
+      rename: false
+    fields:
+      - name: number
+        label: Stage number
+        type: number
+        readonly: true
+      - name: start
+        label: From
+        type: string
+        required: true
+      - name: end
+        label: To
+        type: string
+        required: true
+      - name: date
+        type: string
+        hidden: true
+      - name: date_label
+        label: Date as shown on the site
+        type: string
+      - name: summary
+        label: Short note next to the date (optional)
+        description: For example "Approach" or "Rest day before".
+        type: string
+      - name: body
+        label: Story of the day
+        description: Write freely. Use the toolbar to insert photos anywhere in the text.
+        type: rich-text
+      - name: gallery
+        label: Photo gallery
+        description: Add as many photos as you like. Drag to reorder.
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Photo
+            type: image
+          - name: caption
+            label: Caption
+            type: string
+      - name: instagram
+        label: Instagram videos
+        description: Paste the full link of the post or reel, e.g. https://www.instagram.com/reel/XXXX/
+        type: string
+        list: true
+      - name: links
+        label: Links
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Text shown
+            type: string
+          - name: url
+            label: Web address
+            type: string
+      - name: climbing
+        label: Climbing sections (triangles on the map)
+        description: "km = distance from the start of the stage where the triangle sits. Read it on the elevation profile of the stage page."
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Summit or section
+            type: string
+          - name: color
+            label: Colour
+            type: select
+            options:
+              values:
+                - value: green
+                  label: Green · F / F+
+                - value: yellow
+                  label: Yellow · PD− and harder
+          - name: grade
+            label: Grade (optional)
+            type: string
+          - name: km
+            label: Position (km from start)
+            type: number
+          - name: link
+            label: Link to route description
+            type: string
+
+  - name: preparation
+    label: Preparation page
+    type: file
+    path: preparation.md
+    fields:
+      - name: layout
+        type: string
+        hidden: true
+        default: page
+      - name: permalink
+        type: string
+        hidden: true
+        default: /preparation/
+      - name: title
+        label: Title
+        type: string
+      - name: kicker
+        label: Line above the title
+        type: string
+      - name: body
+        label: Text
+        description: Headings, lists, tables and photos can all go here.
+        type: rich-text
+      - name: gallery
+        label: Photo gallery
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Photo
+            type: image
+          - name: caption
+            label: Caption
+            type: string
+
+  - name: settings
+    label: Site settings
+    type: file
+    path: _data/settings.yml
+    format: yaml
+    fields:
+      - name: show_placeholders
+        label: Show the dashed "your text here" boxes
+        description: Turn off when the site is ready to share.
+        type: boolean
