@@ -54,7 +54,7 @@ layout: default
     </div>
 
     <aside class="side">
-      <div class="map mini" id="stage-map" data-n="{{ page.number }}" aria-label="Map of this stage"></div>
+      <div class="map mini" id="stage-map" data-style="relief-soft" data-n="{{ page.number }}" aria-label="Map of this stage"></div>
       <div class="eyebrow">Download the track</div>
       <div class="dl">
         <a class="btn" href="{{ '/assets/tracks/' | append: st.slug | append: '.gpx' | relative_url }}" download>GPX</a>
