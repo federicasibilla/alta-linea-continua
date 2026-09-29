@@ -36,12 +36,20 @@
     var sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
       maxZoom: 18, attribution: "Imagery © Esri, Maxar, Earthstar Geographics"
     });
-    return { "Topographic": topo, "Minimal": light, "Satellite": sat };
+    var relief = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 17, attribution: "Relief: Esri, Vantor, Airbus DS, USGS, NGA, NASA, CGIAR, N Robinson, NCEAS, NLS, OS, NMA, Geodatastyrelsen, Rijkswaterstaat, GSA, Geoland, FEMA, Intermap and the GIS user community"
+    });
+    return { "Relief": relief, "Topographic": topo, "Minimal": light, "Satellite": sat };
   }
 
   function makeMap(el) {
     var layers = baseLayers();
-    var map = L.map(el, { scrollWheelZoom: false, zoomSnap: 0.25, layers: [layers.Topographic] });
+    var style = el.dataset.style || "";
+    var start = style.indexOf("relief") === 0 ? layers.Relief : layers.Topographic;
+    var map = L.map(el, { scrollWheelZoom: false, zoomSnap: 0.25, layers: [start] });
+    if (style) el.classList.add("m-" + style);
+    el.classList.toggle("tinted", start === layers.Relief);
+    map.on("baselayerchange", function (e) { el.classList.toggle("tinted", e.layer === layers.Relief); });
     L.control.layers(layers, null, { position: "topright" }).addTo(map);
     L.control.scale({ imperial: false }).addTo(map);
     map.on("focus", function () { map.scrollWheelZoom.enable(); });
@@ -86,6 +94,9 @@
       geo.forEach(function (s) {
         var meta = META[s.n] || { n: s.n, start: "", end: "", date: "", url: "#" };
         var ll = s.line.map(function (p) { return [p[0], p[1]]; });
+        if ((el.dataset.style || "").indexOf("mist") > -1) {
+          [[46, 0.10], [28, 0.14], [16, 0.2]].forEach(function (m) { L.polyline(ll, { color: COL.paper, weight: m[0], opacity: m[1], interactive: false, lineCap: "round", lineJoin: "round" }).addTo(map); });
+        }
         var halo = L.polyline(ll, { color: COL.paper, weight: 7, opacity: 0.8, interactive: false }).addTo(map);
         var line = L.polyline(ll, { color: COL.route, weight: 3.2, opacity: 0.85, interactive: false, lineJoin: "round" }).addTo(map);
         var hit = L.polyline(ll, { color: "#000", weight: 22, opacity: 0 }).addTo(map);
@@ -222,7 +233,7 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") { box.hidden = true; img.src = ""; } });
   }
 
-  var a = document.getElementById("atlas-map"); if (a && window.L) atlas(a);
+  if (window.L) document.querySelectorAll(".js-atlas").forEach(function (m) { atlas(m); });
   var st = document.getElementById("stage-map"); if (st && window.L) stage(st);
   lightbox();
 })();
