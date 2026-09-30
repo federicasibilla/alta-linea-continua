@@ -313,3 +313,5 @@ body:not(:has(.hero)) .spine{margin-top:6px}
 .sp-tri{position:absolute;width:0;height:0;border-left:5.5px solid transparent;border-right:5.5px solid transparent;border-bottom:10px solid var(--green);transform:translate(-50%,-125%);z-index:2;transition:transform .15s}
 .sp-tri.yellow{border-bottom-color:var(--yellow)}
 a.sp-tri:hover{transform:translate(-50%,-125%) scale(1.5)}
+/* phone: hide pass labels in the aerial view */
+@media (max-width:640px){.haze .colname,.haze .colalt,.haze .colmark,.haze .lead{display:none}}
