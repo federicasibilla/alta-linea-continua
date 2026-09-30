@@ -1,0 +1,623 @@
+[
+ {
+  "name": "Pointe Marguareis / Cima Marguarèis",
+  "ele": 2651,
+  "lat": 44.17394,
+  "lon": 7.68448,
+  "stage": 1,
+  "km": 5.45,
+  "dist_m": 1
+ },
+ {
+  "name": "Punta Tino Prato",
+  "ele": 2573,
+  "lat": 44.17538,
+  "lon": 7.68306,
+  "stage": 1,
+  "km": 6.93,
+  "dist_m": 8
+ },
+ {
+  "name": "Cime de l'Armusse",
+  "ele": 2526,
+  "lat": 44.17637,
+  "lon": 7.67956,
+  "stage": 1,
+  "km": 8.0,
+  "dist_m": 31
+ },
+ {
+  "name": "Castello delle Aquile",
+  "ele": 2513,
+  "lat": 44.17705,
+  "lon": 7.67533,
+  "stage": 1,
+  "km": 8.64,
+  "dist_m": 3
+ },
+ {
+  "name": "Testa Ciaudon / Tête Chaudon",
+  "ele": 2387,
+  "lat": 44.17328,
+  "lon": 7.63218,
+  "stage": 2,
+  "km": 0.91,
+  "dist_m": 11
+ },
+ {
+  "name": "Cima dei Cuni / Cime du Coin",
+  "ele": 2259,
+  "lat": 44.16034,
+  "lon": 7.62792,
+  "stage": 2,
+  "km": 4.22,
+  "dist_m": 92
+ },
+ {
+  "name": "Cima del Becco / Cime du Bec",
+  "ele": 2301,
+  "lat": 44.14952,
+  "lon": 7.61987,
+  "stage": 2,
+  "km": 6.36,
+  "dist_m": 2
+ },
+ {
+  "name": "Cima del Becco Rosso",
+  "ele": 2214,
+  "lat": 44.15019,
+  "lon": 7.59128,
+  "stage": 2,
+  "km": 9.09,
+  "dist_m": 70
+ },
+ {
+  "name": "Punta Bussaia",
+  "ele": 2101,
+  "lat": 44.14925,
+  "lon": 7.53532,
+  "stage": 2,
+  "km": 18.52,
+  "dist_m": 116
+ },
+ {
+  "name": "Rocca dell'Abisso / Roche de l'Abisse",
+  "ele": 2755,
+  "lat": 44.14348,
+  "lon": 7.50392,
+  "stage": 3,
+  "km": 3.85,
+  "dist_m": 1
+ },
+ {
+  "name": "Rocca dell'Abisso Cima sud / Roche de l'Abisse Cime sud",
+  "ele": 2750,
+  "lat": 44.14328,
+  "lon": 7.5046,
+  "stage": 3,
+  "km": 4.0,
+  "dist_m": 3
+ },
+ {
+  "name": "Pointe de Peyrefique / Punta di Peirafica",
+  "ele": 2661,
+  "lat": 44.13696,
+  "lon": 7.49092,
+  "stage": 3,
+  "km": 10.46,
+  "dist_m": 4
+ },
+ {
+  "name": "Cima del Sabbione / Cime du Sabion",
+  "ele": 2610,
+  "lat": 44.13367,
+  "lon": 7.48356,
+  "stage": 3,
+  "km": 16.13,
+  "dist_m": 3
+ },
+ {
+  "name": "Cime de Vernasque",
+  "ele": 2849,
+  "lat": 44.12921,
+  "lon": 7.44855,
+  "stage": 4,
+  "km": 5.0,
+  "dist_m": 3
+ },
+ {
+  "name": "Cima est del Lago dell'Agnello / Cime Est de l'Agnel",
+  "ele": 2852,
+  "lat": 44.12907,
+  "lon": 7.43764,
+  "stage": 4,
+  "km": 6.87,
+  "dist_m": 10
+ },
+ {
+  "name": "Cima ovest del Lago dell'Agnello / Cime Ouest de l'Agnel",
+  "ele": 2794,
+  "lat": 44.13023,
+  "lon": 7.4298,
+  "stage": 4,
+  "km": 8.0,
+  "dist_m": 105
+ },
+ {
+  "name": "Pointe de l'Agnel",
+  "ele": 2679,
+  "lat": 44.12562,
+  "lon": 7.42949,
+  "stage": 4,
+  "km": 8.55,
+  "dist_m": 117
+ },
+ {
+  "name": "Cime Borello",
+  "ele": 2985,
+  "lat": 44.12526,
+  "lon": 7.39321,
+  "stage": 5,
+  "km": 5.03,
+  "dist_m": 0
+ },
+ {
+  "name": "Cime de Chafrion",
+  "ele": 3073,
+  "lat": 44.12508,
+  "lon": 7.38915,
+  "stage": 5,
+  "km": 8.74,
+  "dist_m": 3
+ },
+ {
+  "name": "Balcon du Gélas / Balcone del Gelàs",
+  "ele": 3085,
+  "lat": 44.12407,
+  "lon": 7.38781,
+  "stage": 5,
+  "km": 9.93,
+  "dist_m": 6
+ },
+ {
+  "name": "Cime du Gélas / Monte Gelàs",
+  "ele": 3143,
+  "lat": 44.12275,
+  "lon": 7.38419,
+  "stage": 5,
+  "km": 11.25,
+  "dist_m": 13
+ },
+ {
+  "name": "Cime sud du Gélas",
+  "ele": 3134,
+  "lat": 44.12213,
+  "lon": 7.3841,
+  "stage": 5,
+  "km": 11.38,
+  "dist_m": 61
+ },
+ {
+  "name": "Collet du Lac de Fenestre",
+  "ele": 0,
+  "lat": 44.11135,
+  "lon": 7.3674,
+  "stage": 5,
+  "km": 15.79,
+  "dist_m": 54
+ },
+ {
+  "name": "Cima di Mercantour / Cime du Mercantour",
+  "ele": 2772,
+  "lat": 44.14419,
+  "lon": 7.29528,
+  "stage": 7,
+  "km": 8.7,
+  "dist_m": 6
+ },
+ {
+  "name": "Cima di Ciriegia / Cime de Cerise",
+  "ele": 2714,
+  "lat": 44.14526,
+  "lon": 7.28789,
+  "stage": 7,
+  "km": 10.02,
+  "dist_m": 7
+ },
+ {
+  "name": "Cima di Leccia / Cime de la Lèche",
+  "ele": 2674,
+  "lat": 44.141,
+  "lon": 7.28131,
+  "stage": 7,
+  "km": 13.17,
+  "dist_m": 4
+ },
+ {
+  "name": "Cima di Fremamorta / Cime de Frémamorte",
+  "ele": 2731,
+  "lat": 44.15701,
+  "lon": 7.2507,
+  "stage": 8,
+  "km": 2.08,
+  "dist_m": 3
+ },
+ {
+  "name": "Testa di Bresses sud / Tête Sud des Bresses",
+  "ele": 2820,
+  "lat": 44.17165,
+  "lon": 7.24366,
+  "stage": 8,
+  "km": 5.05,
+  "dist_m": 6
+ },
+ {
+  "name": "Mont Malinvern / Testa di Malinvern",
+  "ele": 2938,
+  "lat": 44.19873,
+  "lon": 7.18907,
+  "stage": 9,
+  "km": 3.03,
+  "dist_m": 2
+ },
+ {
+  "name": "Mont Malinvern - Ouest",
+  "ele": 2931,
+  "lat": 44.20122,
+  "lon": 7.18603,
+  "stage": 9,
+  "km": 3.81,
+  "dist_m": 3
+ },
+ {
+  "name": "Cime de Vermeil",
+  "ele": 2778,
+  "lat": 44.20512,
+  "lon": 7.16649,
+  "stage": 9,
+  "km": 8.73,
+  "dist_m": 73
+ },
+ {
+  "name": "Cima della Lombarda",
+  "ele": 2800,
+  "lat": 44.20812,
+  "lon": 7.16324,
+  "stage": 9,
+  "km": 9.71,
+  "dist_m": 3
+ },
+ {
+  "name": "Tête Grosse du Cheval",
+  "ele": 2331,
+  "lat": 44.21092,
+  "lon": 7.12577,
+  "stage": 9,
+  "km": 14.04,
+  "dist_m": 48
+ },
+ {
+  "name": "Cima Moravacciera",
+  "ele": 2383,
+  "lat": 44.21663,
+  "lon": 7.11753,
+  "stage": 9,
+  "km": 15.05,
+  "dist_m": 99
+ },
+ {
+  "name": "Cime Moravachère",
+  "ele": 0,
+  "lat": 44.21734,
+  "lon": 7.11189,
+  "stage": 9,
+  "km": 15.51,
+  "dist_m": 120
+ },
+ {
+  "name": "Cima d'Arena Grossa",
+  "ele": 2380,
+  "lat": 44.22168,
+  "lon": 7.1002,
+  "stage": 9,
+  "km": 18.16,
+  "dist_m": 34
+ },
+ {
+  "name": "Roche du Saboulé",
+  "ele": 2594,
+  "lat": 44.23297,
+  "lon": 7.07026,
+  "stage": 10,
+  "km": 2.02,
+  "dist_m": 60
+ },
+ {
+  "name": "Anticima orientale Testa Rognosa della Guercia",
+  "ele": 2685,
+  "lat": 44.22808,
+  "lon": 7.06509,
+  "stage": 10,
+  "km": 3.03,
+  "dist_m": 8
+ },
+ {
+  "name": "Testa Rognosa della Guercia / Tête Rougnouse de la Guercha",
+  "ele": 2693,
+  "lat": 44.22688,
+  "lon": 7.06141,
+  "stage": 10,
+  "km": 3.4,
+  "dist_m": 2
+ },
+ {
+  "name": "Testa dell'Autaret / Tête de l'Autaret",
+  "ele": 2761,
+  "lat": 44.22534,
+  "lon": 7.04225,
+  "stage": 10,
+  "km": 8.46,
+  "dist_m": 39
+ },
+ {
+  "name": "Testa dell'Autaret cima Ovest / Tête de l'Autaret Cime Ouest",
+  "ele": 2754,
+  "lat": 44.2243,
+  "lon": 7.04013,
+  "stage": 10,
+  "km": 8.94,
+  "dist_m": 2
+ },
+ {
+  "name": "Cima Tommy",
+  "ele": 2614,
+  "lat": 44.23161,
+  "lon": 7.03033,
+  "stage": 11,
+  "km": 0.79,
+  "dist_m": 106
+ },
+ {
+  "name": "Cima di Collalunga / Cime de Colle Longue",
+  "ele": 2760,
+  "lat": 44.23237,
+  "lon": 7.01929,
+  "stage": 11,
+  "km": 2.67,
+  "dist_m": 10
+ },
+ {
+  "name": "Tête Cimon",
+  "ele": 2699,
+  "lat": 44.23512,
+  "lon": 7.01354,
+  "stage": 11,
+  "km": 3.51,
+  "dist_m": 69
+ },
+ {
+  "name": "Pointe d'Isatier",
+  "ele": 2664,
+  "lat": 44.23971,
+  "lon": 7.00532,
+  "stage": 11,
+  "km": 5.03,
+  "dist_m": 30
+ },
+ {
+  "name": "Roche Nègre",
+  "ele": 2765,
+  "lat": 44.24377,
+  "lon": 7.00063,
+  "stage": 11,
+  "km": 5.82,
+  "dist_m": 15
+ },
+ {
+  "name": "Cima ovest delle Beccas del Corborant / Cime Ouest des Becs du Corborant",
+  "ele": 2836,
+  "lat": 44.24695,
+  "lon": 7.00093,
+  "stage": 11,
+  "km": 6.29,
+  "dist_m": 19
+ },
+ {
+  "name": "Cima di Corborant / Corborant",
+  "ele": 3010,
+  "lat": 44.26652,
+  "lon": 6.99637,
+  "stage": 11,
+  "km": 11.44,
+  "dist_m": 4
+ },
+ {
+  "name": "Mont Ténibre / Monte Ténibres",
+  "ele": 3031,
+  "lat": 44.28365,
+  "lon": 6.97172,
+  "stage": 12,
+  "km": 3.41,
+  "dist_m": 5
+ },
+ {
+  "name": "Cima del Bal / Mont Bal",
+  "ele": 2830,
+  "lat": 44.33737,
+  "lon": 6.9258,
+  "stage": 13,
+  "km": 8.13,
+  "dist_m": 45
+ },
+ {
+  "name": "Mont Aiga",
+  "ele": 2832,
+  "lat": 44.34541,
+  "lon": 6.92082,
+  "stage": 13,
+  "km": 11.07,
+  "dist_m": 8
+ },
+ {
+  "name": "Pel Brun",
+  "ele": 2795,
+  "lat": 44.35163,
+  "lon": 6.92201,
+  "stage": 13,
+  "km": 12.11,
+  "dist_m": 6
+ },
+ {
+  "name": "Enciastraia / Tête de l'Enchastraye",
+  "ele": 2954,
+  "lat": 44.36696,
+  "lon": 6.88778,
+  "stage": 14,
+  "km": 3.23,
+  "dist_m": 15
+ },
+ {
+  "name": "Tête des Barres",
+  "ele": 2794,
+  "lat": 44.37036,
+  "lon": 6.88408,
+  "stage": 14,
+  "km": 4.68,
+  "dist_m": 71
+ },
+ {
+  "name": "Cima Dronero",
+  "ele": 3061,
+  "lat": 44.43949,
+  "lon": 6.93666,
+  "stage": 15,
+  "km": 12.19,
+  "dist_m": 2
+ },
+ {
+  "name": "Monte Oronaye / Tête de Moïse",
+  "ele": 3104,
+  "lat": 44.44009,
+  "lon": 6.93488,
+  "stage": 15,
+  "km": 15.14,
+  "dist_m": 2
+ },
+ {
+  "name": "Cime de la Coste du Col / Monte Viraysse",
+  "ele": 2838,
+  "lat": 44.47548,
+  "lon": 6.88605,
+  "stage": 16,
+  "km": 6.88,
+  "dist_m": 11
+ },
+ {
+  "name": "Brec de l'Homme / Tête de l'Homme",
+  "ele": 3211,
+  "lat": 44.54638,
+  "lon": 6.87362,
+  "stage": 18,
+  "km": 6.34,
+  "dist_m": 5
+ },
+ {
+  "name": "Tête de l'Autaret",
+  "ele": 3015,
+  "lat": 44.57305,
+  "lon": 6.93287,
+  "stage": 19,
+  "km": 3.86,
+  "dist_m": 83
+ },
+ {
+  "name": "Pelvas de Chabrière / Pelvo di Ciabrera",
+  "ele": 3157,
+  "lat": 44.57959,
+  "lon": 6.93305,
+  "stage": 19,
+  "km": 5.76,
+  "dist_m": 2
+ },
+ {
+  "name": "Punta del Vallone del Lupo / Tête de Gandin",
+  "ele": 3155,
+  "lat": 44.59276,
+  "lon": 6.9327,
+  "stage": 19,
+  "km": 8.35,
+  "dist_m": 6
+ },
+ {
+  "name": "Testa di Malacosta / Tête de Malacoste",
+  "ele": 3212,
+  "lat": 44.60039,
+  "lon": 6.93718,
+  "stage": 19,
+  "km": 10.11,
+  "dist_m": 1
+ },
+ {
+  "name": "Monte Giuep",
+  "ele": 3100,
+  "lat": 44.6101,
+  "lon": 6.95036,
+  "stage": 19,
+  "km": 12.12,
+  "dist_m": 86
+ },
+ {
+  "name": "Bric de Rubren / Cima Mongioia",
+  "ele": 3340,
+  "lat": 44.61958,
+  "lon": 6.94966,
+  "stage": 20,
+  "km": 1.17,
+  "dist_m": 4
+ },
+ {
+  "name": "Rocca Bianca",
+  "ele": 3063,
+  "lat": 44.66472,
+  "lon": 6.9595,
+  "stage": 20,
+  "km": 12.53,
+  "dist_m": 1
+ },
+ {
+  "name": "Rocca Bianca Nord Est",
+  "ele": 3014,
+  "lat": 44.66601,
+  "lon": 6.96035,
+  "stage": 20,
+  "km": 12.87,
+  "dist_m": 41
+ },
+ {
+  "name": "Pic Brusalana",
+  "ele": 3170,
+  "lat": 44.68919,
+  "lon": 7.00846,
+  "stage": 22,
+  "km": 1.29,
+  "dist_m": 10
+ },
+ {
+  "name": "L'Asti / Monte Aiguillette",
+  "ele": 3298,
+  "lat": 44.69146,
+  "lon": 7.02401,
+  "stage": 22,
+  "km": 3.76,
+  "dist_m": 7
+ },
+ {
+  "name": "Punta Gastaldi",
+  "ele": 3214,
+  "lat": 44.68078,
+  "lon": 7.07756,
+  "stage": 23,
+  "km": 6.29,
+  "dist_m": 4
+ }
+]
