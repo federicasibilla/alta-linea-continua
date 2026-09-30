@@ -302,3 +302,14 @@ table.summits td:last-child{white-space:nowrap}
 .hero-haze svg{min-width:0}
 body:not(:has(.hero)) .spine{margin-top:6px}
 #cap + .atlas{margin-top:24px}
+
+/* title inside the aerial view */
+.hero-haze .hz-name{font-family:var(--f-display);font-weight:400;fill:var(--ink)}
+.hero-haze .hz-name.it{font-style:italic}
+.hero-haze .hz-kicker{font:400 13px var(--f-data);letter-spacing:.2em;fill:var(--muted)}
+.hero{padding-block:24px 30px}
+
+/* climbing triangles on the profile line */
+.sp-tri{position:absolute;width:0;height:0;border-left:5.5px solid transparent;border-right:5.5px solid transparent;border-bottom:10px solid var(--green);transform:translate(-50%,-125%);z-index:2;transition:transform .15s}
+.sp-tri.yellow{border-bottom-color:var(--yellow)}
+a.sp-tri:hover{transform:translate(-50%,-125%) scale(1.5)}

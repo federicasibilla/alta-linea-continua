@@ -139,6 +139,26 @@
     });
     segs.forEach(function (g) { svg += '<rect class="hit" data-n="' + g.s.n + '" x="' + X(g.off).toFixed(1) + '" y="0" width="' + Math.max(1, X(g.len)).toFixed(1) + '" height="' + H + '"/>'; });
     el.innerHTML = svg + "</svg>";
+    // climbing triangles on their summits (Stages page)
+    if (!document.getElementById("haze")) {
+      el.style.position = "relative";
+      segs.forEach(function (g) {
+        var m = META[g.s.n] || {};
+        (Array.isArray(m.climbing) ? m.climbing : []).forEach(function (c) {
+          if (c.km === undefined || c.km === null || c.km === "") return;
+          var km = +c.km, pr = g.s.profile, alt = pr[pr.length - 1][1];
+          for (var i = 0; i < pr.length; i++) { if (pr[i][0] >= km) { alt = pr[i][1]; break; } }
+          var a = document.createElement(c.link ? "a" : "span");
+          a.className = "sp-tri " + ((c.color || "").indexOf("yellow") === 0 ? "yellow" : "green");
+          a.style.left = (X(g.off + km) / W * 100) + "%";
+          a.style.top = (Y(alt) / H * 100) + "%";
+          a.title = c.name + (c.grade ? " · " + c.grade : "");
+          a.setAttribute("aria-label", a.title);
+          if (c.link) { a.href = c.link; a.target = "_blank"; a.rel = "noopener"; }
+          el.appendChild(a);
+        });
+      });
+    }
     var cap = document.getElementById("cap");
     var idle = cap ? '<span class="d">' + esc(cap.dataset.idleTop || "") + "</span><b>" + esc(cap.dataset.idle || "") + "</b>" : "";
     if (cap) cap.innerHTML = idle;
@@ -199,7 +219,7 @@
         var d = s.line.reduce(function (a, p) { return a + depth(p); }, 0) / s.line.length, col = mix(C, Hz, Math.min(1, d * 0.8)), m = META[s.n] || {};
         var curtain = ""; s.line.forEach(function (p, i) { if (i % 2) return; var q = P(p), gq = G(p); curtain += "M" + q[0].toFixed(1) + "," + q[1].toFixed(1) + "V" + gq[1].toFixed(1); });
         var end = P(s.line[s.line.length - 1]);
-        var mk = (Array.isArray(m.climbing) ? m.climbing : []).map(function (c) {
+        var mk = (el.dataset.title ? [] : (Array.isArray(m.climbing) ? m.climbing : [])).map(function (c) {
           if (c.km === undefined || c.km === "") return "";
           var q = s.line[s.line.length - 1]; for (var i = 0; i < s.line.length; i++) { if (s.line[i][3] >= +c.km) { q = s.line[i]; break; } }
           var xy = P(q), r = 6; return '<path class="mk" fill="' + climbColor(c) + '" d="M' + xy[0].toFixed(1) + "," + (xy[1] - r).toFixed(1) + "L" + (xy[0] + r * .9).toFixed(1) + "," + (xy[1] + r * .55).toFixed(1) + "L" + (xy[0] - r * .9).toFixed(1) + "," + (xy[1] + r * .55).toFixed(1) + 'Z"/>';
@@ -213,8 +233,22 @@
         var q = P(best), gq = G(best), x = q[0], y = q[1];
         g += '<path class="colmark" d="M' + (x - 6) + "," + (y - 6) + "Q" + x + "," + (y + 1) + " " + (x + 6) + "," + (y - 6) + "M" + (x - 6) + "," + (y + 6) + "Q" + x + "," + (y - 1) + " " + (x + 6) + "," + (y + 6) + '"/><line class="lead" x1="' + x + '" x2="' + x + '" y1="' + (y + 8) + '" y2="' + (gq[1] + 10) + '"/><text class="colname" x="' + x + '" y="' + (gq[1] + 26) + '" text-anchor="middle">' + esc(c[0]) + '</text><text class="colalt" x="' + x + '" y="' + (gq[1] + 40) + '" text-anchor="middle">' + c[1] + " m</text>";
       });
+      if (el.dataset.title) {
+        g += '<g class="hz-title" aria-hidden="true"><text class="hz-kicker" x="800" y="150" text-anchor="middle">' + esc((el.dataset.kicker || "").toUpperCase()) + '</text>' +
+          '<text class="hz-name" id="hzA" x="800" y="272" font-size="120" text-anchor="middle">Alta Linea</text>' +
+          '<text class="hz-name it" id="hzC" x="800" y="386" font-size="120" text-anchor="middle">Continua</text></g>';
+      }
       el.innerHTML = g + "</svg>";
       var svg0 = el.querySelector("svg");
+      var fitTitle = function () {
+        var a = svg0.querySelector("#hzA"), c = svg0.querySelector("#hzC");
+        if (!a || !c) return;
+        c.setAttribute("font-size", "120");
+        var wa = a.getComputedTextLength(), wc = c.getComputedTextLength();
+        if (wa && wc) c.setAttribute("font-size", (120 * wa / wc).toFixed(1));
+      };
+      fitTitle();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitle);
       try { var bb = svg0.getBBox(); if (bb.width > 0) svg0.setAttribute("viewBox", [Math.max(0, bb.x - 10), Math.max(0, bb.y - 30), Math.min(W, bb.width + 20), Math.min(H, bb.height + 50)].join(" ")); } catch (e) {}
       var svg = svg0, cap = document.getElementById("hcap") || document.getElementById("cap"), links = document.querySelectorAll(".list a[data-n]"), spineApi = null, cur = -2;
       var idle = cap ? '<span class="d">' + esc(cap.dataset.idleTop || "") + "</span><b>" + esc(cap.dataset.idle || "") + "</b>" : "";

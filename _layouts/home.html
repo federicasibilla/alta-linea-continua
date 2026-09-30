@@ -8,10 +8,8 @@ layout: default
 {%- if lang == "it" -%}{%- assign sep = "." -%}{%- else -%}{%- assign sep = "," -%}{%- endif -%}
 {%- capture tagline -%}{% include tr.html o=H k="tagline" %}{%- endcapture -%}{%- assign tagline = tagline | strip | default: t.tagline_default -%}
 <section class="hero">
-  <div class="eyebrow kicker">{% if lang == "it" %}{{ site.authors | replace: " & ", " e " }}{% else %}{{ site.authors }}{% endif %}</div>
-  <h1 class="name" id="n1"><span id="n1t">Alta Linea</span><span class="sr-only"> Continua</span></h1>
-  <div class="haze hero-haze" id="haze" aria-label="{{ t.haze_aria }}"></div>
-  <div class="name it" id="n2" aria-hidden="true">Continua</div>
+  <h1 class="sr-only">Alta Linea Continua</h1>
+  <div class="haze hero-haze" id="haze" aria-label="{{ t.haze_aria }}" data-title="1" data-kicker="{% if lang == 'it' %}{{ site.authors | replace: ' & ', ' e ' }}{% else %}{{ site.authors }}{% endif %}"></div>
   <div class="cap" id="cap" aria-live="polite" data-idle-top="{{ site.stages | size }} {{ t.stages_word }} · {{ tkm | round }} km · {{ tup | divided_by: 1000 | floor }}{{ sep }}{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} {{ t.of_ascent }}" data-idle="{{ tagline | escape }}"></div>
 </section>
 
