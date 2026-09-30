@@ -42,8 +42,11 @@
 {%- if page.layout == 'home' %}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Alta Linea Continua","alternateName":["Alta Linea Continua traverse","ALC"],"url":{{ '/' | absolute_url | jsonify }},"inLanguage":["en","it"],"description":{{ t.desc_site | jsonify }},"author":[{"@type":"Person","name":"Ema"},{"@type":"Person","name":"Federica"}]}</script>
 {%- endif %}
-{%- assign ogimg = page.cover -%}{%- if lang == "it" and page.layout == "home" -%}{%- assign Hh = site.pages | where: "url", "/" | first -%}{%- assign ogimg = Hh.cover -%}{%- endif -%}
-{%- if ogimg and ogimg != "" %}<meta property="og:image" content="{{ site.url }}{{ ogimg }}">{% endif %}
+{%- if S -%}{%- assign ogimg = "/assets/og/stage-" | append: S.number | prepend: "" -%}{%- capture ogimg -%}/assets/og/stage-{% if S.number < 10 %}0{% endif %}{{ S.number }}.png{%- endcapture -%}{%- else -%}{%- assign ogimg = "/assets/og/home.png" -%}{%- endif %}
+<meta property="og:image" content="{{ ogimg | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="{{ ogimg | absolute_url }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
