@@ -1,0 +1,169 @@
+# Sveltia CMS · the editor at /alta-linea-continua/admin/
+backend:
+  name: github
+  repo: federicasibilla/alta-linea-continua
+  branch: main
+  commit_messages:
+    update: "Update {{path}} (via editor)"
+
+media_folder: assets/images
+public_folder: /alta-linea-continua/assets/images
+
+# Photos are resized and compressed automatically on upload (longest side 2400 px, WebP).
+media_libraries:
+  default:
+    config:
+      max_file_size: 50000000
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2400
+
+site_url: https://federicasibilla.github.io/alta-linea-continua/
+display_url: https://federicasibilla.github.io/alta-linea-continua/
+
+collections:
+  - name: stages
+    label: Stages
+    label_singular: Stage
+    folder: _stages
+    extension: md
+    format: frontmatter
+    create: false
+    delete: false
+    identifier_field: start
+    summary: "{{number}} · {{start}} → {{end}}"
+    sortable_fields: [number]
+    sort_by: number
+    fields:
+      - { name: number, label: Stage number, widget: number, value_type: int, readonly: true }
+      - { name: start, label: From, widget: string }
+      - { name: start_it, label: "From · Italiano (only if different)", widget: string, required: false }
+      - { name: end, label: To, widget: string }
+      - { name: end_it, label: "To · Italiano (only if different)", widget: string, required: false }
+      - { name: date, label: Date, widget: hidden }
+      - { name: date_label, label: Date as shown on the site, widget: string, required: false }
+      - { name: date_label_it, label: "Date · Italiano (optional, otherwise automatic)", widget: string, required: false }
+      - { name: summary, label: Short note next to the date, widget: string, required: false }
+      - { name: summary_it, label: "Short note · Italiano", widget: string, required: false }
+      - { name: body, label: Story of the day, widget: markdown, required: false, hint: "Use the toolbar to add photos anywhere in the text." }
+      - { name: story_it, label: "Story of the day · Italiano", widget: markdown, required: false, hint: "If empty, the Italian page shows the English story." }
+      - name: gallery
+        label: Photo gallery
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{caption}}"
+        fields:
+          - { name: image, label: Photo, widget: image }
+          - { name: caption, label: Caption, widget: string, required: false }
+          - { name: caption_it, label: "Caption · Italiano", widget: string, required: false }
+      - name: instagram
+        label: Instagram videos (full link of the post or reel)
+        widget: list
+        required: false
+        field: { name: url, label: Link, widget: string }
+      - name: links
+        label: Links
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{label}}"
+        fields:
+          - { name: label, label: Text shown, widget: string, required: false }
+          - { name: label_it, label: "Text shown · Italiano", widget: string, required: false }
+          - { name: url, label: Web address, widget: string }
+      - name: climbing
+        label: Climbing sections (triangles on the map)
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{name}} · {{grade}}"
+        hint: "km = distance from the start of the stage. Read it on the elevation profile."
+        fields:
+          - { name: name, label: Summit or section, widget: string }
+          - { name: color, label: Colour, widget: select, options: [{ label: "Green · F / F+", value: green }, { label: "Yellow · PD− and harder", value: yellow }] }
+          - { name: grade, label: Grade, widget: string, required: false }
+          - { name: km, label: "Position (km from start)", widget: number, value_type: float, required: false }
+          - { name: link, label: Link to route description, widget: string, required: false }
+      - name: comments
+        label: Comments & trail updates (published on the stage page)
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{date}} · {{name}} · {{kind}}"
+        hint: "Copy here the messages you approve from Tally."
+        fields:
+          - { name: name, label: Name, widget: string, required: false }
+          - { name: date, label: "Date (YYYY-MM-DD)", widget: string, required: false }
+          - { name: kind, label: Type, widget: select, options: [Comment, Trail update], default: Comment }
+          - { name: text, label: Message, widget: text }
+          - { name: photos, label: Photos, widget: image, multiple: true, required: false }
+          - { name: reply, label: Your reply, widget: text, required: false }
+          - { name: reply_it, label: "Your reply · Italiano", widget: text, required: false }
+
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: Home page
+        file: index.md
+        format: frontmatter
+        fields:
+          - { name: layout, widget: hidden, default: home }
+          - { name: headline, widget: hidden, default: Alta Linea Continua }
+          - { name: tagline, label: Line under the title, widget: string, required: false }
+          - { name: tagline_it, label: "Line under the title · Italiano", widget: string, required: false }
+          - { name: intro_title, label: Introduction headline, widget: string, required: false }
+          - { name: intro_title_it, label: "Introduction headline · Italiano", widget: string, required: false }
+          - { name: body, label: Introduction text, widget: markdown, required: false }
+          - { name: intro_it, label: "Introduction text · Italiano", widget: markdown, required: false, hint: "If empty, the Italian page shows the English text." }
+          - { name: cover, label: Cover photo, widget: image, required: false }
+          - { name: cover_caption, label: Cover photo caption, widget: string, required: false }
+          - { name: cover_caption_it, label: "Cover photo caption · Italiano", widget: string, required: false }
+      - name: preparation
+        label: Preparation page
+        file: preparation.md
+        format: frontmatter
+        fields:
+          - { name: layout, widget: hidden, default: page }
+          - { name: permalink, widget: hidden, default: /preparation/ }
+          - { name: title, label: Title, widget: string }
+          - { name: title_it, label: "Title · Italiano", widget: string, required: false }
+          - { name: kicker, label: Line above the title, widget: string, required: false }
+          - { name: kicker_it, label: "Line above the title · Italiano", widget: string, required: false }
+          - { name: body, label: Text, widget: markdown, required: false }
+          - { name: body_it, label: "Text · Italiano", widget: markdown, required: false, hint: "If empty, the Italian page shows the English text." }
+          - name: gallery
+            label: Photo gallery
+            widget: list
+            required: false
+            collapsed: true
+            fields:
+              - { name: image, label: Photo, widget: image }
+              - { name: caption, label: Caption, widget: string, required: false }
+              - { name: caption_it, label: "Caption · Italiano", widget: string, required: false }
+          - name: questions
+            label: "Ask us · questions and answers"
+            widget: list
+            required: false
+            collapsed: true
+            summary: "{{question}}"
+            fields:
+              - { name: question, label: Question, widget: text }
+              - { name: question_it, label: "Question · Italiano", widget: text, required: false }
+              - { name: name, label: Name, widget: string, required: false }
+              - { name: date, label: "Date (YYYY-MM-DD)", widget: string, required: false }
+              - { name: answer, label: Your answer, widget: text, required: false }
+              - { name: answer_it, label: "Your answer · Italiano", widget: text, required: false }
+      - name: settings
+        label: Site settings
+        file: _data/settings.yml
+        format: yaml
+        fields:
+          - { name: show_placeholders, label: 'Show the dashed "your text here" boxes', widget: boolean, default: true }
+          - { name: google_site_verification, label: Google verification code, widget: string, required: false }
+          - { name: tally_comment_form, label: Tally form code for stage comments, widget: string, required: false }
+          - { name: tally_question_form, label: Tally form code for Ask us, widget: string, required: false }

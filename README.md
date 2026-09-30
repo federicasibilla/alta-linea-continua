@@ -2,6 +2,9 @@
 
 Sito di Federica & Ema. Pubblicato con GitHub Pages, modificabile con [Pages CMS](https://app.pagescms.org).
 
+## Editor di riserva (consigliato se Pages CMS non risponde)
+Vai su https://federicasibilla.github.io/alta-linea-continua/admin/ e accedi con **Sign In with Token** (un token GitHub con permesso "Contents: Read and write" su questo repository). Le foto vengono ridimensionate automaticamente (lato lungo 2400 px, formato WebP).
+
 ## Come si modifica
 1. Vai su https://app.pagescms.org e accedi con GitHub.
 2. Apri il repository `alta-linea-continua`.
