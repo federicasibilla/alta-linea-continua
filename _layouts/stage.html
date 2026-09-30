@@ -65,6 +65,8 @@ layout: default
     </aside>
   </div>
 
+  {% include stage-comments.html %}
+
   <nav class="pager">
     {%- for s in ordered -%}{%- if s.number == prev_n -%}<a href="{{ s.url | relative_url }}">← Stage {{ s.number }}<b>{{ s.start }} → {{ s.end }}</b></a>{%- endif -%}{%- endfor -%}
     {%- if page.number == 0 -%}<span></span>{%- endif -%}

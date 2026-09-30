@@ -132,6 +132,34 @@ content:
             label: Link to route description
             type: string
 
+      - name: comments
+        label: Comments & trail updates (published on the stage page)
+        description: Copy here the messages you approve from Tally. Newest are shown first.
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name (first name only is fine)
+            type: string
+          - name: date
+            label: Date (YYYY-MM-DD)
+            type: string
+          - name: kind
+            label: Type
+            type: select
+            options:
+              values: [Comment, Trail update]
+          - name: text
+            label: Message
+            type: text
+          - name: photos
+            label: Photos
+            type: image
+            list: true
+          - name: reply
+            label: Your reply (optional)
+            type: text
+
   - name: preparation
     label: Preparation page
     type: file
@@ -167,6 +195,25 @@ content:
             label: Caption
             type: string
 
+      - name: questions
+        label: Ask us · questions and answers
+        description: Copy here the questions you want to publish, with your answer.
+        type: object
+        list: true
+        fields:
+          - name: question
+            label: Question
+            type: text
+          - name: name
+            label: Name
+            type: string
+          - name: date
+            label: Date (YYYY-MM-DD)
+            type: string
+          - name: answer
+            label: Your answer
+            type: text
+
   - name: settings
     label: Site settings
     type: file
@@ -176,6 +223,13 @@ content:
       - name: google_site_verification
         label: Google verification code
         description: From Google Search Console → HTML tag. Paste only the code inside content="...".
+        type: string
+      - name: tally_comment_form
+        label: Tally form code for stage comments
+        description: The code at the end of the Tally form link, e.g. for tally.so/r/wA1bC2 write wA1bC2
+        type: string
+      - name: tally_question_form
+        label: Tally form code for Ask us
         type: string
       - name: show_placeholders
         label: Show the dashed "your text here" boxes

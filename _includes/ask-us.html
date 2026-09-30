@@ -1,0 +1,15 @@
+<section class="talk" id="ask">
+  <div class="talk-head">
+    <h2>Ask us</h2>
+    <p>Planning something similar? Ask about organisation, food, resupplies, gear or permits. We answer here, so everyone can read it.</p>
+  </div>
+  {%- assign qs = page.questions | default: empty -%}
+  {%- if qs.size > 0 %}
+  <dl class="qa">
+    {%- for q in qs %}
+    <div class="qa-item"><dt>{{ q.question }}<span class="who">{{ q.name | default: "A reader" }}{% if q.date %} · {{ q.date }}{% endif %}</span></dt><dd>{{ q.answer | markdownify }}</dd></div>
+    {%- endfor %}
+  </dl>
+  {%- endif %}
+  <div class="talk-form">{% include tally.html form=site.data.settings.tally_question_form params="" title="Ask us" %}</div>
+</section>

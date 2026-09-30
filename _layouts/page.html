@@ -11,3 +11,4 @@ layout: default
 {%- else -%}{% include placeholder.html label="Your text" text="Training, gear, food, water, resupplies, how you planned the route. Edit “Preparation” in the editor: you can add headings, lists, tables and photos anywhere in the text." %}{%- endif -%}
 </div>
 {% include gallery.html items=page.gallery %}
+{% if page.url == "/preparation/" %}{% include ask-us.html %}{% endif %}

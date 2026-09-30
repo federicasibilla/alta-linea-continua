@@ -19,4 +19,5 @@ climbing:
 gallery: []
 instagram: []
 links: []
+comments: []
 ---

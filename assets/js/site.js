@@ -171,6 +171,71 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
   window.addEventListener("resize", fitName);
 
+
+  /* ---------- aerial haze (Stages page) ---------- */
+  function haze(el) {
+    load(function (geo) {
+      var C = COL.accent, Hz = C_("--haze") || "#B9CDD1";
+      var COLS = [["Colle di Tenda", 1871, 44.150, 7.563], ["Colle della Lombarda", 2350, 44.202, 7.149], ["Colle della Maddalena", 1996, 44.421, 6.893], ["Colle dell'Agnello", 2744, 44.684, 6.979]];
+      var S = geo.map(function (s) {
+        var pr = s.profile, j = 0;
+        var line = s.line.map(function (p) { while (j < pr.length - 1 && pr[j][0] < p[2]) j++; return [p[0], p[1], pr[j][1], p[2]]; });
+        return { n: s.n, km: s.km, up: s.up, line: line };
+      });
+      var all = []; S.forEach(function (s) { all = all.concat(s.line); });
+      var la0 = Infinity, la1 = -Infinity, lo0 = Infinity, lo1 = -Infinity, a0 = Infinity, a1 = -Infinity;
+      all.forEach(function (p) { la0 = Math.min(la0, p[0]); la1 = Math.max(la1, p[0]); lo0 = Math.min(lo0, p[1]); lo1 = Math.max(lo1, p[1]); a0 = Math.min(a0, p[2]); a1 = Math.max(a1, p[2]); });
+      var kx = Math.cos(44.45 * Math.PI / 180), W = 1200, H = 720;
+      var sx = (W - 120) / ((lo1 - lo0) * kx), Y0 = H - 70, dk = H * 0.52, ak = H * 0.25;
+      var depth = function (p) { return (p[0] - la0) / (la1 - la0); };
+      var P = function (p) { return [60 + (p[1] - lo0) * kx * sx, Y0 - depth(p) * dk - ((p[2] - a0) / (a1 - a0)) * ak]; };
+      var G = function (p) { return [60 + (p[1] - lo0) * kx * sx, Y0 - depth(p) * dk]; };
+      var path = function (pts, f) { return pts.map(function (p, i) { var q = f(p); return (i ? "L" : "M") + q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(""); };
+      function mix(a, b, t) { var h = function (x) { return [1, 3, 5].map(function (i) { return parseInt(x.slice(i, i + 2), 16); }); }; var A = h(a), B = h(b); return "#" + A.map(function (v, i) { return Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0"); }).join(""); }
+      var g = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="The route seen from the south"><defs><linearGradient id="hzg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" class="hz-a" stop-opacity="0"/><stop offset="1" class="hz-a" stop-opacity=".45"/></linearGradient></defs><rect x="0" y="0" width="' + W + '" height="' + H + '" fill="url(#hzg)"/>';
+      S.slice().sort(function (a, b) { return b.line[0][0] - a.line[0][0]; }).forEach(function (s) {
+        var d = s.line.reduce(function (a, p) { return a + depth(p); }, 0) / s.line.length, col = mix(C, Hz, Math.min(1, d * 0.8)), m = META[s.n] || {};
+        var curtain = ""; s.line.forEach(function (p, i) { if (i % 2) return; var q = P(p), gq = G(p); curtain += "M" + q[0].toFixed(1) + "," + q[1].toFixed(1) + "V" + gq[1].toFixed(1); });
+        var end = P(s.line[s.line.length - 1]);
+        var mk = (Array.isArray(m.climbing) ? m.climbing : []).map(function (c) {
+          if (c.km === undefined || c.km === "") return "";
+          var q = s.line[s.line.length - 1]; for (var i = 0; i < s.line.length; i++) { if (s.line[i][3] >= +c.km) { q = s.line[i]; break; } }
+          var xy = P(q), r = 6; return '<path class="mk" fill="' + climbColor(c) + '" d="M' + xy[0].toFixed(1) + "," + (xy[1] - r).toFixed(1) + "L" + (xy[0] + r * .9).toFixed(1) + "," + (xy[1] + r * .55).toFixed(1) + "L" + (xy[0] - r * .9).toFixed(1) + "," + (xy[1] + r * .55).toFixed(1) + 'Z"/>';
+        }).join("");
+        g += '<g class="st" data-n="' + s.n + '"><path d="' + curtain + '" stroke="' + col + '" stroke-width=".5" opacity=".3" fill="none"/><path d="' + path(s.line, G) + '" stroke="' + col + '" stroke-width=".8" opacity=".45" fill="none"/><path d="' + path(s.line, P) + '" stroke="' + col + '" stroke-width="' + (2.4 - d).toFixed(2) + '" fill="none" stroke-linejoin="round"/>' + mk +
+          '<circle class="hutdot" cx="' + end[0].toFixed(1) + '" cy="' + end[1].toFixed(1) + '" r="2.6"/><g class="hover-only"><line class="lead" x1="' + end[0].toFixed(1) + '" x2="' + end[0].toFixed(1) + '" y1="' + (end[1] - 5).toFixed(1) + '" y2="' + (end[1] - 34).toFixed(1) + '"/><text class="hut" x="' + end[0].toFixed(1) + '" y="' + (end[1] - 39).toFixed(1) + '" text-anchor="middle">' + esc(m.end || "") + "</text></g>" +
+          '<path class="hit" d="' + path(s.line, P) + '"/></g>';
+      });
+      COLS.forEach(function (c) {
+        var best = null, bd = 1e9; all.forEach(function (p) { var dd = Math.pow(p[0] - c[2], 2) + Math.pow((p[1] - c[3]) * kx, 2); if (dd < bd) { bd = dd; best = p; } });
+        var q = P(best), gq = G(best), x = q[0], y = q[1];
+        g += '<path class="colmark" d="M' + (x - 6) + "," + (y - 6) + "Q" + x + "," + (y + 1) + " " + (x + 6) + "," + (y - 6) + "M" + (x - 6) + "," + (y + 6) + "Q" + x + "," + (y - 1) + " " + (x + 6) + "," + (y + 6) + '"/><line class="lead" x1="' + x + '" x2="' + x + '" y1="' + (y + 8) + '" y2="' + (gq[1] + 10) + '"/><text class="colname" x="' + x + '" y="' + (gq[1] + 26) + '" text-anchor="middle">' + esc(c[0]) + '</text><text class="colalt" x="' + x + '" y="' + (gq[1] + 40) + '" text-anchor="middle">' + c[1] + " m</text>";
+      });
+      el.innerHTML = g + "</svg>";
+      var svg = el.querySelector("svg"), cap = document.getElementById("hcap"), links = document.querySelectorAll(".list a[data-n]");
+      var idle = cap ? '<span class="d">' + esc(cap.dataset.idleTop || "") + "</span><b>" + esc(cap.dataset.idle || "") + "</b>" : "";
+      if (cap) cap.innerHTML = idle;
+      function set(n) {
+        svg.classList.toggle("dim", n >= 0);
+        svg.querySelectorAll("g.st").forEach(function (x) { x.classList.toggle("on", +x.dataset.n === n); });
+        links.forEach(function (a) { a.classList.toggle("on", +a.dataset.n === n); });
+        if (!cap) return;
+        if (n < 0) { cap.innerHTML = idle; return; }
+        var s = S[n], m = META[n] || {};
+        cap.innerHTML = '<span class="d">Stage ' + n + " · " + esc(m.date || "") + " · " + s.km + " km · +" + s.up + " m</span><b>" + esc(m.start || "") + " → " + esc(m.end || "") + "</b>";
+      }
+      svg.querySelectorAll("g.st").forEach(function (x) {
+        var n = +x.dataset.n;
+        x.addEventListener("mouseenter", function () { set(n); });
+        x.addEventListener("mouseleave", function () { set(-1); });
+        x.addEventListener("click", function () { if (META[n]) window.location.href = META[n].url; });
+      });
+      links.forEach(function (a) { a.addEventListener("mouseenter", function () { set(+a.dataset.n); }); a.addEventListener("mouseleave", function () { set(-1); }); });
+    });
+  }
+  var C_ = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
+  var hz = document.getElementById("haze"); if (hz) haze(hz);
+
   /* ---------- single stage ---------- */
   function stage(el) {
     var n = +el.dataset.n;
