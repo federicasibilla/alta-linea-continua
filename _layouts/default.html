@@ -59,7 +59,7 @@
       <a href="{{ L | append: '/' | relative_url }}" {% if page.layout == 'home' %}aria-current="page"{% endif %}>{{ t.nav_project }}</a>
       <a href="{{ L | append: '/stages/' | relative_url }}" {% if page.layout == 'stages' or S %}aria-current="page"{% endif %}>{{ t.nav_stages }}</a>
       <a href="{{ L | append: '/preparation/' | relative_url }}" {% if page.layout == 'page' %}aria-current="page"{% endif %}>{{ t.nav_prep }}</a>
-      <span class="lang" aria-label="Language"><a href="{{ en_url | relative_url }}" hreflang="en" lang="en" {% if lang == 'en' %}aria-current="true"{% endif %}>EN</a><a href="{{ it_url | relative_url }}" hreflang="it" lang="it" {% if lang == 'it' %}aria-current="true"{% endif %}>IT</a></span>
+      <span class="lang" aria-label="Language"><a href="{{ en_url | relative_url }}" hreflang="en" lang="en" {% if lang == 'en' %}aria-current="true"{% endif %}>EN<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="fuk"><path d="M0,0v30h60V0z"/></clipPath><clipPath id="fuk2"><path d="M30,15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#fuk)"><path d="M0,0v30h60V0z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#fuk2)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></g></svg></a><a href="{{ it_url | relative_url }}" hreflang="it" lang="it" {% if lang == 'it' %}aria-current="true"{% endif %}>IT<svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#CE2B37" d="M2 0h1v2H2z"/></svg></a></span>
     </nav>
   </header>
   <main>
