@@ -67,6 +67,7 @@ collections:
           - { name: image, label: Photo, widget: image }
           - { name: caption, label: Caption, widget: string, required: false }
           - { name: caption_it, label: "Caption · Italiano", widget: string, required: false }
+          - { name: on_map, label: "Show this photo on the map", widget: boolean, default: false }
           - { name: km, label: "Position on the route in km (only if the photo is not placed automatically)", widget: number, value_type: float, required: false }
       - name: instagram
         label: Instagram videos (full link of the post or reel)
@@ -175,3 +176,5 @@ collections:
           - { name: google_site_verification, label: Google verification code, widget: string, required: false }
           - { name: tally_comment_form, label: Tally form code for stage comments, widget: string, required: false }
           - { name: tally_question_form, label: Tally form code for Ask us, widget: string, required: false }
+          - { name: goatcounter_code, label: "GoatCounter code (statistics)", widget: string, required: false }
+          - { name: substack_url, label: "Substack address, e.g. https://altalineacontinua.substack.com", widget: string, required: false }

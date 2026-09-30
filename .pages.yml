@@ -139,6 +139,9 @@ content:
           - name: caption_it
             label: Caption · Italiano
             type: string
+          - name: on_map
+            label: Show this photo on the map
+            type: boolean
           - name: km
             label: Position on the route in km (only if the photo is not placed automatically)
             type: number
@@ -309,6 +312,12 @@ content:
         type: string
       - name: tally_question_form
         label: Tally form code for Ask us
+        type: string
+      - name: goatcounter_code
+        label: GoatCounter code (statistics)
+        type: string
+      - name: substack_url
+        label: Substack address, e.g. https://altalineacontinua.substack.com
         type: string
       - name: show_placeholders
         label: Show the dashed "your text here" boxes

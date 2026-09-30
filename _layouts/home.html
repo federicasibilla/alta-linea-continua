@@ -41,3 +41,5 @@ layout: default
   <figure class="cover"><img src="{{ H.cover }}" alt="{{ ccap | default: t.cover_photo | escape }}">{% if ccap != "" %}<figcaption>{{ ccap }}</figcaption>{% endif %}</figure>
   {%- elsif site.data.settings.show_placeholders -%}<div class="photo">{{ t.ph_cover }}</div>{%- endif -%}
 </section>
+
+{% include newsletter.html %}

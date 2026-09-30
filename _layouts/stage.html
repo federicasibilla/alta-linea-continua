@@ -73,7 +73,7 @@ layout: default
   </div>
 
   <script>window.ALC_PHOTOS = [
-  {%- for g in S.gallery -%}{%- if g.image and g.image != "" -%}
+  {%- for g in S.gallery -%}{%- if g.image and g.image != "" and g.on_map -%}
     {%- assign fname = g.image | split: "/" | last -%}{%- assign pd = site.data.photos[fname] -%}
     {%- capture cap_ -%}{% include tr.html o=g k="caption" %}{%- endcapture -%}
     {"src": {{ g.image | jsonify }}, "caption": {{ cap_ | strip | jsonify }}, "km": {% if g.km %}{{ g.km }}{% else %}null{% endif %}, "lat": {% if pd.lat %}{{ pd.lat }}{% else %}null{% endif %}, "lon": {% if pd.lon %}{{ pd.lon }}{% else %}null{% endif %}},
@@ -81,6 +81,8 @@ layout: default
   null].filter(Boolean);</script>
 
   {% include stage-comments.html %}
+
+  {% include newsletter.html %}
 
   <nav class="pager">
     {%- for s in ordered -%}{%- if s.number == prev_n -%}<a href="{% include stage-url.html s=s %}">← {{ t.stage }} {{ s.number }}<b>{% include tr.html o=s k="start" %} → {% include tr.html o=s k="end" %}</b></a>{%- endif -%}{%- endfor -%}

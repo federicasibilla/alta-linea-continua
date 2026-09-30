@@ -1,0 +1,15 @@
+{%- assign sub = site.data.settings.substack_url | strip | remove: "/embed" -%}
+{%- if sub != "" -%}{%- assign last_ = sub | slice: -1, 1 -%}{%- if last_ == "/" -%}{%- assign sub = sub | slice: 0, sub.size | minus: 1 -%}{%- endif -%}
+<section class="newsletter" id="follow">
+  <div>
+    <h2>{{ t.nl_title }}</h2>
+    <p>{{ t.nl_text }}</p>
+  </div>
+  <form action="{{ sub }}/api/v1/free?nojs=true" method="post" target="_blank" class="nl-form">
+    <label class="sr-only" for="nl-email">{{ t.nl_email }}</label>
+    <input id="nl-email" type="email" name="email" required placeholder="{{ t.nl_email }}" autocomplete="email">
+    <button class="btn" type="submit">{{ t.nl_button }}</button>
+    <a class="nl-note" href="{{ sub }}" target="_blank" rel="noopener">{{ t.nl_note }} ↗</a>
+  </form>
+</section>
+{%- endif -%}

@@ -246,3 +246,15 @@ header nav .lang a:hover{border-bottom-color:transparent;color:var(--ink)}
 /* photos on the stage map */
 .photo-pin span{display:block;width:30px;height:30px;border-radius:50%;background:var(--paper) center/cover no-repeat;border:2px solid var(--paper);box-shadow:0 0 0 1.5px var(--accent),0 2px 6px rgba(0,0,0,.3);cursor:zoom-in;transition:transform .15s}
 .photo-pin:hover span{transform:scale(1.35)}
+
+/* newsletter */
+.newsletter{margin-top:48px;border-top:1px solid var(--line);padding-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 40px;align-items:end}
+@media (max-width:760px){.newsletter{grid-template-columns:1fr}}
+.newsletter h2{margin-bottom:8px}
+.newsletter p{margin:0;color:var(--muted);max-width:52ch}
+.nl-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.nl-form input{flex:1 1 220px;min-width:0;font:400 15px var(--f-body);padding:9px 12px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0}
+.nl-form input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.nl-form .btn{background:var(--ink);color:var(--bg);cursor:pointer;padding:10px 16px}
+.nl-form .btn:hover{background:var(--accent);border-color:var(--accent)}
+.nl-note{flex-basis:100%;font:400 11px var(--f-data);letter-spacing:.08em;color:var(--muted);text-decoration:none}

@@ -67,6 +67,11 @@ en:
   g_water_yes: Water along the way
   g_water_no: No water along the way
   g_resupply: Resupply
+  nl_title: Follow the next line
+  nl_text: Stories from the trail and our next projects, a few times a year. No spam.
+  nl_email: Your email
+  nl_button: Subscribe
+  nl_note: Newsletter on Substack
   months: [January, February, March, April, May, June, July, August, September, October, November, December]
   days: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
   js:
@@ -153,6 +158,11 @@ it:
   g_water_yes: Acqua lungo il percorso
   g_water_no: Niente acqua lungo il percorso
   g_resupply: Rifornimento
+  nl_title: Segui la prossima linea
+  nl_text: Racconti dal sentiero e i nostri prossimi progetti, qualche volta all'anno. Niente spam.
+  nl_email: La tua email
+  nl_button: Iscriviti
+  nl_note: Newsletter su Substack
   months: [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre]
   days: [domenica, lunedì, martedì, mercoledì, giovedì, venerdì, sabato]
   js:
