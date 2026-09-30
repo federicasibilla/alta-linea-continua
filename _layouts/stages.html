@@ -6,7 +6,11 @@ layout: default
   <div class="eyebrow">{{ site.stages | size }} {{ t.stages_eyebrow }}</div>
   <h1>{{ t.stages_title }}</h1>
 </div>
-<div class="haze" id="haze" aria-label="{{ t.haze_aria }}"></div>
-<div class="cap" id="hcap" aria-live="polite" data-idle-top="{{ t.haze_idle }}" data-idle="{{ t.tagline_default }}"></div>
-<div class="dl-all"><a class="btn" href="{{ '/assets/tracks/alta-linea-continua-full-route.gpx' | relative_url }}" download>{{ t.dl_full }}</a></div>
-{% include stage-list.html %}
+<div class="atlas">
+  <div>
+    <div class="map js-atlas" id="atlas-map" data-style="relief-soft" aria-label="{{ t.map_aria }}"></div>
+    <div class="maphint"><span>{{ t.map_hint }}</span><span>Pian delle Gorre → Pian del Re</span></div>
+    <div class="dl-all"><a class="btn" href="{{ '/assets/tracks/alta-linea-continua-full-route.gpx' | relative_url }}" download>{{ t.dl_full }}</a></div>
+  </div>
+  {% include stage-list.html %}
+</div>

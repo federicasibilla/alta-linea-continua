@@ -214,10 +214,14 @@
         g += '<path class="colmark" d="M' + (x - 6) + "," + (y - 6) + "Q" + x + "," + (y + 1) + " " + (x + 6) + "," + (y - 6) + "M" + (x - 6) + "," + (y + 6) + "Q" + x + "," + (y - 1) + " " + (x + 6) + "," + (y + 6) + '"/><line class="lead" x1="' + x + '" x2="' + x + '" y1="' + (y + 8) + '" y2="' + (gq[1] + 10) + '"/><text class="colname" x="' + x + '" y="' + (gq[1] + 26) + '" text-anchor="middle">' + esc(c[0]) + '</text><text class="colalt" x="' + x + '" y="' + (gq[1] + 40) + '" text-anchor="middle">' + c[1] + " m</text>";
       });
       el.innerHTML = g + "</svg>";
-      var svg = el.querySelector("svg"), cap = document.getElementById("hcap"), links = document.querySelectorAll(".list a[data-n]");
+      var svg0 = el.querySelector("svg");
+      try { var bb = svg0.getBBox(); if (bb.width > 0) svg0.setAttribute("viewBox", [Math.max(0, bb.x - 10), Math.max(0, bb.y - 30), Math.min(W, bb.width + 20), Math.min(H, bb.height + 50)].join(" ")); } catch (e) {}
+      var svg = svg0, cap = document.getElementById("hcap"), links = document.querySelectorAll(".list a[data-n]"), spineApi = null, cur = -2;
       var idle = cap ? '<span class="d">' + esc(cap.dataset.idleTop || "") + "</span><b>" + esc(cap.dataset.idle || "") + "</b>" : "";
       if (cap) cap.innerHTML = idle;
       function set(n) {
+        if (n === cur) return; cur = n;
+        if (spineApi) spineApi.set(n);
         svg.classList.toggle("dim", n >= 0);
         svg.querySelectorAll("g.st").forEach(function (x) { x.classList.toggle("on", +x.dataset.n === n); });
         links.forEach(function (a) { a.classList.toggle("on", +a.dataset.n === n); });
@@ -233,6 +237,8 @@
         x.addEventListener("click", function () { if (META[n]) window.location.href = META[n].url; });
       });
       links.forEach(function (a) { a.addEventListener("mouseenter", function () { set(+a.dataset.n); }); a.addEventListener("mouseleave", function () { set(-1); }); });
+      var sp = document.getElementById("spine");
+      if (sp && !sp.firstChild) spineApi = spine(sp, geo, set);
     });
   }
   var C_ = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };

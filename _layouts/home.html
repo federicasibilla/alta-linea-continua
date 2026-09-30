@@ -16,13 +16,8 @@ layout: default
   <div class="cap" id="cap" aria-live="polite" data-idle-top="{{ site.stages | size }} {{ t.stages_word }} · {{ tkm | round }} km · {{ tup | divided_by: 1000 | floor }}{{ sep }}{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} {{ t.of_ascent }}" data-idle="{{ tagline | escape }}"></div>
 </section>
 
-<div class="atlas">
-  <div>
-    <div class="map js-atlas" id="atlas-map" data-style="relief-soft" aria-label="{{ t.map_aria }}"></div>
-    <div class="maphint"><span>{{ t.map_hint }}</span><span>Pian delle Gorre → Pian del Re</span></div>
-  </div>
-  {% include stage-list.html %}
-</div>
+<div class="haze home-haze" id="haze" aria-label="{{ t.haze_aria }}"></div>
+<div class="maphint haze-hint"><span>{{ t.map_hint }}</span><span>{{ t.haze_aria }}</span></div>
 
 <section class="intro">
   <div class="prose">

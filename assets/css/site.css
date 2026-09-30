@@ -292,3 +292,7 @@ table.summits td:last-child{white-space:nowrap}
 .lock-msg{margin:0;font-size:14px;color:var(--accent);min-height:1.4em}
 .lock-out{margin-top:40px}
 .lock-out .btn{cursor:pointer;background:none}
+
+/* aerial haze on the home page */
+.home-haze{margin-top:10px;border-top:1px solid var(--line);padding-top:24px}
+.haze-hint{margin-top:4px}
