@@ -198,15 +198,6 @@
   "dist_m": 61
  },
  {
-  "name": "Collet du Lac de Fenestre",
-  "ele": 0,
-  "lat": 44.11135,
-  "lon": 7.3674,
-  "stage": 5,
-  "km": 15.79,
-  "dist_m": 54
- },
- {
   "name": "Cima di Mercantour / Cime du Mercantour",
   "ele": 2772,
   "lat": 44.14419,
@@ -304,15 +295,6 @@
   "stage": 9,
   "km": 15.05,
   "dist_m": 99
- },
- {
-  "name": "Cime Moravachère",
-  "ele": 0,
-  "lat": 44.21734,
-  "lon": 7.11189,
-  "stage": 9,
-  "km": 15.51,
-  "dist_m": 120
  },
  {
   "name": "Cima d'Arena Grossa",

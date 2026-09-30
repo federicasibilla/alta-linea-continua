@@ -58,7 +58,9 @@ for s in S:
             ele = int(float(str(tags.get("ele", "0")).replace(",", ".").split()[0]))
         except Exception:
             ele = 0
-        if ele and reached < ele - 70:
+        if not ele or reached < ele - 70:   # no altitude in the database: usually a pass or a duplicate
+            continue
+        if name.lower().startswith(("col ", "colle ", "collet ", "passo ", "pas ")):
             continue
         out.append({"name": name, "ele": ele, "lat": round(pk[0], 5), "lon": round(pk[1], 5),
                     "stage": s["n"], "km": round(bkm, 2), "dist_m": round(best)})
