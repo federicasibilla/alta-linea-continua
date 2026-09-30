@@ -1,47 +1,48 @@
 ---
 layout: default
 ---
-{%- assign sub = site.data.settings.substack_url | strip -%}
-{%- assign gc = site.data.settings.goatcounter_code | strip -%}
 <div class="pagehead">
-  <div class="eyebrow">Ema &amp; Federica · private links</div>
+  <div class="eyebrow">Ema &amp; Federica</div>
   <h1>Control <em>room</em></h1>
 </div>
-<p class="prose muted">Everything for running the site in one place. Bookmark this page, or add it to your phone's home screen. It is not in the menu and search engines are asked not to list it.</p>
-
-<div class="team">
-  <section>
-    <div class="eyebrow">The site</div>
-    <a class="tile" href="{{ '/' | relative_url }}"><b>Site · English</b><span>federicasibilla.github.io/alta-linea-continua</span></a>
-    <a class="tile" href="{{ '/it/' | relative_url }}"><b>Sito · Italiano</b><span>…/alta-linea-continua/it/</span></a>
-  </section>
-  <section>
-    <div class="eyebrow">Edit</div>
-    <a class="tile main" href="{{ '/admin/' | relative_url }}" target="_blank" rel="noopener"><b>Editor (Sveltia)</b><span>Sign in with your GitHub token · photos resized automatically</span></a>
-    <a class="tile" href="https://app.pagescms.org/federicasibilla/alta-linea-continua/main" target="_blank" rel="noopener"><b>Pages CMS</b><span>Sign in with GitHub · photos up to ~4 MB</span></a>
-  </section>
-  <section>
-    <div class="eyebrow">Readers</div>
-    <a class="tile" href="https://tally.so/dashboard" target="_blank" rel="noopener"><b>Tally · comments &amp; questions</b><span>Messages waiting to be approved</span></a>
-    {%- if gc != "" %}<a class="tile" href="https://{{ gc }}.goatcounter.com" target="_blank" rel="noopener"><b>GoatCounter · statistics</b><span>Visits, pages, where people come from</span></a>{% endif %}
-    {%- if sub != "" %}<a class="tile" href="{{ sub }}/publish" target="_blank" rel="noopener"><b>Substack · newsletter</b><span>Write and send to subscribers</span></a>
-    {%- else %}<div class="tile off"><b>Substack · newsletter</b><span>Coming soon</span></div>{% endif %}
-  </section>
-  <section>
-    <div class="eyebrow">Behind the scenes</div>
-    <a class="tile" href="https://github.com/federicasibilla/alta-linea-continua" target="_blank" rel="noopener"><b>GitHub repository</b><span>All the files and the history of every change</span></a>
-    <a class="tile" href="https://github.com/federicasibilla/alta-linea-continua/actions" target="_blank" rel="noopener"><b>Site updates</b><span>Green tick = the latest change is online</span></a>
-    <a class="tile" href="https://search.google.com/search-console" target="_blank" rel="noopener"><b>Google Search Console</b><span>How the site appears on Google</span></a>
-  </section>
-</div>
-
-<section class="talk">
-  <div class="talk-head"><h2>Reminders</h2></div>
-  <ul class="remind">
-    <li><b>New token for the editor</b> (another computer, or a lost token): <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">create one on GitHub</a> → <i>Only select repositories</i>: alta-linea-continua → <i>Contents</i>: Read and write. Save it straight away: GitHub shows it only once.</li>
-    <li><b>Publishing a comment</b>: copy it from Tally into the stage in the editor → <i>Comments &amp; trail updates</i>.</li>
-    <li><b>Photo on the map</b>: in the stage gallery switch on <i>Show this photo on the map</i>. If it doesn't appear, fill in <i>Position on the route in km</i>.</li>
-    <li><b>Change not visible?</b> Wait 1–2 minutes, then reload with Ctrl/Cmd + Shift + R, or open a private window.</li>
-    <li><b>Hide the dashed "your text here" boxes</b> when the site is ready: editor → Site settings.</li>
-  </ul>
-</section>
+<form class="lock-form" id="lockform" autocomplete="off">
+  <label for="lockpw" class="eyebrow">Password</label>
+  <div class="lock-row">
+    <input id="lockpw" type="password" autocomplete="current-password" required>
+    <button class="btn" type="submit">Open</button>
+  </div>
+  <label class="lock-remember"><input type="checkbox" id="lockremember"> Remember on this device</label>
+  <p class="lock-msg" id="lockmsg" aria-live="polite"></p>
+</form>
+<div id="lockcontent" hidden></div>
+<p class="lock-out" id="lockout" hidden><button type="button" class="btn" id="lockforget">Lock and forget on this device</button></p>
+<script>
+(function () {
+  var B = {{ site.data.team_lock | jsonify }};
+  var b64 = function (s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); };
+  async function open(pw) {
+    var enc = new TextEncoder();
+    var base = await crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveKey"]);
+    var key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64(B.s), iterations: B.n, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+    var out = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(B.i) }, key, b64(B.c));
+    return new TextDecoder().decode(out);
+  }
+  async function tryOpen(pw) {
+    var cands = [pw, pw + "!", pw.replace(/!$/, "")];
+    for (var i = 0; i < cands.length; i++) { try { return { html: await open(cands[i]), pw: cands[i] }; } catch (e) {} }
+    return null;
+  }
+  var form = document.getElementById("lockform"), msg = document.getElementById("lockmsg"), box = document.getElementById("lockcontent"), out = document.getElementById("lockout");
+  function show(html) { box.innerHTML = html; box.hidden = false; form.hidden = true; out.hidden = false; }
+  var saved = null; try { saved = localStorage.getItem("alc-team"); } catch (e) {}
+  if (saved) tryOpen(saved).then(function (r) { if (r) show(r.html); });
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); msg.textContent = "Opening…";
+    var r = await tryOpen(document.getElementById("lockpw").value);
+    if (!r) { msg.textContent = "Wrong password. Check capital letters and try again."; return; }
+    if (document.getElementById("lockremember").checked) { try { localStorage.setItem("alc-team", r.pw); } catch (e) {} }
+    msg.textContent = ""; show(r.html);
+  });
+  document.getElementById("lockforget").addEventListener("click", function () { try { localStorage.removeItem("alc-team"); } catch (e) {} location.reload(); });
+})();
+</script>

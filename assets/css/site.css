@@ -283,3 +283,12 @@ table.summits td:last-child{white-space:nowrap}
 .tile.off{opacity:.55}
 .remind{margin:0;padding-left:18px;display:grid;gap:10px;max-width:70ch}
 .remind a{color:var(--accent)}
+/* control room lock */
+.lock-form{display:grid;gap:10px;max-width:420px;margin-top:10px}
+.lock-row{display:flex;gap:10px}
+.lock-row input{flex:1;min-width:0;font:400 16px var(--f-body);padding:9px 12px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0}
+.lock-row .btn{background:var(--ink);color:var(--bg);cursor:pointer}
+.lock-remember{font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.lock-msg{margin:0;font-size:14px;color:var(--accent);min-height:1.4em}
+.lock-out{margin-top:40px}
+.lock-out .btn{cursor:pointer;background:none}
