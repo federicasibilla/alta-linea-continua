@@ -10,4 +10,9 @@ gallery: []
 instagram: []
 links: []
 comments: []
+sleep: tent
+water: "no"
+resupply: true
+resupply_note: "Resupply at Colle della Maddalena"
+resupply_note_it: "Rifornimento al Colle della Maddalena"
 ---

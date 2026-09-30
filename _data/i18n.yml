@@ -59,6 +59,14 @@ en:
   desc_stage_a: of Alta Linea Continua
   desc_stage_b: Map, elevation profile and GPX track of a 377 km traverse from Marguareis to Monviso.
   to: to
+  g_sleep_hut: Night in a hut
+  g_sleep_bivouac: Night in a bivouac
+  g_sleep_tent: Night in the tent
+  g_sleep_home: Night at home
+  g_sleep_end: Arrival
+  g_water_yes: Water along the way
+  g_water_no: No water along the way
+  g_resupply: Resupply
   months: [January, February, March, April, May, June, July, August, September, October, November, December]
   days: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
   js:
@@ -137,6 +145,14 @@ it:
   desc_stage_a: di Alta Linea Continua
   desc_stage_b: Mappa, profilo altimetrico e traccia GPX di una traversata di 377 km dal Marguareis al Monviso.
   to: →
+  g_sleep_hut: Notte in rifugio
+  g_sleep_bivouac: Notte in bivacco
+  g_sleep_tent: Notte in tenda
+  g_sleep_home: Notte a casa
+  g_sleep_end: Arrivo
+  g_water_yes: Acqua lungo il percorso
+  g_water_no: Niente acqua lungo il percorso
+  g_resupply: Rifornimento
   months: [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre]
   days: [domenica, lunedì, martedì, mercoledì, giovedì, venerdì, sabato]
   js:

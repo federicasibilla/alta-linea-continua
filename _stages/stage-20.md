@@ -16,4 +16,7 @@ gallery: []
 instagram: []
 links: []
 comments: []
+sleep: tent
+water: "yes"
+resupply: false
 ---

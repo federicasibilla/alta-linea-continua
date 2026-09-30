@@ -10,4 +10,7 @@ gallery: []
 instagram: []
 links: []
 comments: []
+sleep: bivouac
+water: "no"
+resupply: false
 ---

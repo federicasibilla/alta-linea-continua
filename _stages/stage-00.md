@@ -11,4 +11,7 @@ gallery: []
 instagram: []
 links: []
 comments: []
+sleep: hut
+water: "yes"
+resupply: false
 ---

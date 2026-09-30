@@ -10,4 +10,7 @@ gallery: []
 instagram: []
 links: []
 comments: []
+sleep: hut
+water: "no"
+resupply: false
 ---

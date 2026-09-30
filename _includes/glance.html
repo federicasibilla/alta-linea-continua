@@ -1,0 +1,13 @@
+{%- assign sl = S.sleep | default: "" -%}
+{%- if sl != "" or S.water or S.resupply -%}
+<ul class="glance">
+  {%- if sl != "" -%}{%- assign k_ = "g_sleep_" | append: sl -%}
+  <li><svg viewBox="0 0 24 24" aria-hidden="true">{% case sl %}{% when "hut" %}<path d="M3 20h18M5 20v-8l7-6 7 6v8M10 20v-5h4v5"/>{% when "bivouac" %}<path d="M3 20h18M5 20c0-6 3-11 7-11s7 5 7 11M9 20v-4h6v4"/>{% when "tent" %}<path d="M2 20h20M4 20 12 5l8 15M12 5v15M9 20l3-5 3 5"/>{% when "home" %}<path d="M3 20h18M5 20v-9l7-5 7 5v9"/>{% else %}<path d="M5 21V4M5 4h11l-2 3 2 3H5"/>{% endcase %}</svg>{{ t[k_] }}</li>
+  {%- endif -%}
+  {%- if S.water == "yes" -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg>{{ t.g_water_yes }}</li>
+  {%- elsif S.water == "no" -%}<li class="off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11zM4 4l16 16"/></svg>{{ t.g_water_no }}</li>{%- endif -%}
+  {%- if S.resupply -%}{%- capture rn_ -%}{% include tr.html o=S k="resupply_note" %}{%- endcapture -%}{%- assign rn_ = rn_ | strip -%}
+  <li class="res"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8zM9 8V6a3 3 0 0 1 6 0v2"/></svg>{% if rn_ != "" %}{{ rn_ }}{% else %}{{ t.g_resupply }}{% endif %}</li>
+  {%- endif -%}
+</ul>
+{%- endif -%}

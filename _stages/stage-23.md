@@ -15,4 +15,7 @@ gallery: []
 instagram: []
 links: []
 comments: []
+sleep: end
+water: "no"
+resupply: false
 ---

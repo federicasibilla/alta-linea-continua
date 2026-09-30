@@ -16,4 +16,9 @@ gallery: []
 instagram: []
 links: []
 comments: []
+sleep: tent
+water: "yes"
+resupply: true
+resupply_note: "Resupply at Colle della Lombarda, with a day back home"
+resupply_note_it: "Rifornimento al Colle della Lombarda, con un giorno a casa"
 ---

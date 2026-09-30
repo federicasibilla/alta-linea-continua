@@ -97,6 +97,25 @@ content:
       - name: summary_it
         label: Short note · Italiano
         type: string
+      - name: sleep
+        label: Where you slept
+        type: select
+        options:
+          values: [{ value: hut, label: Hut }, { value: bivouac, label: Bivouac }, { value: tent, label: Tent }, { value: home, label: Home }, { value: end, label: "Arrival (last stage)" }]
+      - name: water
+        label: Water along the way
+        type: select
+        options:
+          values: [{ value: "yes", label: "Yes" }, { value: "no", label: "No" }]
+      - name: resupply
+        label: Resupply on this stage
+        type: boolean
+      - name: resupply_note
+        label: Resupply note
+        type: string
+      - name: resupply_note_it
+        label: Resupply note · Italiano
+        type: string
       - name: body
         label: Story of the day
         description: Write freely. Use the toolbar to insert photos anywhere in the text.

@@ -12,6 +12,7 @@ layout: default
     {%- capture summ -%}{% include tr.html o=S k="summary" %}{%- endcapture -%}{%- assign summ = summ | strip -%}
     <div class="eyebrow">{{ t.stage }} {{ S.number }} · {% include sdate.html s=S %}{% if summ != "" %} · {{ summ }}{% endif %}</div>
     <h1>{% include tr.html o=S k="start" %} <em>→</em> {% include tr.html o=S k="end" %}</h1>
+    {% include glance.html %}
     {%- if S.climbing and S.climbing.size > 0 %}
     <ul class="climbs">
       {%- for c in S.climbing %}

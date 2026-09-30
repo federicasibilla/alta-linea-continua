@@ -48,6 +48,11 @@ collections:
       - { name: date_label_it, label: "Date · Italiano (optional, otherwise automatic)", widget: string, required: false }
       - { name: summary, label: Short note next to the date, widget: string, required: false }
       - { name: summary_it, label: "Short note · Italiano", widget: string, required: false }
+      - { name: sleep, label: Where you slept, widget: select, options: [{ label: Hut, value: hut }, { label: Bivouac, value: bivouac }, { label: Tent, value: tent }, { label: Home, value: home }, { label: "Arrival (last stage)", value: end }], required: false }
+      - { name: water, label: Water along the way, widget: select, options: [{ label: "Yes", value: "yes" }, { label: "No", value: "no" }], required: false }
+      - { name: resupply, label: Resupply on this stage, widget: boolean, default: false }
+      - { name: resupply_note, label: Resupply note, widget: string, required: false }
+      - { name: resupply_note_it, label: "Resupply note · Italiano", widget: string, required: false }
       - { name: body, label: Story of the day, widget: markdown, required: false, hint: "Use the toolbar to add photos anywhere in the text." }
       - { name: story_it, label: "Story of the day · Italiano", widget: markdown, required: false, hint: "If empty, the Italian page shows the English story." }
       - name: gallery
