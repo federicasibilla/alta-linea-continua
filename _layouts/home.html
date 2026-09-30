@@ -5,7 +5,7 @@ layout: default
 {%- for s in site.data.stats -%}{%- assign tkm = tkm | plus: s.km -%}{%- assign tup = tup | plus: s.up -%}{%- if s.max > tmax -%}{%- assign tmax = s.max -%}{%- endif -%}{%- endfor -%}
 <section class="hero">
   <div class="eyebrow kicker">{{ site.authors }}</div>
-  <h1 class="name" id="n1">Alta Linea</h1>
+  <h1 class="name" id="n1"><span id="n1t">Alta Linea</span><span class="sr-only"> Continua</span></h1>
   <div class="spine" id="spine" aria-label="Elevation profile of the whole route"></div>
   <div class="ends" aria-hidden="true"><span>Pian delle Gorre</span><span>Pian del Re</span></div>
   <div class="name it" id="n2" aria-hidden="true">Continua</div>

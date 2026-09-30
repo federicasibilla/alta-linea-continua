@@ -5,6 +5,12 @@ url: "https://federicasibilla.github.io"
 baseurl: "/alta-linea-continua"
 lang: en
 
+# Paste the code from Google Search Console here (only the content="..." part)
+google_site_verification: ""
+
+plugins:
+  - jekyll-sitemap
+
 collections:
   stages:
     output: true

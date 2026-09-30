@@ -163,7 +163,7 @@
     if (!n1 || !n2) return;
     n2.style.fontSize = "";
     var r = document.createRange();
-    r.selectNodeContents(n1); var w1 = r.getBoundingClientRect().width;
+    r.selectNodeContents(document.getElementById("n1t") || n1); var w1 = r.getBoundingClientRect().width;
     r.selectNodeContents(n2); var w2 = r.getBoundingClientRect().width;
     if (w2) n2.style.fontSize = (parseFloat(getComputedStyle(n2).fontSize) * w1 / w2).toFixed(2) + "px";
   }

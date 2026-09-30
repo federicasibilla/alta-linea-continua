@@ -11,9 +11,25 @@
   {%- capture ptitle -%}{{ page.title }} · {{ site.title }}{%- endcapture -%}
 {%- endif %}
 <title>{{ ptitle }}</title>
-<meta name="description" content="{{ page.summary | default: site.description | strip_html | escape }}">
+{%- if page.collection == 'stages' -%}
+  {%- capture pdesc -%}Stage {{ page.number }} of Alta Linea Continua, {{ page.date_label }}: {{ page.start }} to {{ page.end }}. Map, elevation profile and GPX track of a 377 km traverse from Marguareis to Monviso.{%- endcapture -%}
+{%- else -%}
+  {%- assign pdesc = site.description -%}
+{%- endif %}
+<meta name="description" content="{{ pdesc | strip_html | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:title" content="{{ ptitle | escape }}">
-<meta property="og:description" content="{{ site.description | escape }}">
+<meta property="og:description" content="{{ pdesc | strip_html | escape }}">
+<meta name="twitter:card" content="summary_large_image">
+{%- if site.google_site_verification and site.google_site_verification != "" %}
+<meta name="google-site-verification" content="{{ site.google_site_verification }}">
+{%- endif %}
+{%- if page.layout == 'home' %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Alta Linea Continua","alternateName":["Alta Linea Continua traverse","ALC"],"url":{{ '/' | absolute_url | jsonify }},"description":{{ site.description | jsonify }},"author":[{"@type":"Person","name":"Ema"},{"@type":"Person","name":"Federica"}]}</script>
+{%- endif %}
 {%- if page.cover and page.cover != "" %}<meta property="og:image" content="{{ site.url }}{{ page.cover }}">{% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
