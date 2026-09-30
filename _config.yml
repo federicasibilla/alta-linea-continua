@@ -20,4 +20,4 @@ defaults:
 markdown: kramdown
 kramdown:
   input: GFM
-exclude: [README.md, .pages.yml, Gemfile, Gemfile.lock, vendor]
+exclude: [README.md, .pages.yml, Gemfile, Gemfile.lock, vendor, scripts]

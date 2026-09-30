@@ -139,6 +139,9 @@ content:
           - name: caption_it
             label: Caption · Italiano
             type: string
+          - name: km
+            label: Position on the route in km (only if the photo is not placed automatically)
+            type: number
       - name: instagram
         label: Instagram videos
         description: Paste the full link of the post or reel, e.g. https://www.instagram.com/reel/XXXX/

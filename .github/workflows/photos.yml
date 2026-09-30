@@ -1,0 +1,25 @@
+name: Place and resize photos
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["assets/images/**", "scripts/photos.py"]
+permissions:
+  contents: write
+concurrency: { group: photos, cancel-in-progress: false }
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install pillow pillow-heif
+      - run: python scripts/photos.py
+      - name: Commit result
+        run: |
+          git config user.name "route-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add _data/photos.json assets/images
+          git diff --cached --quiet || git commit -m "Place photos on the route and resize them"
+          git pull --rebase origin main && git push

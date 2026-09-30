@@ -9,16 +9,18 @@ backend:
 media_folder: assets/images
 public_folder: /alta-linea-continua/assets/images
 
-# Photos are resized and compressed automatically on upload (longest side 2400 px, WebP).
+# Photos: uploaded as originals so their GPS data can place them on the map; a GitHub job resizes them afterwards.
 media_libraries:
   default:
     config:
       max_file_size: 50000000
       slugify_filename: true
+      # iPhone HEIC photos are converted to JPEG (browsers can't show HEIC).
+      # Other photos are uploaded as they are: a GitHub job then reads their position and resizes them.
       transformations:
-        raster_image:
-          format: webp
-          quality: 82
+        heic:
+          format: jpeg
+          quality: 85
           width: 2400
 
 site_url: https://federicasibilla.github.io/alta-linea-continua/
@@ -65,6 +67,7 @@ collections:
           - { name: image, label: Photo, widget: image }
           - { name: caption, label: Caption, widget: string, required: false }
           - { name: caption_it, label: "Caption · Italiano", widget: string, required: false }
+          - { name: km, label: "Position on the route in km (only if the photo is not placed automatically)", widget: number, value_type: float, required: false }
       - name: instagram
         label: Instagram videos (full link of the post or reel)
         widget: list

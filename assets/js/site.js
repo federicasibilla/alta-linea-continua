@@ -257,6 +257,16 @@
       L.circleMarker(ll[0], { radius: 5, color: COL.edge, weight: 1.5, fillColor: COL.paper, fillOpacity: 1 }).bindTooltip(T.start).addTo(map);
       L.circleMarker(ll[ll.length - 1], { radius: 5, color: COL.edge, weight: 1.5, fillColor: COL.edge, fillOpacity: 1 }).bindTooltip(T.end).addTo(map);
       if (META[n]) addClimbMarkers(map, s, META[n], 20);
+      (window.ALC_PHOTOS || []).forEach(function (ph) {
+        var pos = null;
+        if (ph.km !== null && ph.km !== undefined && ph.km !== "") pos = pointAtKm(s.line, +ph.km);
+        else if (ph.lat && ph.lon) pos = [ph.lat, ph.lon];
+        if (!pos) return;
+        var icon = L.divIcon({ className: "photo-pin", html: '<span style="background-image:url(\'' + encodeURI(ph.src).replace(/'/g, "%27") + '\')"></span>', iconSize: [30, 30], iconAnchor: [15, 15] });
+        var m = L.marker(pos, { icon: icon, riseOnHover: true, keyboard: true, title: ph.caption || "" }).addTo(map);
+        if (ph.caption) m.bindTooltip(esc(ph.caption), { className: "stage-tip", direction: "top", offset: [0, -16] });
+        m.on("click", function () { openLightbox(ph.src, ph.caption); });
+      });
       map.invalidateSize(); map.fitBounds(line.getBounds(), { padding: [28, 28] });
       profile(document.getElementById("profile"), s, META[n]);
     });
@@ -288,6 +298,10 @@
   }
 
   /* ---------- lightbox ---------- */
+  function openLightbox(src, caption) {
+    var box = document.getElementById("lightbox"); if (!box) return;
+    box.querySelector("img").src = src; box.querySelector("figcaption").textContent = caption || ""; box.hidden = false;
+  }
   function lightbox() {
     var box = document.getElementById("lightbox");
     if (!box) return;
