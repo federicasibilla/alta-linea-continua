@@ -192,7 +192,7 @@
       var G = function (p) { return [60 + (p[1] - lo0) * kx * sx, Y0 - depth(p) * dk]; };
       var path = function (pts, f) { return pts.map(function (p, i) { var q = f(p); return (i ? "L" : "M") + q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(""); };
       function mix(a, b, t) { var h = function (x) { return [1, 3, 5].map(function (i) { return parseInt(x.slice(i, i + 2), 16); }); }; var A = h(a), B = h(b); return "#" + A.map(function (v, i) { return Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0"); }).join(""); }
-      var g = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="The route seen from the south"><defs><linearGradient id="hzg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" class="hz-a" stop-opacity="0"/><stop offset="1" class="hz-a" stop-opacity=".45"/></linearGradient></defs><rect x="0" y="0" width="' + W + '" height="' + H + '" fill="url(#hzg)"/>';
+      var g = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="The route seen from the south"><defs><linearGradient id="hzg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" class="hz-a" stop-opacity="0"/><stop offset="1" class="hz-a" stop-opacity=".45"/></linearGradient></defs>';
       S.slice().sort(function (a, b) { return b.line[0][0] - a.line[0][0]; }).forEach(function (s) {
         var d = s.line.reduce(function (a, p) { return a + depth(p); }, 0) / s.line.length, col = mix(C, Hz, Math.min(1, d * 0.8)), m = META[s.n] || {};
         var curtain = ""; s.line.forEach(function (p, i) { if (i % 2) return; var q = P(p), gq = G(p); curtain += "M" + q[0].toFixed(1) + "," + q[1].toFixed(1) + "V" + gq[1].toFixed(1); });

@@ -182,7 +182,7 @@ footer{margin-top:50px;padding-block:30px;border-top:1px solid var(--line);font:
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* aerial haze (Stages page) */
-.haze{background:var(--paper);border:1px solid var(--line);overflow-x:auto}
+.haze{overflow-x:auto}
 .haze svg{display:block;width:100%;min-width:720px;height:auto}
 .haze .hz-a{stop-color:var(--haze)}
 .haze .hut{font:400 11px var(--f-data);fill:var(--ink)}
@@ -224,3 +224,5 @@ body:not(:has(.atlas)) #hcap{margin-bottom:10px}
 .qa dd{margin:0}
 .qa dd p{margin:0 0 .6em}
 .talk-form iframe{display:block;width:100%;border:0;min-height:200px}
+.privacy{font-size:12.5px;color:var(--muted);margin:8px 0 0;max-width:62ch}
+.privacy a{color:inherit}
