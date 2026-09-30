@@ -300,5 +300,8 @@
 
   if (window.L) document.querySelectorAll(".js-atlas").forEach(function (m) { atlas(m); });
   var st = document.getElementById("stage-map"); if (st && window.L) stage(st);
+  document.querySelectorAll("details.talk-form").forEach(function (d) {
+    d.addEventListener("toggle", function () { if (d.open && window.Tally) window.Tally.loadEmbeds(); });
+  });
   lightbox();
 })();

@@ -226,3 +226,6 @@ body:not(:has(.atlas)) #hcap{margin-bottom:10px}
 .talk-form iframe{display:block;width:100%;border:0;min-height:200px}
 .privacy{font-size:12.5px;color:var(--muted);margin:8px 0 0;max-width:62ch}
 .privacy a{color:inherit}
+.talk-form>summary{list-style:none;cursor:pointer;width:max-content;max-width:100%}
+.talk-form>summary::-webkit-details-marker{display:none}
+.talk-form[open]>summary{margin-bottom:16px;background:var(--ink);color:var(--bg)}

@@ -11,5 +11,8 @@
     {%- endfor %}
   </dl>
   {%- endif %}
-  <div class="talk-form">{% include tally.html form=site.data.settings.tally_question_form params="" title="Ask us" %}</div>
+  <details class="talk-form">
+    <summary class="btn">Ask a question</summary>
+    {% include tally.html form=site.data.settings.tally_question_form params="" title="Ask us" %}
+  </details>
 </section>

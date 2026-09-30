@@ -19,8 +19,9 @@
     {%- endfor %}
   </ol>
   {%- endif %}
-  <div class="talk-form">
+  <details class="talk-form">
+    <summary class="btn">Write a comment or trail update</summary>
     {%- capture params -%}&stage={{ page.number }}&stage_name={{ page.start | append: " → " | append: page.end | url_encode }}{%- endcapture -%}
     {% include tally.html form=site.data.settings.tally_comment_form params=params title="Comment on this stage" %}
-  </div>
+  </details>
 </section>
