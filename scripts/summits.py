@@ -18,20 +18,27 @@ def overpass(q):
         try:
             data = urllib.parse.urlencode({"data": q}).encode()
             req = urllib.request.Request(url, data=data, headers={"User-Agent": "alta-linea-continua/1.0"})
-            with urllib.request.urlopen(req, timeout=90) as r:
+            with urllib.request.urlopen(req, timeout=180) as r:
                 return json.loads(r.read())
         except Exception as e:
             print("overpass failed", url, e)
             time.sleep(5)
     raise SystemExit("no overpass server answered")
 
+# one request for the whole route area, then check every peak against every stage
+allla = [p[0] for s in S for p in s["line"]]; alllo = [p[1] for s in S for p in s["line"]]
+bbox = f"{min(allla)-0.005},{min(alllo)-0.005},{max(allla)+0.005},{max(alllo)+0.005}"
+res = overpass(f'[out:json][timeout:120];node["natural"="peak"]({bbox});out;')
+peaks = res.get("elements", [])
+print(len(peaks), "peaks in the area")
 out = []
 for s in S:
     line = s["line"]; prof = s["profile"]
-    la = [p[0] for p in line]; lo = [p[1] for p in line]
-    bbox = f"{min(la)-0.003},{min(lo)-0.003},{max(la)+0.003},{max(lo)+0.003}"
-    res = overpass(f'[out:json][timeout:60];node["natural"="peak"]({bbox});out;')
-    for el in res.get("elements", []):
+    la0, la1 = min(p[0] for p in line) - 0.003, max(p[0] for p in line) + 0.003
+    lo0, lo1 = min(p[1] for p in line) - 0.003, max(p[1] for p in line) + 0.003
+    for el in peaks:
+        if not (la0 <= el["lat"] <= la1 and lo0 <= el["lon"] <= lo1):
+            continue
         tags = el.get("tags", {})
         name = tags.get("name") or tags.get("name:it") or tags.get("name:fr")
         if not name:
@@ -44,7 +51,6 @@ for s in S:
                 best, bkm = d, p[2]
         if best > 120:
             continue
-        # highest track altitude within 300 m of the closest point
         near = [a for k, a in prof if abs(k - bkm) <= 0.3]
         reached = max(near) if near else 0
         try:
@@ -55,7 +61,6 @@ for s in S:
             continue
         out.append({"name": name, "ele": ele, "lat": round(pk[0], 5), "lon": round(pk[1], 5),
                     "stage": s["n"], "km": round(bkm, 2), "dist_m": round(best)})
-    time.sleep(2)
 
 # one entry per summit (a summit on a stage boundary counts once, on its first stage)
 seen, uniq = set(), []
