@@ -24,8 +24,9 @@
 <meta property="og:title" content="{{ ptitle | escape }}">
 <meta property="og:description" content="{{ pdesc | strip_html | escape }}">
 <meta name="twitter:card" content="summary_large_image">
-{%- if site.google_site_verification and site.google_site_verification != "" %}
-<meta name="google-site-verification" content="{{ site.google_site_verification }}">
+{%- assign gsv = site.data.settings.google_site_verification | default: site.google_site_verification -%}
+{%- if gsv and gsv != "" %}
+<meta name="google-site-verification" content="{{ gsv | strip }}">
 {%- endif %}
 {%- if page.layout == 'home' %}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Alta Linea Continua","alternateName":["Alta Linea Continua traverse","ALC"],"url":{{ '/' | absolute_url | jsonify }},"description":{{ site.description | jsonify }},"author":[{"@type":"Person","name":"Ema"},{"@type":"Person","name":"Federica"}]}</script>

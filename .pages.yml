@@ -173,6 +173,10 @@ content:
     path: _data/settings.yml
     format: yaml
     fields:
+      - name: google_site_verification
+        label: Google verification code
+        description: From Google Search Console → HTML tag. Paste only the code inside content="...".
+        type: string
       - name: show_placeholders
         label: Show the dashed "your text here" boxes
         description: Turn off when the site is ready to share.
