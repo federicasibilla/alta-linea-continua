@@ -216,7 +216,7 @@
       el.innerHTML = g + "</svg>";
       var svg0 = el.querySelector("svg");
       try { var bb = svg0.getBBox(); if (bb.width > 0) svg0.setAttribute("viewBox", [Math.max(0, bb.x - 10), Math.max(0, bb.y - 30), Math.min(W, bb.width + 20), Math.min(H, bb.height + 50)].join(" ")); } catch (e) {}
-      var svg = svg0, cap = document.getElementById("hcap"), links = document.querySelectorAll(".list a[data-n]"), spineApi = null, cur = -2;
+      var svg = svg0, cap = document.getElementById("hcap") || document.getElementById("cap"), links = document.querySelectorAll(".list a[data-n]"), spineApi = null, cur = -2;
       var idle = cap ? '<span class="d">' + esc(cap.dataset.idleTop || "") + "</span><b>" + esc(cap.dataset.idle || "") + "</b>" : "";
       if (cap) cap.innerHTML = idle;
       function set(n) {

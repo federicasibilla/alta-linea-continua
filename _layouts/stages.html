@@ -6,6 +6,12 @@ layout: default
   <div class="eyebrow">{{ site.stages | size }} {{ t.stages_eyebrow }}</div>
   <h1>{{ t.stages_title }}</h1>
 </div>
+{%- assign tkm = 0 -%}{%- assign tup = 0 -%}
+{%- for s in site.data.stats -%}{%- assign tkm = tkm | plus: s.km -%}{%- assign tup = tup | plus: s.up -%}{%- endfor -%}
+{%- if lang == "it" -%}{%- assign sep = "." -%}{%- else -%}{%- assign sep = "," -%}{%- endif -%}
+<div class="spine" id="spine" aria-label="{{ t.profile_aria }}"></div>
+<div class="ends" aria-hidden="true"><span>Pian delle Gorre</span><span>Pian del Re</span></div>
+<div class="cap" id="cap" aria-live="polite" data-idle-top="{{ site.stages | size }} {{ t.stages_word }} · {{ tkm | round }} km · {{ tup | divided_by: 1000 | floor }}{{ sep }}{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} {{ t.of_ascent }}" data-idle="{{ t.tagline_default }}"></div>
 <div class="atlas">
   <div>
     <div class="map js-atlas" id="atlas-map" data-style="relief-soft" aria-label="{{ t.map_aria }}"></div>

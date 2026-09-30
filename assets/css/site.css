@@ -296,3 +296,9 @@ table.summits td:last-child{white-space:nowrap}
 /* aerial haze on the home page */
 .home-haze{margin-top:10px;border-top:1px solid var(--line);padding-top:24px}
 .haze-hint{margin-top:4px}
+
+/* aerial view inside the title */
+.hero-haze{margin-block:clamp(6px,1.5vw,16px) clamp(4px,1vw,10px)}
+.hero-haze svg{min-width:0}
+body:not(:has(.hero)) .spine{margin-top:6px}
+#cap + .atlas{margin-top:24px}
