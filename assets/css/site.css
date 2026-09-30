@@ -270,3 +270,4 @@ table.summits .num{text-align:right;font-variant-numeric:tabular-nums;font-famil
 table.summits tr.high td:first-child{color:var(--accent)}
 table.summits a{color:var(--muted);text-decoration:none} table.summits a:hover{color:var(--ink)}
 .tbl{overflow-x:auto}
+table.summits td:last-child{white-space:nowrap}
