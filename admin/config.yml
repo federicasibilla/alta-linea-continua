@@ -15,11 +15,11 @@ media_libraries:
     config:
       max_file_size: 50000000
       slugify_filename: true
-      # iPhone HEIC photos are converted to JPEG (browsers can't show HEIC).
+      # iPhone HEIC photos are converted to WebP (browsers can't show HEIC).
       # Other photos are uploaded as they are: a GitHub job then reads their position and resizes them.
       transformations:
         heic:
-          format: jpeg
+          format: webp
           quality: 85
           width: 2400
 
