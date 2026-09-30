@@ -2,6 +2,7 @@
 number: 20
 start: Bivacco Boerio
 end: Above Colle dell'Agnello
+end_it: "Sopra il Colle dell'Agnello"
 date: '2026-08-15'
 date_label: Saturday 15 August
 summary: ''

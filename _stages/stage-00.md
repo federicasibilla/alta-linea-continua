@@ -5,6 +5,7 @@ end: Rifugio Garelli
 date: '2026-07-24'
 date_label: Friday 24 July
 summary: Approach
+summary_it: Avvicinamento
 climbing: []
 gallery: []
 instagram: []

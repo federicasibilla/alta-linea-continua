@@ -1,0 +1,4 @@
+{%- if lang == "it" -%}
+{%- if include.s.date_label_it and include.s.date_label_it != "" -%}{{ include.s.date_label_it }}
+{%- else -%}{%- assign d_ = include.s.date | date: "%w" | plus: 0 -%}{%- assign m_ = include.s.date | date: "%-m" | minus: 1 -%}{{ t.days[d_] }} {{ include.s.date | date: "%-d" }} {{ t.months[m_] }}{%- endif -%}
+{%- else -%}{{ include.s.date_label }}{%- endif -%}

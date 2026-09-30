@@ -1,0 +1,3 @@
+{%- comment -%}Prints field k of object o, in Italian (k_it) when the page is Italian and that field is filled in.{%- endcomment -%}
+{%- assign kit_ = include.k | append: "_it" -%}
+{%- if lang == "it" and include.o[kit_] and include.o[kit_] != "" -%}{{ include.o[kit_] }}{%- else -%}{{ include.o[include.k] }}{%- endif -%}

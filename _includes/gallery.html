@@ -1,7 +1,8 @@
 {%- if include.items and include.items.size > 0 -%}
 <div class="gallery">
 {%- for g in include.items -%}{%- if g.image and g.image != "" -%}
-<figure><a href="{{ g.image }}" class="lb" data-caption="{{ g.caption | escape }}"><img src="{{ g.image }}" alt="{{ g.caption | default: 'Photo' | escape }}" loading="lazy"></a>{% if g.caption and g.caption != "" %}<figcaption>{{ g.caption }}</figcaption>{% endif %}</figure>
+{%- capture cap_ -%}{% include tr.html o=g k="caption" %}{%- endcapture -%}{%- assign cap_ = cap_ | strip -%}
+<figure><a href="{{ g.image }}" class="lb" data-caption="{{ cap_ | escape }}"><img src="{{ g.image }}" alt="{{ cap_ | default: t.photo | escape }}" loading="lazy"></a>{% if cap_ != "" %}<figcaption>{{ cap_ }}</figcaption>{% endif %}</figure>
 {%- endif -%}{%- endfor -%}
 </div>
 {%- endif -%}

@@ -20,18 +20,31 @@ content:
       - name: tagline
         label: Line under the title
         type: string
+      - name: tagline_it
+        label: Line under the title · Italiano
+        type: string
       - name: intro_title
         label: Introduction headline
+        type: string
+      - name: intro_title_it
+        label: Introduction headline · Italiano
         type: string
       - name: body
         label: Introduction text
         description: Write freely. Use the toolbar for headings, bold, links and to insert photos anywhere in the text.
+        type: rich-text
+      - name: intro_it
+        label: Introduction text · Italiano
+        description: If empty, the Italian page shows the English text.
         type: rich-text
       - name: cover
         label: Cover photo
         type: image
       - name: cover_caption
         label: Cover photo caption
+        type: string
+      - name: cover_caption_it
+        label: Cover photo caption · Italiano
         type: string
 
   - name: stages
@@ -58,23 +71,39 @@ content:
         label: From
         type: string
         required: true
+      - name: start_it
+        label: From · Italiano (only if different)
+        type: string
       - name: end
         label: To
         type: string
         required: true
+      - name: end_it
+        label: To · Italiano (only if different)
+        type: string
       - name: date
         type: string
         hidden: true
       - name: date_label
         label: Date as shown on the site
         type: string
+      - name: date_label_it
+        label: Date · Italiano (optional, otherwise automatic)
+        type: string
       - name: summary
         label: Short note next to the date (optional)
         description: For example "Approach" or "Rest day before".
         type: string
+      - name: summary_it
+        label: Short note · Italiano
+        type: string
       - name: body
         label: Story of the day
         description: Write freely. Use the toolbar to insert photos anywhere in the text.
+        type: rich-text
+      - name: story_it
+        label: Story of the day · Italiano
+        description: If empty, the Italian page shows the English story.
         type: rich-text
       - name: gallery
         label: Photo gallery
@@ -88,6 +117,9 @@ content:
           - name: caption
             label: Caption
             type: string
+          - name: caption_it
+            label: Caption · Italiano
+            type: string
       - name: instagram
         label: Instagram videos
         description: Paste the full link of the post or reel, e.g. https://www.instagram.com/reel/XXXX/
@@ -100,6 +132,9 @@ content:
         fields:
           - name: label
             label: Text shown
+            type: string
+          - name: label_it
+            label: Text shown · Italiano
             type: string
           - name: url
             label: Web address
@@ -159,6 +194,9 @@ content:
           - name: reply
             label: Your reply (optional)
             type: text
+          - name: reply_it
+            label: Your reply · Italiano (optional)
+            type: text
 
   - name: preparation
     label: Preparation page
@@ -176,12 +214,22 @@ content:
       - name: title
         label: Title
         type: string
+      - name: title_it
+        label: Title · Italiano
+        type: string
       - name: kicker
         label: Line above the title
+        type: string
+      - name: kicker_it
+        label: Line above the title · Italiano
         type: string
       - name: body
         label: Text
         description: Headings, lists, tables and photos can all go here.
+        type: rich-text
+      - name: body_it
+        label: Text · Italiano
+        description: If empty, the Italian page shows the English text.
         type: rich-text
       - name: gallery
         label: Photo gallery
@@ -194,6 +242,9 @@ content:
           - name: caption
             label: Caption
             type: string
+          - name: caption_it
+            label: Caption · Italiano
+            type: string
 
       - name: questions
         label: Ask us · questions and answers
@@ -204,6 +255,9 @@ content:
           - name: question
             label: Question
             type: text
+          - name: question_it
+            label: Question · Italiano
+            type: text
           - name: name
             label: Name
             type: string
@@ -212,6 +266,9 @@ content:
             type: string
           - name: answer
             label: Your answer
+            type: text
+          - name: answer_it
+            label: Your answer · Italiano
             type: text
 
   - name: settings

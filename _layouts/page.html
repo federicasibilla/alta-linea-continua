@@ -1,14 +1,19 @@
 ---
 layout: default
 ---
+{%- include lang.html -%}
+{%- if lang == "it" -%}{%- assign P = site.pages | where: "url", "/preparation/" | first -%}{%- else -%}{%- assign P = page -%}{%- endif -%}
 <div class="pagehead">
-  <div class="eyebrow">{{ page.kicker }}</div>
-  <h1>{{ page.title }}</h1>
+  <div class="eyebrow">{% include tr.html o=P k="kicker" %}</div>
+  <h1>{% include tr.html o=P k="title" %}</h1>
 </div>
 <div class="prose">
-{%- assign body = content | strip -%}
-{%- if body != "" -%}<div class="rich">{{ content }}</div>
-{%- else -%}{% include placeholder.html label="Your text" text="Training, gear, food, water, resupplies, how you planned the route. Edit “Preparation” in the editor: you can add headings, lists, tables and photos anywhere in the text." %}{%- endif -%}
+{%- if lang == "it" and P.body_it and P.body_it != "" -%}{%- assign body = P.body_it | markdownify -%}
+{%- elsif lang == "it" -%}{%- assign body = P.content | markdownify -%}
+{%- else -%}{%- assign body = content -%}{%- endif -%}
+{%- assign bs = body | strip -%}
+{%- if bs != "" -%}<div class="rich">{{ body }}</div>
+{%- else -%}{% include placeholder.html label=t.ph_your_text text=t.ph_prep %}{%- endif -%}
 </div>
-{% include gallery.html items=page.gallery %}
-{% if page.url == "/preparation/" %}{% include ask-us.html %}{% endif %}
+{% include gallery.html items=P.gallery %}
+{% include ask-us.html %}

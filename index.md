@@ -2,6 +2,7 @@
 layout: home
 headline: Alta Linea Continua
 tagline: From Marguareis to Monviso
+tagline_it: Dal Marguareis al Monviso
 intro_title: Concept
 cover: /alta-linea-continua/assets/images/IMG_8064 (2) (3)-1.png
 ---

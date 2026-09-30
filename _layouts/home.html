@@ -1,34 +1,43 @@
 ---
 layout: default
 ---
+{%- include lang.html -%}
+{%- if lang == "it" -%}{%- assign H = site.pages | where: "url", "/" | first -%}{%- else -%}{%- assign H = page -%}{%- endif -%}
 {%- assign tkm = 0 -%}{%- assign tup = 0 -%}{%- assign tmax = 0 -%}
 {%- for s in site.data.stats -%}{%- assign tkm = tkm | plus: s.km -%}{%- assign tup = tup | plus: s.up -%}{%- if s.max > tmax -%}{%- assign tmax = s.max -%}{%- endif -%}{%- endfor -%}
+{%- if lang == "it" -%}{%- assign sep = "." -%}{%- else -%}{%- assign sep = "," -%}{%- endif -%}
+{%- capture tagline -%}{% include tr.html o=H k="tagline" %}{%- endcapture -%}{%- assign tagline = tagline | strip | default: t.tagline_default -%}
 <section class="hero">
-  <div class="eyebrow kicker">{{ site.authors }}</div>
+  <div class="eyebrow kicker">{% if lang == "it" %}{{ site.authors | replace: " & ", " e " }}{% else %}{{ site.authors }}{% endif %}</div>
   <h1 class="name" id="n1"><span id="n1t">Alta Linea</span><span class="sr-only"> Continua</span></h1>
-  <div class="spine" id="spine" aria-label="Elevation profile of the whole route"></div>
+  <div class="spine" id="spine" aria-label="{{ t.profile_aria }}"></div>
   <div class="ends" aria-hidden="true"><span>Pian delle Gorre</span><span>Pian del Re</span></div>
   <div class="name it" id="n2" aria-hidden="true">Continua</div>
-  <div class="cap" id="cap" aria-live="polite" data-idle-top="{{ site.stages | size }} stages · {{ tkm | round }} km · {{ tup | divided_by: 1000 | floor }},{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} m of ascent" data-idle="{{ page.tagline | default: 'From Marguareis to Monviso' }}"></div>
+  <div class="cap" id="cap" aria-live="polite" data-idle-top="{{ site.stages | size }} {{ t.stages_word }} · {{ tkm | round }} km · {{ tup | divided_by: 1000 | floor }}{{ sep }}{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} {{ t.of_ascent }}" data-idle="{{ tagline | escape }}"></div>
 </section>
 
 <div class="atlas">
   <div>
-    <div class="map js-atlas" id="atlas-map" data-style="relief-soft" aria-label="Map of the whole route"></div>
-    <div class="maphint"><span>Hover over the line to see each stage · click to open it</span><span>Pian delle Gorre → Pian del Re</span></div>
+    <div class="map js-atlas" id="atlas-map" data-style="relief-soft" aria-label="{{ t.map_aria }}"></div>
+    <div class="maphint"><span>{{ t.map_hint }}</span><span>Pian delle Gorre → Pian del Re</span></div>
   </div>
   {% include stage-list.html %}
 </div>
 
 <section class="intro">
   <div class="prose">
-    <div class="eyebrow">The idea</div>
-    {%- if page.intro_title and page.intro_title != "" %}<h2>{{ page.intro_title }}</h2>{% endif -%}
-    {%- assign body = content | strip -%}
-    {%- if body != "" -%}<div class="rich">{{ content }}</div>
-    {%- else -%}{% include placeholder.html label="Your text" text="How the idea was born, who you are, why one continuous line from the Ligurian Alps to Monviso. Edit “Home” in the editor." %}{%- endif -%}
+    <div class="eyebrow">{{ t.the_idea }}</div>
+    {%- capture ititle -%}{% include tr.html o=H k="intro_title" %}{%- endcapture -%}{%- assign ititle = ititle | strip -%}
+    {%- if ititle != "" %}<h2>{{ ititle }}</h2>{% endif -%}
+    {%- if lang == "it" and H.intro_it and H.intro_it != "" -%}{%- assign body = H.intro_it | markdownify -%}
+    {%- elsif lang == "it" -%}{%- assign body = H.content | markdownify -%}
+    {%- else -%}{%- assign body = content -%}{%- endif -%}
+    {%- assign bs = body | strip -%}
+    {%- if bs != "" -%}<div class="rich">{{ body }}</div>
+    {%- else -%}{% include placeholder.html label=t.ph_your_text text=t.ph_home %}{%- endif -%}
   </div>
-  {%- if page.cover and page.cover != "" -%}
-  <figure class="cover"><img src="{{ page.cover }}" alt="{{ page.cover_caption | default: 'Cover photo' | escape }}">{% if page.cover_caption != "" %}<figcaption>{{ page.cover_caption }}</figcaption>{% endif %}</figure>
-  {%- elsif site.data.settings.show_placeholders -%}<div class="photo">YOUR COVER PHOTO</div>{%- endif -%}
+  {%- capture ccap -%}{% include tr.html o=H k="cover_caption" %}{%- endcapture -%}{%- assign ccap = ccap | strip -%}
+  {%- if H.cover and H.cover != "" -%}
+  <figure class="cover"><img src="{{ H.cover }}" alt="{{ ccap | default: t.cover_photo | escape }}">{% if ccap != "" %}<figcaption>{{ ccap }}</figcaption>{% endif %}</figure>
+  {%- elsif site.data.settings.show_placeholders -%}<div class="photo">{{ t.ph_cover }}</div>{%- endif -%}
 </section>

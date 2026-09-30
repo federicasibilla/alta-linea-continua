@@ -1,18 +1,20 @@
 <section class="talk" id="ask">
   <div class="talk-head">
-    <h2>Ask us</h2>
-    <p>Planning something similar? Ask about organisation, food, resupplies, gear or permits. We answer here, so everyone can read it.</p>
+    <h2>{{ t.q_title }}</h2>
+    <p>{{ t.q_intro }}</p>
   </div>
-  {%- assign qs = page.questions | default: empty -%}
+  {%- assign qs = P.questions | default: empty -%}
   {%- if qs.size > 0 %}
   <dl class="qa">
     {%- for q in qs %}
-    <div class="qa-item"><dt>{{ q.question }}<span class="who">{{ q.name | default: "A reader" }}{% if q.date %} · {{ q.date }}{% endif %}</span></dt><dd>{{ q.answer | markdownify }}</dd></div>
+    {%- capture qq -%}{% include tr.html o=q k="question" %}{%- endcapture -%}{%- capture qa -%}{% include tr.html o=q k="answer" %}{%- endcapture -%}
+    <div class="qa-item"><dt>{{ qq | strip }}<span class="who">{{ q.name | default: t.c_reader }}{% if q.date %} · {{ q.date }}{% endif %}</span></dt><dd>{{ qa | markdownify }}</dd></div>
     {%- endfor %}
   </dl>
   {%- endif %}
   <details class="talk-form">
-    <summary class="btn">Ask a question</summary>
-    {% include tally.html form=site.data.settings.tally_question_form params="" title="Ask us" %}
+    <summary class="btn">{{ t.q_button }}</summary>
+    {%- capture qparams -%}&lang={{ lang }}{%- endcapture -%}
+    {% include tally.html form=site.data.settings.tally_question_form params=qparams title=t.q_title %}
   </details>
 </section>

@@ -229,3 +229,8 @@ body:not(:has(.atlas)) #hcap{margin-bottom:10px}
 .talk-form>summary{list-style:none;cursor:pointer;width:max-content;max-width:100%}
 .talk-form>summary::-webkit-details-marker{display:none}
 .talk-form[open]>summary{margin-bottom:16px;background:var(--ink);color:var(--bg)}
+/* language switch */
+header nav .lang{display:inline-flex;gap:2px;margin-left:4px;font:400 11px/1 var(--f-data);letter-spacing:.1em}
+header nav .lang a{padding:4px 6px;border:1px solid transparent;color:var(--muted)}
+header nav .lang a[aria-current="true"]{border-color:var(--line);color:var(--ink)}
+header nav .lang a:hover{border-bottom-color:transparent;color:var(--ink)}

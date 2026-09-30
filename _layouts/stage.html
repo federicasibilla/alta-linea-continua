@@ -1,17 +1,20 @@
 ---
 layout: default
 ---
+{%- include lang.html -%}
+{%- if page.ref -%}{%- assign S = site.stages | where: "number", page.ref | first -%}{%- else -%}{%- assign S = page -%}{%- endif -%}
 {%- assign ordered = site.stages | sort: "number" -%}
-{%- assign st = site.data.stats[page.number] -%}
-{%- assign prev_n = page.number | minus: 1 -%}{%- assign next_n = page.number | plus: 1 -%}
-<article class="stage" data-n="{{ page.number }}">
+{%- assign st = site.data.stats[S.number] -%}
+{%- assign prev_n = S.number | minus: 1 -%}{%- assign next_n = S.number | plus: 1 -%}
+<article class="stage" data-n="{{ S.number }}">
   <div class="stagehead">
-    <a class="back" href="{{ '/stages/' | relative_url }}">← All stages</a>
-    <div class="eyebrow">Stage {{ page.number }} · {{ page.date_label }}{% if page.summary and page.summary != "" %} · {{ page.summary }}{% endif %}</div>
-    <h1>{{ page.start }} <em>→</em> {{ page.end }}</h1>
-    {%- if page.climbing and page.climbing.size > 0 %}
+    <a class="back" href="{{ L | append: '/stages/' | relative_url }}">{{ t.all_stages }}</a>
+    {%- capture summ -%}{% include tr.html o=S k="summary" %}{%- endcapture -%}{%- assign summ = summ | strip -%}
+    <div class="eyebrow">{{ t.stage }} {{ S.number }} · {% include sdate.html s=S %}{% if summ != "" %} · {{ summ }}{% endif %}</div>
+    <h1>{% include tr.html o=S k="start" %} <em>→</em> {% include tr.html o=S k="end" %}</h1>
+    {%- if S.climbing and S.climbing.size > 0 %}
     <ul class="climbs">
-      {%- for c in page.climbing %}
+      {%- for c in S.climbing %}
       <li><span class="tri {{ c.color }}"></span>{% if c.link and c.link != "" %}<a href="{{ c.link }}" target="_blank" rel="noopener">{{ c.name }} ↗</a>{% else %}{{ c.name }}{% endif %}{% if c.grade and c.grade != "" %}<span class="grade">{{ c.grade }}</span>{% endif %}</li>
       {%- endfor %}
     </ul>
@@ -19,57 +22,60 @@ layout: default
   </div>
 
   <div class="figs">
-    <div><b>{{ st.km }}</b>km</div>
-    <div><b>{{ st.moving }}</b>moving time</div>
-    <div><b>+{{ st.up }}</b>m ascent</div>
-    <div><b>−{{ st.down }}</b>m descent</div>
-    <div><b>{{ st.max }}</b>m high point</div>
-    <div><b>{{ st.min }}</b>m low point</div>
+    <div><b>{% include num.html v=st.km %}</b>{{ t.km }}</div>
+    <div><b>{{ st.moving }}</b>{{ t.moving }}</div>
+    <div><b>+{{ st.up }}</b>{{ t.ascent }}</div>
+    <div><b>−{{ st.down }}</b>{{ t.descent }}</div>
+    <div><b>{{ st.max }}</b>{{ t.high }}</div>
+    <div><b>{{ st.min }}</b>{{ t.low }}</div>
   </div>
-  <div class="profile" id="profile" aria-label="Elevation profile"></div>
+  <div class="profile" id="profile" aria-label="{{ t.profile_aria }}"></div>
 
   <div class="two">
     <div class="story">
-      {%- assign body = content | strip -%}
-      {%- if body != "" -%}<div class="rich">{{ content }}</div>
-      {%- else -%}{% include placeholder.html label="Your story" text="How the day went, the summits, the technical passages, where you slept. You can put photos anywhere in the text." %}{%- endif -%}
+      {%- if lang == "it" and S.story_it and S.story_it != "" -%}{%- assign body = S.story_it | markdownify -%}
+      {%- elsif lang == "it" -%}{%- assign body = S.content | markdownify -%}
+      {%- else -%}{%- assign body = content -%}{%- endif -%}
+      {%- assign bs = body | strip -%}
+      {%- if bs != "" -%}<div class="rich">{{ body }}</div>
+      {%- else -%}{% include placeholder.html label=t.ph_story_label text=t.ph_story %}{%- endif -%}
 
-      {%- if page.gallery and page.gallery.size > 0 -%}
-        {% include gallery.html items=page.gallery %}
+      {%- if S.gallery and S.gallery.size > 0 -%}
+        {% include gallery.html items=S.gallery %}
       {%- elsif site.data.settings.show_placeholders -%}
-        <div class="gallery ph"><div class="photo">YOUR PHOTOS</div><div class="photo">as many as you like</div></div>
+        <div class="gallery ph"><div class="photo">{{ t.ph_photos }}</div><div class="photo">{{ t.ph_photos2 }}</div></div>
       {%- endif -%}
 
-      {%- if page.instagram and page.instagram.size > 0 -%}
+      {%- if S.instagram and S.instagram.size > 0 -%}
       <div class="insta">
-        {%- for u in page.instagram %}{% if u != "" %}<blockquote class="instagram-media" data-instgrm-permalink="{{ u }}" data-instgrm-version="14"><a href="{{ u }}" target="_blank" rel="noopener">Watch on Instagram</a></blockquote>{% endif %}{% endfor -%}
+        {%- for u in S.instagram %}{% if u != "" %}<blockquote class="instagram-media" data-instgrm-permalink="{{ u }}" data-instgrm-version="14"><a href="{{ u }}" target="_blank" rel="noopener">{{ t.watch_insta }}</a></blockquote>{% endif %}{% endfor -%}
       </div>
-      {%- elsif site.data.settings.show_placeholders -%}{% include placeholder.html label="Instagram" text="Paste the link of the stage video in the editor and it appears here." %}
+      {%- elsif site.data.settings.show_placeholders -%}{% include placeholder.html label="Instagram" text=t.ph_insta %}
       {%- endif -%}
 
-      {%- if page.links and page.links.size > 0 -%}
-      <div class="links"><div class="eyebrow">Links</div><ul>
-        {%- for l in page.links %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label | default: l.url }} ↗</a></li>{% endfor -%}
+      {%- if S.links and S.links.size > 0 -%}
+      <div class="links"><div class="eyebrow">{{ t.links }}</div><ul>
+        {%- for l in S.links %}{%- capture lab -%}{% include tr.html o=l k="label" %}{%- endcapture -%}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ lab | strip | default: l.url }} ↗</a></li>{% endfor -%}
       </ul></div>
       {%- endif -%}
     </div>
 
     <aside class="side">
-      <div class="map mini" id="stage-map" data-n="{{ page.number }}" aria-label="Map of this stage"></div>
-      <div class="eyebrow">Download the track</div>
+      <div class="map mini" id="stage-map" data-n="{{ S.number }}" aria-label="{{ t.stage_map_aria }}"></div>
+      <div class="eyebrow">{{ t.dl_track }}</div>
       <div class="dl">
         <a class="btn" href="{{ '/assets/tracks/' | append: st.slug | append: '.gpx' | relative_url }}" download>GPX</a>
         <a class="btn" href="{{ '/assets/tracks/' | append: st.slug | append: '.kml' | relative_url }}" download>KML · Google Earth</a>
       </div>
-      <p class="note">GPX works with most apps and GPS units (Komoot, Gaia, OsmAnd, Garmin). KML opens in Google Earth.</p>
+      <p class="note">{{ t.dl_note }}</p>
     </aside>
   </div>
 
   {% include stage-comments.html %}
 
   <nav class="pager">
-    {%- for s in ordered -%}{%- if s.number == prev_n -%}<a href="{{ s.url | relative_url }}">← Stage {{ s.number }}<b>{{ s.start }} → {{ s.end }}</b></a>{%- endif -%}{%- endfor -%}
-    {%- if page.number == 0 -%}<span></span>{%- endif -%}
-    {%- for s in ordered -%}{%- if s.number == next_n -%}<a class="next" href="{{ s.url | relative_url }}">Stage {{ s.number }} →<b>{{ s.start }} → {{ s.end }}</b></a>{%- endif -%}{%- endfor -%}
+    {%- for s in ordered -%}{%- if s.number == prev_n -%}<a href="{% include stage-url.html s=s %}">← {{ t.stage }} {{ s.number }}<b>{% include tr.html o=s k="start" %} → {% include tr.html o=s k="end" %}</b></a>{%- endif -%}{%- endfor -%}
+    {%- if S.number == 0 -%}<span></span>{%- endif -%}
+    {%- for s in ordered -%}{%- if s.number == next_n -%}<a class="next" href="{% include stage-url.html s=s %}">{{ t.stage }} {{ s.number }} →<b>{% include tr.html o=s k="start" %} → {% include tr.html o=s k="end" %}</b></a>{%- endif -%}{%- endfor -%}
   </nav>
 </article>

@@ -1,11 +1,12 @@
 ---
 layout: default
 ---
+{%- include lang.html -%}
 <div class="pagehead">
-  <div class="eyebrow">{{ site.stages | size }} stages · 24 July – 18 August 2026</div>
-  <h1>The <em>stages</em></h1>
+  <div class="eyebrow">{{ site.stages | size }} {{ t.stages_eyebrow }}</div>
+  <h1>{{ t.stages_title }}</h1>
 </div>
-<div class="haze" id="haze" aria-label="The route seen from the south"></div>
-<div class="cap" id="hcap" aria-live="polite" data-idle-top="Seen from the south · hover a stage, click to open it" data-idle="From Marguareis to Monviso"></div>
-<div class="dl-all"><a class="btn" href="{{ '/assets/tracks/alta-linea-continua-full-route.gpx' | relative_url }}" download>Download the full route · GPX</a></div>
+<div class="haze" id="haze" aria-label="{{ t.haze_aria }}"></div>
+<div class="cap" id="hcap" aria-live="polite" data-idle-top="{{ t.haze_idle }}" data-idle="{{ t.tagline_default }}"></div>
+<div class="dl-all"><a class="btn" href="{{ '/assets/tracks/alta-linea-continua-full-route.gpx' | relative_url }}" download>{{ t.dl_full }}</a></div>
 {% include stage-list.html %}

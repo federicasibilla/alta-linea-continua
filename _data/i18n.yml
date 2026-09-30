@@ -1,0 +1,155 @@
+en:
+  nav_project: The project
+  nav_stages: Stages
+  nav_prep: Preparation
+  switch_label: Italiano
+  switch_short: IT
+  home_label: Alta Linea Continua, home
+  summer: Summer 2026
+  full_gpx: Full route GPX
+  stage: Stage
+  stages_word: stages
+  of_ascent: m of ascent
+  tagline_default: From Marguareis to Monviso
+  map_hint: Hover over the line to see each stage · click to open it
+  map_aria: Map of the whole route
+  profile_aria: Elevation profile of the whole route
+  the_idea: The idea
+  cover_photo: Cover photo
+  ph_your_text: Your text
+  ph_home: How the idea was born, who you are, why one continuous line from the Ligurian Alps to Monviso. Edit “Home page” in the editor.
+  ph_cover: YOUR COVER PHOTO
+  stages_eyebrow: stages · 24 July – 18 August 2026
+  stages_title: The <em>stages</em>
+  haze_aria: The route seen from the south
+  haze_idle: Seen from the south · hover a stage, click to open it
+  dl_full: Download the full route · GPX
+  all_stages: ← All stages
+  km: km
+  moving: moving time
+  ascent: m ascent
+  descent: m descent
+  high: m high point
+  low: m low point
+  high_point: high point
+  ph_story_label: Your story
+  ph_story: How the day went, the summits, the technical passages, where you slept. You can put photos anywhere in the text.
+  ph_photos: YOUR PHOTOS
+  ph_photos2: as many as you like
+  ph_insta: Paste the link of the stage video in the editor and it appears here.
+  watch_insta: Watch on Instagram
+  links: Links
+  stage_map_aria: Map of this stage
+  dl_track: Download the track
+  dl_note: GPX works with most apps and GPS units (Komoot, Gaia, OsmAnd, Garmin). KML opens in Google Earth.
+  ph_prep: Training, gear, food, water, resupplies, how you planned the route. Edit “Preparation page” in the editor.
+  photo: Photo
+  c_title: Comment on this stage
+  c_intro: Walked it too, or planning to? Share a comment, a question or a <b>trail update</b> (snow, water, huts, anything that changed), with photos if you like. Ema &amp; Federica read every message before it appears here.
+  c_button: Write a comment or trail update
+  c_reader: A reader
+  c_update: Trail update
+  c_photo_from: Photo from
+  q_title: Ask us
+  q_intro: Planning something similar? Ask about organisation, food, resupplies, gear or permits. We answer here, so everyone can read it.
+  q_button: Ask a question
+  privacy: Your name and message may be published here after we read them; your email is only for us, to reply if needed, and is never published or shared. Messages are collected with <a href="https://tally.so/help/privacy-policy" target="_blank" rel="noopener">Tally</a>. To have something removed, write to us through this form.
+  form_ph: The form appears here once the Tally form code is added in Site settings.
+  desc_site: One continuous line across the Ligurian, Maritime and Cottian Alps, from Pian delle Gorre to Pian del Re. Ema & Federica, summer 2026.
+  desc_stage_a: of Alta Linea Continua
+  desc_stage_b: Map, elevation profile and GPX track of a 377 km traverse from Marguareis to Monviso.
+  to: to
+  months: [January, February, March, April, May, June, July, August, September, October, November, December]
+  days: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+  js:
+    stage: Stage
+    STAGE: STAGE
+    climbing: CLIMBING SECTION
+    grade: Grade
+    link: Click for the route description ↗
+    nolink: Route description coming soon
+    start: Start
+    end: End
+    high: high point
+    relief: Relief
+    topo: Topographic
+    minimal: Minimal
+    satellite: Satellite
+
+it:
+  nav_project: Il progetto
+  nav_stages: Tappe
+  nav_prep: Preparazione
+  switch_label: English
+  switch_short: EN
+  home_label: Alta Linea Continua, pagina iniziale
+  summer: Estate 2026
+  full_gpx: GPX del percorso completo
+  stage: Tappa
+  stages_word: tappe
+  of_ascent: m di dislivello positivo
+  tagline_default: Dal Marguareis al Monviso
+  map_hint: Passa sulla linea per vedere ogni tappa · clicca per aprirla
+  map_aria: Mappa di tutto il percorso
+  profile_aria: Profilo altimetrico di tutto il percorso
+  the_idea: L'idea
+  cover_photo: Foto di copertina
+  ph_your_text: Il tuo testo
+  ph_home: Come è nata l'idea, chi siete, perché una linea continua dalle Alpi Liguri al Monviso. Modifica “Home page” nell'editor.
+  ph_cover: LA TUA FOTO DI COPERTINA
+  stages_eyebrow: tappe · 24 luglio – 18 agosto 2026
+  stages_title: Le <em>tappe</em>
+  haze_aria: Il percorso visto da sud
+  haze_idle: Visto da sud · passa su una tappa, clicca per aprirla
+  dl_full: Scarica il percorso completo · GPX
+  all_stages: ← Tutte le tappe
+  km: km
+  moving: tempo in movimento
+  ascent: m di salita
+  descent: m di discesa
+  high: m punto più alto
+  low: m punto più basso
+  high_point: punto più alto
+  ph_story_label: Il vostro racconto
+  ph_story: Com'è andata la giornata, le cime, i passaggi tecnici, dove avete dormito. Potete inserire foto ovunque nel testo.
+  ph_photos: LE VOSTRE FOTO
+  ph_photos2: quante ne volete
+  ph_insta: Incolla nell'editor il link del video della tappa e comparirà qui.
+  watch_insta: Guarda su Instagram
+  links: Link
+  stage_map_aria: Mappa di questa tappa
+  dl_track: Scarica la traccia
+  dl_note: Il GPX funziona con quasi tutte le app e i GPS (Komoot, Gaia, OsmAnd, Garmin). Il KML si apre in Google Earth.
+  ph_prep: Allenamento, attrezzatura, cibo, acqua, rifornimenti, come avete pianificato il percorso. Modifica “Preparation page” nell'editor.
+  photo: Foto
+  c_title: Commenta questa tappa
+  c_intro: L'hai percorsa anche tu, o ci stai pensando? Lascia un commento, una domanda o un <b>aggiornamento sul percorso</b> (neve, acqua, rifugi, qualsiasi cosa sia cambiata), anche con foto. Ema e Federica leggono ogni messaggio prima che compaia qui.
+  c_button: Scrivi un commento o un aggiornamento
+  c_reader: Un lettore
+  c_update: Aggiornamento sul percorso
+  c_photo_from: Foto di
+  q_title: Chiedici
+  q_intro: Stai organizzando qualcosa di simile? Chiedici di organizzazione, cibo, rifornimenti, attrezzatura o permessi. Rispondiamo qui, così tutti possono leggere.
+  q_button: Fai una domanda
+  privacy: Il tuo nome e il tuo messaggio possono essere pubblicati qui dopo che li avremo letti; l'email serve solo a noi per risponderti se necessario e non viene mai pubblicata né condivisa. I messaggi sono raccolti con <a href="https://tally.so/help/privacy-policy" target="_blank" rel="noopener">Tally</a>. Per far rimuovere qualcosa, scrivici tramite questo modulo.
+  form_ph: Il modulo comparirà qui quando il codice del modulo Tally sarà inserito in Site settings.
+  desc_site: Una linea continua attraverso le Alpi Liguri, Marittime e Cozie, da Pian delle Gorre a Pian del Re. Ema e Federica, estate 2026.
+  desc_stage_a: di Alta Linea Continua
+  desc_stage_b: Mappa, profilo altimetrico e traccia GPX di una traversata di 377 km dal Marguareis al Monviso.
+  to: →
+  months: [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre]
+  days: [domenica, lunedì, martedì, mercoledì, giovedì, venerdì, sabato]
+  js:
+    stage: Tappa
+    STAGE: TAPPA
+    climbing: TRATTO ALPINISTICO
+    grade: Grado
+    link: Clicca per la relazione ↗
+    nolink: Relazione in arrivo
+    start: Partenza
+    end: Arrivo
+    high: punto più alto
+    relief: Rilievo
+    topo: Topografica
+    minimal: Minimale
+    satellite: Satellite

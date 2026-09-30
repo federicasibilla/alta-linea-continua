@@ -1,25 +1,36 @@
+{%- include lang.html -%}
+{%- if page.ref -%}{%- assign S = site.stages | where: "number", page.ref | first -%}{%- elsif page.collection == "stages" -%}{%- assign S = page -%}{%- endif -%}
+{%- if lang == "it" -%}{%- assign alt_url = page.url | remove_first: "/it" -%}{%- assign alt_lang = "en" -%}{%- else -%}{%- assign alt_url = "/it" | append: page.url -%}{%- assign alt_lang = "it" -%}{%- endif -%}
+{%- assign en_url = page.url | remove_first: "/it" -%}{%- assign it_url = "/it" | append: en_url -%}
 <!doctype html>
-<html lang="{{ site.lang }}">
+<html lang="{{ lang }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {%- if page.layout == 'home' -%}
   {%- assign ptitle = site.title -%}
-{%- elsif page.collection == 'stages' -%}
-  {%- capture ptitle -%}Stage {{ page.number }} · {{ page.start }} → {{ page.end }} · {{ site.title }}{%- endcapture -%}
+{%- elsif S -%}
+  {%- capture sstart -%}{% include tr.html o=S k="start" %}{%- endcapture -%}{%- capture send -%}{% include tr.html o=S k="end" %}{%- endcapture -%}
+  {%- capture ptitle -%}{{ t.stage }} {{ S.number }} · {{ sstart }} → {{ send }} · {{ site.title }}{%- endcapture -%}
 {%- else -%}
-  {%- capture ptitle -%}{{ page.title }} · {{ site.title }}{%- endcapture -%}
+  {%- assign ENP = site.pages | where: "url", en_url | first -%}{%- if ENP == nil -%}{%- assign ENP = page -%}{%- endif -%}
+  {%- capture ptitle -%}{% include tr.html o=ENP k="title" %} · {{ site.title }}{%- endcapture -%}
 {%- endif %}
 <title>{{ ptitle }}</title>
-{%- if page.collection == 'stages' -%}
-  {%- capture pdesc -%}Stage {{ page.number }} of Alta Linea Continua, {{ page.date_label }}: {{ page.start }} to {{ page.end }}. Map, elevation profile and GPX track of a 377 km traverse from Marguareis to Monviso.{%- endcapture -%}
+{%- if S -%}
+  {%- capture sd -%}{% include sdate.html s=S %}{%- endcapture -%}
+  {%- capture pdesc -%}{{ t.stage }} {{ S.number }} {{ t.desc_stage_a }}, {{ sd }}: {{ sstart }} → {{ send }}. {{ t.desc_stage_b }}{%- endcapture -%}
 {%- else -%}
-  {%- assign pdesc = site.description -%}
+  {%- assign pdesc = t.desc_site -%}
 {%- endif %}
 <meta name="description" content="{{ pdesc | strip_html | escape }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
+<link rel="alternate" hreflang="en" href="{{ en_url | absolute_url }}">
+<link rel="alternate" hreflang="it" href="{{ it_url | absolute_url }}">
+<link rel="alternate" hreflang="x-default" href="{{ en_url | absolute_url }}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:locale" content="{% if lang == 'it' %}it_IT{% else %}en_GB{% endif %}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:title" content="{{ ptitle | escape }}">
 <meta property="og:description" content="{{ pdesc | strip_html | escape }}">
@@ -29,9 +40,10 @@
 <meta name="google-site-verification" content="{{ gsv | strip }}">
 {%- endif %}
 {%- if page.layout == 'home' %}
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Alta Linea Continua","alternateName":["Alta Linea Continua traverse","ALC"],"url":{{ '/' | absolute_url | jsonify }},"description":{{ site.description | jsonify }},"author":[{"@type":"Person","name":"Ema"},{"@type":"Person","name":"Federica"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Alta Linea Continua","alternateName":["Alta Linea Continua traverse","ALC"],"url":{{ '/' | absolute_url | jsonify }},"inLanguage":["en","it"],"description":{{ t.desc_site | jsonify }},"author":[{"@type":"Person","name":"Ema"},{"@type":"Person","name":"Federica"}]}</script>
 {%- endif %}
-{%- if page.cover and page.cover != "" %}<meta property="og:image" content="{{ site.url }}{{ page.cover }}">{% endif %}
+{%- assign ogimg = page.cover -%}{%- if lang == "it" and page.layout == "home" -%}{%- assign Hh = site.pages | where: "url", "/" | first -%}{%- assign ogimg = Hh.cover -%}{%- endif -%}
+{%- if ogimg and ogimg != "" %}<meta property="og:image" content="{{ site.url }}{{ ogimg }}">{% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -42,19 +54,20 @@
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Alta Linea Continua, home"><span class="t">Alta Linea</span>{% include mini-profile.svg %}<span class="t it">Continua</span></a>
+    <a class="brand" href="{{ L | append: '/' | relative_url }}" aria-label="{{ t.home_label }}"><span class="t">Alta Linea</span>{% include mini-profile.svg %}<span class="t it">Continua</span></a>
     <nav>
-      <a href="{{ '/' | relative_url }}" {% if page.layout == 'home' %}aria-current="page"{% endif %}>The project</a>
-      <a href="{{ '/stages/' | relative_url }}" {% if page.layout == 'stages' or page.collection == 'stages' %}aria-current="page"{% endif %}>Stages</a>
-      <a href="{{ '/preparation/' | relative_url }}" {% if page.url == '/preparation/' %}aria-current="page"{% endif %}>Preparation</a>
+      <a href="{{ L | append: '/' | relative_url }}" {% if page.layout == 'home' %}aria-current="page"{% endif %}>{{ t.nav_project }}</a>
+      <a href="{{ L | append: '/stages/' | relative_url }}" {% if page.layout == 'stages' or S %}aria-current="page"{% endif %}>{{ t.nav_stages }}</a>
+      <a href="{{ L | append: '/preparation/' | relative_url }}" {% if page.layout == 'page' %}aria-current="page"{% endif %}>{{ t.nav_prep }}</a>
+      <span class="lang" aria-label="Language"><a href="{{ en_url | relative_url }}" hreflang="en" lang="en" {% if lang == 'en' %}aria-current="true"{% endif %}>EN</a><a href="{{ it_url | relative_url }}" hreflang="it" lang="it" {% if lang == 'it' %}aria-current="true"{% endif %}>IT</a></span>
     </nav>
   </header>
   <main>
 {{ content }}
   </main>
   <footer>
-    <span>Alta Linea Continua · {{ site.authors }} · Summer 2026</span>
-    <span><a href="{{ '/assets/tracks/alta-linea-continua-full-route.gpx' | relative_url }}" download>Full route GPX</a></span>
+    <span>Alta Linea Continua · {% if lang == "it" %}{{ site.authors | replace: " & ", " e " }}{% else %}{{ site.authors }}{% endif %} · {{ t.summer }}</span>
+    <span><a href="{{ '/assets/tracks/alta-linea-continua-full-route.gpx' | relative_url }}" download>{{ t.full_gpx }}</a></span>
   </footer>
 </div>
 <div class="lightbox" id="lightbox" hidden><button type="button" aria-label="Close">×</button><figure><img alt=""><figcaption></figcaption></figure></div>
@@ -62,16 +75,20 @@
 <script>
 window.ALC = {
   base: {{ site.baseurl | jsonify }},
+  lang: {{ lang | jsonify }},
+  t: {{ t.js | jsonify }},
   stages: [
   {%- assign ordered = site.stages | sort: "number" -%}
   {%- for s in ordered -%}
-    {"n": {{ s.number }}, "url": {{ s.url | relative_url | jsonify }}, "start": {{ s.start | jsonify }}, "end": {{ s.end | jsonify }}, "date": {{ s.date_label | jsonify }}, "climbing": {% if s.climbing %}{{ s.climbing | jsonify }}{% else %}[]{% endif %}}{% unless forloop.last %},{% endunless %}
+    {%- capture a_ -%}{% include tr.html o=s k="start" %}{%- endcapture -%}{%- capture b_ -%}{% include tr.html o=s k="end" %}{%- endcapture -%}{%- capture d_ -%}{% include sdate.html s=s %}{%- endcapture -%}
+    {"n": {{ s.number }}, "url": {{ L | append: s.url | relative_url | jsonify }}, "start": {{ a_ | strip | jsonify }}, "end": {{ b_ | strip | jsonify }}, "date": {{ d_ | strip | jsonify }}, "climbing": {% if s.climbing %}{{ s.climbing | jsonify }}{% else %}[]{% endif %}}{% unless forloop.last %},{% endunless %}
   {%- endfor -%}
   ]
 };
 </script>
 <script async src="https://tally.so/widgets/embed.js" onload="window.Tally&&Tally.loadEmbeds()"></script>
 <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
-{%- if page.instagram and page.instagram.size > 0 %}<script async src="https://www.instagram.com/embed.js"></script>{% endif %}
+{%- assign ig = page.instagram -%}{%- if S -%}{%- assign ig = S.instagram -%}{%- endif -%}
+{%- if ig and ig.size > 0 %}<script async src="https://www.instagram.com/embed.js"></script>{% endif %}
 </body>
 </html>

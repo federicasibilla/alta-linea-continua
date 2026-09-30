@@ -1,5 +1,7 @@
 (function () {
   var ALC = window.ALC || { base: "", stages: [] };
+  var KM = function (v) { return ALC.lang === "it" ? String(v).replace(".", ",") : String(v); };
+  var T = Object.assign({ stage: "Stage", STAGE: "STAGE", climbing: "CLIMBING SECTION", grade: "Grade", link: "Click for the route description ↗", nolink: "Route description coming soon", start: "Start", end: "End", high: "high point", relief: "Relief", topo: "Topographic", minimal: "Minimal", satellite: "Satellite" }, ALC.t || {});
   var css = getComputedStyle(document.documentElement);
   var C = function (name) { return css.getPropertyValue(name).trim(); };
   var COL = { route: C("--route"), accent: C("--accent"), green: C("--green"), yellow: C("--yellow"), edge: C("--edge"), paper: C("--paper") };
@@ -39,17 +41,17 @@
     var relief = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}", {
       maxZoom: 17, attribution: "Relief: Esri, Vantor, Airbus DS, USGS, NGA, NASA, CGIAR, N Robinson, NCEAS, NLS, OS, NMA, Geodatastyrelsen, Rijkswaterstaat, GSA, Geoland, FEMA, Intermap and the GIS user community"
     });
-    return { "Relief": relief, "Topographic": topo, "Minimal": light, "Satellite": sat };
+    var o = {}; o[T.relief] = relief; o[T.topo] = topo; o[T.minimal] = light; o[T.satellite] = sat; return o;
   }
 
   function makeMap(el) {
     var layers = baseLayers();
     var style = el.dataset.style || "";
-    var start = style.indexOf("relief") === 0 ? layers.Relief : layers.Topographic;
+    var start = style.indexOf("relief") === 0 ? layers[T.relief] : layers[T.topo];
     var map = L.map(el, { scrollWheelZoom: false, zoomSnap: 0.25, layers: [start] });
     if (style) el.classList.add("m-" + style);
-    el.classList.toggle("tinted", start === layers.Relief);
-    map.on("baselayerchange", function (e) { el.classList.toggle("tinted", e.layer === layers.Relief); });
+    el.classList.toggle("tinted", start === layers[T.relief]);
+    map.on("baselayerchange", function (e) { el.classList.toggle("tinted", e.layer === layers[T.relief]); });
     L.control.layers(layers, null, { position: "topright" }).addTo(map);
     L.control.scale({ imperial: false }).addTo(map);
     map.on("focus", function () { map.scrollWheelZoom.enable(); });
@@ -63,8 +65,8 @@
       var pos = pointAtKm(stageGeo.line, +c.km);
       var icon = L.divIcon({ className: "climb-icon", html: triSVG(climbColor(c), size), iconSize: [size * 1.12, size], iconAnchor: [size * 0.56, size * 0.66] });
       var m = L.marker(pos, { icon: icon, riseOnHover: true, zIndexOffset: 1000, keyboard: true, title: c.name }).addTo(map);
-      var tip = "<b>STAGE " + stageMeta.n + " · CLIMBING SECTION</b><span class=\"t\">" + esc(c.name) + "</span>" +
-        (c.grade ? "Grade " + esc(c.grade) + "<br>" : "") + (c.link ? "Click for the route description ↗" : "Route description coming soon");
+      var tip = "<b>" + T.STAGE + " " + stageMeta.n + " · " + T.climbing + "</b><span class=\"t\">" + esc(c.name) + "</span>" +
+        (c.grade ? T.grade + " " + esc(c.grade) + "<br>" : "") + (c.link ? T.link : T.nolink);
       m.bindTooltip(tip, { className: "stage-tip", direction: "top", offset: [0, -size * 0.6] });
       m.on("click", function () { if (c.link) window.open(c.link, "_blank", "noopener"); });
     });
@@ -100,7 +102,7 @@
         var halo = L.polyline(ll, { color: COL.paper, weight: 7, opacity: 0.8, interactive: false }).addTo(map);
         var line = L.polyline(ll, { color: COL.route, weight: 3.2, opacity: 0.85, interactive: false, lineJoin: "round" }).addTo(map);
         var hit = L.polyline(ll, { color: "#000", weight: 22, opacity: 0 }).addTo(map);
-        hit.bindTooltip("<b>STAGE " + s.n + " · " + esc(meta.date).toUpperCase() + "</b><span class=\"t\">" + esc(meta.start) + " → " + esc(meta.end) + "</span>" + s.km + " km · +" + s.up + " m · −" + s.down + " m", { sticky: true, className: "stage-tip", direction: "top", offset: [0, -12] });
+        hit.bindTooltip("<b>" + T.STAGE + " " + s.n + " · " + esc(meta.date).toUpperCase() + "</b><span class=\"t\">" + esc(meta.start) + " → " + esc(meta.end) + "</span>" + KM(s.km) + " km · +" + s.up + " m · −" + s.down + " m", { sticky: true, className: "stage-tip", direction: "top", offset: [0, -12] });
         hit.on("mouseover", function () { highlight(s.n); });
         hit.on("mouseout", function () { highlight(-1); });
         hit.on("click", function () { window.location.href = meta.url; });
@@ -154,7 +156,7 @@
         if (!cap) return;
         if (n < 0) { cap.innerHTML = idle; return; }
         var s = byN[n], m = META[n] || {};
-        cap.innerHTML = '<span class="d">Stage ' + n + " · " + esc(m.date || "") + " · " + s.km + " km · +" + s.up + " m · high point " + s.max + " m</span><b>" + esc(m.start || "") + " → " + esc(m.end || "") + "</b>";
+        cap.innerHTML = '<span class="d">' + T.stage + " " + n + " · " + esc(m.date || "") + " · " + KM(s.km) + " km · +" + s.up + " m · " + T.high + " " + s.max + " m</span><b>" + esc(m.start || "") + " → " + esc(m.end || "") + "</b>";
       }
     };
   }
@@ -222,7 +224,7 @@
         if (!cap) return;
         if (n < 0) { cap.innerHTML = idle; return; }
         var s = S[n], m = META[n] || {};
-        cap.innerHTML = '<span class="d">Stage ' + n + " · " + esc(m.date || "") + " · " + s.km + " km · +" + s.up + " m</span><b>" + esc(m.start || "") + " → " + esc(m.end || "") + "</b>";
+        cap.innerHTML = '<span class="d">' + T.stage + " " + n + " · " + esc(m.date || "") + " · " + KM(s.km) + " km · +" + s.up + " m</span><b>" + esc(m.start || "") + " → " + esc(m.end || "") + "</b>";
       }
       svg.querySelectorAll("g.st").forEach(function (x) {
         var n = +x.dataset.n;
@@ -246,14 +248,14 @@
         if (g.n === n) { s = g; return; }
         var meta = META[g.n];
         var other = L.polyline(ll, { color: COL.route, weight: 2.2, opacity: 0.45 }).addTo(map);
-        if (meta) { other.bindTooltip("Stage " + g.n + " · " + esc(meta.start) + " → " + esc(meta.end), { sticky: true, className: "stage-tip" }); other.on("click", function () { window.location.href = meta.url; }); }
+        if (meta) { other.bindTooltip(T.stage + " " + g.n + " · " + esc(meta.start) + " → " + esc(meta.end), { sticky: true, className: "stage-tip" }); other.on("click", function () { window.location.href = meta.url; }); }
       });
       if (!s) return;
       var ll = s.line.map(function (p) { return [p[0], p[1]]; });
       L.polyline(ll, { color: COL.paper, weight: 8, opacity: 0.85 }).addTo(map);
       var line = L.polyline(ll, { color: COL.accent, weight: 4.5 }).addTo(map);
-      L.circleMarker(ll[0], { radius: 5, color: COL.edge, weight: 1.5, fillColor: COL.paper, fillOpacity: 1 }).bindTooltip("Start").addTo(map);
-      L.circleMarker(ll[ll.length - 1], { radius: 5, color: COL.edge, weight: 1.5, fillColor: COL.edge, fillOpacity: 1 }).bindTooltip("End").addTo(map);
+      L.circleMarker(ll[0], { radius: 5, color: COL.edge, weight: 1.5, fillColor: COL.paper, fillOpacity: 1 }).bindTooltip(T.start).addTo(map);
+      L.circleMarker(ll[ll.length - 1], { radius: 5, color: COL.edge, weight: 1.5, fillColor: COL.edge, fillOpacity: 1 }).bindTooltip(T.end).addTo(map);
       if (META[n]) addClimbMarkers(map, s, META[n], 20);
       map.invalidateSize(); map.fitBounds(line.getBounds(), { padding: [28, 28] });
       profile(document.getElementById("profile"), s, META[n]);

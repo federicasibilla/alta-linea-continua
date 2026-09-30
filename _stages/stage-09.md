@@ -4,6 +4,7 @@ start: Laghi di Valscura
 end: Lago di Lausfer
 date: '2026-08-02'
 date_label: 2 & 4 August
+date_label_it: 2 e 4 agosto
 summary: ''
 climbing:
 - name: Monte Malinvern

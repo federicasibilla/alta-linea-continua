@@ -1,27 +1,28 @@
 <section class="talk" id="comments">
   <div class="talk-head">
-    <h2>Comment on this stage</h2>
-    <p>Walked it too, or planning to? Share a comment, a question or a <b>trail update</b> (snow, water, huts, anything that changed), with photos if you like. Ema &amp; Federica read every message before it appears here.</p>
+    <h2>{{ t.c_title }}</h2>
+    <p>{{ t.c_intro }}</p>
   </div>
-  {%- assign items = page.comments | default: empty -%}
+  {%- assign items = S.comments | default: empty -%}
   {%- if items.size > 0 %}
   <ol class="notes">
     {%- assign sorted = items | sort: "date" | reverse -%}
     {%- for c in sorted %}
     <li class="note{% if c.kind == 'Trail update' %} upd{% endif %}">
-      <div class="note-meta"><span class="who">{{ c.name | default: "A reader" }}</span>{% if c.date %}<span>{{ c.date }}</span>{% endif %}{% if c.kind == 'Trail update' %}<span class="badge">Trail update</span>{% endif %}</div>
+      <div class="note-meta"><span class="who">{{ c.name | default: t.c_reader }}</span>{% if c.date %}<span>{{ c.date }}</span>{% endif %}{% if c.kind == 'Trail update' %}<span class="badge">{{ t.c_update }}</span>{% endif %}</div>
       <div class="note-text">{{ c.text | markdownify }}</div>
       {%- if c.photos and c.photos.size > 0 %}
-      <div class="note-photos">{% for ph in c.photos %}{% if ph != "" %}<a href="{{ ph }}" class="lb" data-caption="{{ c.name | escape }}"><img src="{{ ph }}" alt="Photo from {{ c.name | escape }}" loading="lazy"></a>{% endif %}{% endfor %}</div>
+      <div class="note-photos">{% for ph in c.photos %}{% if ph != "" %}<a href="{{ ph }}" class="lb" data-caption="{{ c.name | escape }}"><img src="{{ ph }}" alt="{{ t.c_photo_from }} {{ c.name | escape }}" loading="lazy"></a>{% endif %}{% endfor %}</div>
       {%- endif %}
-      {%- if c.reply and c.reply != "" %}<div class="reply"><span class="who">Ema &amp; Federica</span>{{ c.reply | markdownify }}</div>{% endif %}
+      {%- capture rep -%}{% include tr.html o=c k="reply" %}{%- endcapture -%}{%- assign rep = rep | strip -%}
+      {%- if rep != "" %}<div class="reply"><span class="who">{% if lang == "it" %}Ema e Federica{% else %}Ema &amp; Federica{% endif %}</span>{{ rep | markdownify }}</div>{% endif %}
     </li>
     {%- endfor %}
   </ol>
   {%- endif %}
   <details class="talk-form">
-    <summary class="btn">Write a comment or trail update</summary>
-    {%- capture params -%}&stage={{ page.number }}&stage_name={{ page.start | append: " → " | append: page.end | url_encode }}{%- endcapture -%}
-    {% include tally.html form=site.data.settings.tally_comment_form params=params title="Comment on this stage" %}
+    <summary class="btn">{{ t.c_button }}</summary>
+    {%- capture params -%}&stage={{ S.number }}&stage_name={{ S.start | append: " → " | append: S.end | url_encode }}&lang={{ lang }}{%- endcapture -%}
+    {% include tally.html form=site.data.settings.tally_comment_form params=params title=t.c_title %}
   </details>
 </section>

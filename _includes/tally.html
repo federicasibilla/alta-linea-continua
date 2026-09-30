@@ -1,7 +1,7 @@
 {%- assign fid = include.form | strip -%}
 {%- if fid != "" -%}
 <iframe data-tally-src="https://tally.so/embed/{{ fid }}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1{{ include.params }}" loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" title="{{ include.title | escape }}"></iframe>
-<p class="privacy">Your name and message may be published here after we read them; your email is only for us, to reply if needed, and is never published or shared. Messages are collected with <a href="https://tally.so/help/privacy-policy" target="_blank" rel="noopener">Tally</a>. To have something removed, write to us through this form.</p>
+<p class="privacy">{{ t.privacy }}</p>
 {%- elsif site.data.settings.show_placeholders -%}
-<div class="edit"><div class="eyebrow">Form</div>The form appears here once the Tally form code is added in Site settings.</div>
+<div class="edit"><div class="eyebrow">Form</div>{{ t.form_ph }}</div>
 {%- endif -%}
