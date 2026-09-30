@@ -84,6 +84,9 @@ en:
   s_col_stage: Stage
   s_col_grade: Grade
   s_empty: The list is being prepared.
+  v_south: View from the south
+  v_above: View from above
+  v_hint: Drag to turn the line
   months: [January, February, March, April, May, June, July, August, September, October, November, December]
   days: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
   js:
@@ -187,6 +190,9 @@ it:
   s_col_stage: Tappa
   s_col_grade: Grado
   s_empty: L'elenco è in preparazione.
+  v_south: Vista da sud
+  v_above: Vista dall'alto
+  v_hint: Trascina per ruotare la linea
   months: [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre]
   days: [domenica, lunedì, martedì, mercoledì, giovedì, venerdì, sabato]
   js:

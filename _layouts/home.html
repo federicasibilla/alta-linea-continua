@@ -9,8 +9,11 @@ layout: default
 {%- capture tagline -%}{% include tr.html o=H k="tagline" %}{%- endcapture -%}{%- assign tagline = tagline | strip | default: t.tagline_default -%}
 <section class="hero">
   <h1 class="sr-only">Alta Linea Continua</h1>
-  <div class="haze hero-haze" id="haze" aria-label="{{ t.haze_aria }}" data-title="1" data-kicker="{% if lang == 'it' %}{{ site.authors | replace: ' & ', ' e ' }}{% else %}{{ site.authors }}{% endif %}"></div>
-  <div class="cap" id="cap" aria-live="polite" data-idle-top="{{ site.stages | size }} {{ t.stages_word }} · {{ tkm | round }} km · {{ tup | divided_by: 1000 | floor }}{{ sep }}{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} {{ t.of_ascent }}" data-idle="{{ tagline | escape }}"></div>
+  <div class="alc3d" id="alc3d" data-kicker="{% if lang == 'it' %}{{ site.authors | replace: ' & ', ' e ' }}{% else %}{{ site.authors }}{% endif %}" data-hint="{{ t.v_hint }}">
+    <canvas aria-label="{{ t.haze_aria }}"></canvas>
+  </div>
+  <div class="v-ctrl"><button type="button" class="vbtn" data-view="south">{{ t.v_south }}</button><button type="button" class="vbtn" data-view="above">{{ t.v_above }}</button></div>
+  <div class="cap" id="cap" aria-live="polite" data-idle-top="{% if lang == 'it' %}{{ site.authors | replace: ' & ', ' e ' }}{% else %}{{ site.authors }}{% endif %} · {{ site.stages | size }} {{ t.stages_word }} · {{ tkm | round }} km · {{ tup | divided_by: 1000 | floor }}{{ sep }}{{ tup | modulo: 1000 | prepend: '00' | slice: -3, 3 }} {{ t.of_ascent }}" data-idle="{{ tagline | escape }}"></div>
 </section>
 
 <section class="intro">

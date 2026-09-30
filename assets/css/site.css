@@ -315,3 +315,13 @@ body:not(:has(.hero)) .spine{margin-top:6px}
 a.sp-tri:hover{transform:translate(-50%,-125%) scale(1.5)}
 /* phone: hide pass labels in the aerial view */
 @media (max-width:640px){.haze .colname,.haze .colalt,.haze .colmark,.haze .lead{display:none}}
+
+/* the line in 3D (home) */
+.alc3d{position:relative;margin-block:4px 0}
+.alc3d canvas{display:block;width:100%;aspect-ratio:1200/640;max-height:78vh;cursor:grab;touch-action:pan-y}
+.alc3d.drag canvas{cursor:grabbing}
+.v-ctrl{display:flex;justify-content:center;gap:8px;margin-top:4px}
+.vbtn{font:400 11px var(--f-data);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:none;color:var(--muted);padding:6px 11px;cursor:pointer}
+.vbtn:hover{border-color:var(--ink);color:var(--ink)}
+.vbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:640px){.alc3d canvas{aspect-ratio:1/0.66}}

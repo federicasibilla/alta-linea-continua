@@ -278,6 +278,129 @@
   var C_ = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
   var hz = document.getElementById("haze"); if (hz) haze(hz);
 
+
+  /* ---------- the line in 3D (home page) ---------- */
+  function alc3d(box) {
+    var cv = box.querySelector("canvas"), ctx = cv.getContext("2d");
+    load(function (geo) {
+      var lat0 = 44.42, lon0 = 7.2, kx = 111.32 * Math.cos(lat0 * Math.PI / 180), ky = 110.57, EXAG = 4;
+      var zmin = Infinity;
+      var S = geo.map(function (s) {
+        var pr = s.profile, j = 0;
+        var pts = s.line.map(function (p) { while (j < pr.length - 1 && pr[j][0] < p[2]) j++; var z = pr[j][1]; if (z < zmin) zmin = z; return [p[1], p[0], z]; });
+        return { n: s.n, km: s.km, up: s.up, max: s.max, raw: pts };
+      });
+      var cx = 0, cy = 0, xs = [], ys = [];
+      S.forEach(function (s) { s.pts = s.raw.map(function (p) { var q = [(p[0] - lon0) * kx, (p[1] - lat0) * ky, (p[2] - zmin) / 1000 * EXAG]; xs.push(q[0]); ys.push(q[1]); return q; }); });
+      cx = (Math.min.apply(null, xs) + Math.max.apply(null, xs)) / 2; cy = (Math.min.apply(null, ys) + Math.max.apply(null, ys)) / 2;
+      var R = 0;
+      S.forEach(function (s) { s.pts.forEach(function (p) { p[0] -= cx; p[1] -= cy; R = Math.max(R, Math.hypot(p[0], p[1])); }); });
+      var COLS = [["Colle di Tenda", 1871, 44.150, 7.563], ["Colle della Lombarda", 2350, 44.202, 7.149], ["Colle della Maddalena", 1996, 44.421, 6.893], ["Colle dell'Agnello", 2744, 44.684, 6.979]].map(function (c) {
+        var best = null, bd = 1e9; S.forEach(function (s) { s.raw.forEach(function (p, i) { var d = Math.pow(p[1] - c[2], 2) + Math.pow((p[0] - c[3]) * 0.714, 2); if (d < bd) { bd = d; best = s.pts[i]; } }); });
+        return { name: c[0], alt: c[1], p: best };
+      });
+      var SOUTH = { az: 0, tilt: 24 * Math.PI / 180 }, ABOVE = { az: 0, tilt: Math.PI / 2 };
+      var az = SOUTH.az, tilt = SOUTH.tilt, W = 0, H = 0, scale = 1, hover = -1, proj = [], titleA = 1, anim = null, idle = null, dragged = false;
+      var kicker = (box.dataset.kicker || "").toUpperCase();
+      function project(p) {
+        var ca = Math.cos(az), sa = Math.sin(az), x = p[0] * ca - p[1] * sa, y = p[0] * sa + p[1] * ca, st = Math.sin(tilt), ct = Math.cos(tilt);
+        return [W / 2 + x * scale, H * 0.5 + (-y * st - p[2] * ct) * scale + (1 - st) * H * 0.1, y * ct - p[2] * st];
+      }
+      function mixc(a, b, t) { var h = function (x) { return [1, 3, 5].map(function (i) { return parseInt(x.slice(i, i + 2), 16); }); }; var A = h(a), B = h(b); return "rgb(" + A.map(function (v, i) { return Math.round(v + (B[i] - v) * t); }).join(",") + ")"; }
+      function draw() {
+        var C = C_("--accent"), Hz = C_("--haze") || "#B9CDD1", INK = C_("--ink"), BG = C_("--bg"), MU = C_("--muted");
+        scale = Math.min(W, H / Math.max(Math.sin(tilt), 0.5)) / (2 * R) * 0.95;
+        ctx.clearRect(0, 0, W, H);
+        proj = S.map(function (s) { return { n: s.n, pr: s.pts.map(project), gr: s.pts.map(function (p) { return project([p[0], p[1], 0]); }) }; });
+        var dmin = Infinity, dmax = -Infinity;
+        proj.forEach(function (s) { s.d = s.pr.reduce(function (a, q) { return a + q[2]; }, 0) / s.pr.length; dmin = Math.min(dmin, s.d); dmax = Math.max(dmax, s.d); });
+        var flat = Math.max(0, Math.min(1, (tilt - Math.PI / 3) / (Math.PI / 6)));
+        proj.slice().sort(function (a, b) { return b.d - a.d; }).forEach(function (s) {
+          var d = (s.d - dmin) / ((dmax - dmin) || 1), on = hover < 0 || hover === s.n, col = mixc(C, Hz, Math.min(1, d * 0.8 * (1 - flat))), base = on ? 1 : 0.25;
+          ctx.strokeStyle = col; ctx.lineWidth = 0.5; ctx.globalAlpha = base * 0.32 * (1 - flat * 0.9); ctx.beginPath();
+          for (var i = 0; i < s.pr.length; i += 2) { ctx.moveTo(s.pr[i][0], s.pr[i][1]); ctx.lineTo(s.gr[i][0], s.gr[i][1]); } ctx.stroke();
+          ctx.globalAlpha = base * 0.45 * (1 - flat); ctx.lineWidth = 0.8; ctx.beginPath(); s.gr.forEach(function (q, i) { i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); }); ctx.stroke();
+          ctx.globalAlpha = base; ctx.lineJoin = "round"; ctx.lineWidth = hover === s.n ? 3.2 : 2.3 - d * 0.9; ctx.strokeStyle = hover === s.n ? C : col;
+          ctx.beginPath(); s.pr.forEach(function (q, i) { i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); }); ctx.stroke();
+          var e = s.pr[s.pr.length - 1]; ctx.globalAlpha = on ? 1 : 0.3; ctx.fillStyle = BG; ctx.strokeStyle = INK; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(e[0], e[1], 2.4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          if (hover === s.n) { var m = META[s.n] || {}; ctx.globalAlpha = 1; ctx.fillStyle = INK; ctx.font = "400 11px 'IBM Plex Mono', monospace"; ctx.textAlign = "center"; ctx.fillText(m.end || "", e[0], e[1] - 12); }
+        });
+        // passes, only in the oblique view and on wider screens
+        var colA = (1 - flat) * (W > 600 ? 1 : 0) * Math.max(0, Math.cos(az));
+        if (colA > 0.05) {
+          ctx.font = "500 10px 'IBM Plex Mono', monospace"; ctx.textAlign = "center";
+          COLS.forEach(function (c) { var q = project(c.p), g = project([c.p[0], c.p[1], 0]); ctx.globalAlpha = colA * 0.9; ctx.strokeStyle = MU; ctx.lineWidth = 0.6; ctx.beginPath(); ctx.moveTo(q[0], q[1] + 6); ctx.lineTo(g[0], g[1] + 10); ctx.stroke(); ctx.fillStyle = INK; ctx.fillText(c.name.toUpperCase(), g[0], g[1] + 24); ctx.fillStyle = MU; ctx.fillText(c.alt + " m", g[0], g[1] + 37); });
+        }
+        // the title, in the hollow of the curve
+        if (titleA > 0.01) {
+          var bx = [Infinity, -Infinity], by = [Infinity, -Infinity];
+          proj.forEach(function (s) { s.pr.forEach(function (q) { bx[0] = Math.min(bx[0], q[0]); bx[1] = Math.max(bx[1], q[0]); by[0] = Math.min(by[0], q[1]); by[1] = Math.max(by[1], q[1]); }); });
+          var rw = bx[1] - bx[0], rh = by[1] - by[0], tx = bx[0] + rw * 0.685, fs = rw * 0.108, y1 = by[0] + rh * 0.2, y2 = y1 + fs * 0.95;
+          ctx.globalAlpha = titleA; ctx.textAlign = "center"; ctx.fillStyle = INK;
+          ctx.font = "400 " + fs + "px 'Cormorant Garamond', Georgia, serif"; var wa = ctx.measureText("Alta Linea").width; ctx.fillText("Alta Linea", tx, y1);
+          ctx.font = "italic 400 " + fs + "px 'Cormorant Garamond', Georgia, serif"; var wc = ctx.measureText("Continua").width;
+          ctx.font = "italic 400 " + (fs * wa / wc) + "px 'Cormorant Garamond', Georgia, serif"; ctx.fillText("Continua", tx, y2);
+        }
+        ctx.globalAlpha = 1;
+      }
+      function resize() { var dpr = Math.min(2, window.devicePixelRatio || 1); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); draw(); }
+      function animateTo(v, showTitle) {
+        if (anim) cancelAnimationFrame(anim);
+        (function step() {
+          var da = Math.atan2(Math.sin(v.az - az), Math.cos(v.az - az)); az += da * 0.1; tilt += (v.tilt - tilt) * 0.1;
+          titleA += ((showTitle ? 1 : 0) - titleA) * 0.12;
+          draw();
+          if (Math.abs(da) < 0.002 && Math.abs(v.tilt - tilt) < 0.002 && Math.abs((showTitle ? 1 : 0) - titleA) < 0.01) { az = v.az; tilt = v.tilt; titleA = showTitle ? 1 : 0; draw(); anim = null; return; }
+          anim = requestAnimationFrame(step);
+        })();
+      }
+      function scheduleReturn() { clearTimeout(idle); idle = setTimeout(function () { animateTo(SOUTH, true); }, 4000); }
+      var cap = document.getElementById("cap"), idleCap = cap ? '<span class="d">' + esc(cap.dataset.idleTop || "") + "</span><b>" + esc(cap.dataset.idle || "") + "</b>" : "";
+      if (cap) cap.innerHTML = idleCap;
+      function setHover(n) {
+        if (n === hover) return; hover = n; draw(); cv.style.cursor = n >= 0 ? "pointer" : "grab";
+        if (!cap) return;
+        if (n < 0) { cap.innerHTML = idleCap; return; }
+        var s = S[n], m = META[n] || {};
+        cap.innerHTML = '<span class="d">' + T.stage + " " + n + " · " + esc(m.date || "") + " · " + KM(s.km) + " km · +" + s.up + " m · " + T.high + " " + s.max + " m</span><b>" + esc(m.start || "") + " → " + esc(m.end || "") + "</b>";
+      }
+      var down = null, lx = 0, ly = 0;
+      cv.addEventListener("pointerdown", function (e) { down = { x: e.clientX, y: e.clientY }; lx = e.clientX; ly = e.clientY; dragged = false; clearTimeout(idle); if (anim) { cancelAnimationFrame(anim); anim = null; } });
+      cv.addEventListener("pointermove", function (e) {
+        if (down) {
+          var dx = e.clientX - lx, dy = e.clientY - ly;
+          if (!dragged && Math.hypot(e.clientX - down.x, e.clientY - down.y) > 4) { dragged = true; try { cv.setPointerCapture(e.pointerId); } catch (x) {} box.classList.add("drag"); }
+          if (dragged) {
+            az += dx * 0.008;
+            if (e.pointerType !== "touch") tilt = Math.max(5 * Math.PI / 180, Math.min(Math.PI / 2, tilt + dy * 0.006));
+            titleA = Math.max(0, titleA - 0.12); setHover(-1); draw();
+          }
+          lx = e.clientX; ly = e.clientY; return;
+        }
+        var r = cv.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top, best = 1e9, bn = -1;
+        proj.forEach(function (s) { for (var i = 0; i < s.pr.length; i += 2) { var d = Math.pow(s.pr[i][0] - mx, 2) + Math.pow(s.pr[i][1] - my, 2); if (d < best) { best = d; bn = s.n; } } });
+        setHover(best < 220 ? bn : -1);
+      });
+      function end(e) {
+        if (!down) return;
+        box.classList.remove("drag");
+        if (!dragged && hover >= 0 && META[hover]) { window.location.href = META[hover].url; }
+        if (dragged) scheduleReturn();
+        down = null;
+      }
+      cv.addEventListener("pointerup", end); cv.addEventListener("pointercancel", end);
+      cv.addEventListener("pointerleave", function () { if (!down) setHover(-1); });
+      document.querySelectorAll(".vbtn").forEach(function (b) {
+        b.addEventListener("click", function () { clearTimeout(idle); if (b.dataset.view === "above") animateTo(ABOVE, false); else animateTo(SOUTH, true); });
+      });
+      window.addEventListener("resize", resize);
+      resize();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+      if (window.matchMedia) { var mq = matchMedia("(prefers-color-scheme: dark)"); if (mq.addEventListener) mq.addEventListener("change", draw); }
+    });
+  }
+  var a3 = document.getElementById("alc3d"); if (a3) alc3d(a3);
+
   /* ---------- single stage ---------- */
   function stage(el) {
     var n = +el.dataset.n;
