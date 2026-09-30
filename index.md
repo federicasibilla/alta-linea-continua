@@ -13,7 +13,7 @@ intro_it: |-
   Per noi, ALC rappresenta anche un tentativo di accrescere il nostro senso di appartenenza all'ambiente montano, forzandoci al di fuori della comodità nota. Questo processo ci ha regalato momenti di crescita impagabili.
 
   Rendendo pubblico il nostro percorso, ci auguriamo di ricevere feedback ed incoraggiare altre persone ad immaginare un modo loro di frequentare la montagna.
-cover: /alta-linea-continua/assets/images/IMG_8064 (2) (3)-1.png
+cover: /alta-linea-continua/assets/images/79fee8a8-b05c-44b5-98d0-18f1f1698045.jpg
 cover_caption: ''
 cover_caption_it: ''
 ---
