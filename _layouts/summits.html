@@ -1,0 +1,39 @@
+---
+layout: default
+---
+{%- include lang.html -%}
+{%- assign list = site.data.summits_auto | default: empty -%}
+{%- assign hidden = site.data.settings.summits_hidden | default: "" | split: "," -%}
+{%- assign ordered = site.stages | sort: "number" -%}
+{%- assign n3000 = 0 -%}{%- assign top = nil -%}{%- assign count = 0 -%}
+{%- for p in list -%}{%- unless hidden contains p.name -%}{%- assign count = count | plus: 1 -%}{%- if p.ele >= 3000 -%}{%- assign n3000 = n3000 | plus: 1 -%}{%- endif -%}{%- if top == nil or p.ele > top.ele -%}{%- assign top = p -%}{%- endif -%}{%- endunless -%}{%- endfor -%}
+<div class="pagehead">
+  <div class="eyebrow">{{ t.s_eyebrow }}</div>
+  <h1>{{ t.s_title }}</h1>
+</div>
+{%- if count > 0 %}
+<div class="stats sstats">
+  <span><b>{{ count }}</b>{{ t.s_count }}</span>
+  <span><b>{{ n3000 }}</b>{{ t.s_over3000 }}</span>
+  <span><b>{{ top.ele }} m</b>{{ t.s_highest }} · {{ top.name }}</span>
+</div>
+<p class="prose muted">{{ t.s_intro }}</p>
+<div class="tbl"><table class="summits">
+  <thead><tr><th>{{ t.s_col_name }}</th><th class="num">{{ t.s_col_alt }}</th><th>{{ t.s_col_stage }}</th><th>{{ t.s_col_grade }}</th></tr></thead>
+  <tbody>
+  {%- for p in list -%}{%- unless hidden contains p.name -%}
+    {%- assign st = ordered | where: "number", p.stage | first -%}
+    {%- assign grade = "" -%}{%- assign col = "" -%}
+    {%- for c in st.climbing -%}{%- assign cn = c.name | downcase -%}{%- assign pn = p.name | downcase -%}{%- if cn contains pn or pn contains cn -%}{%- assign grade = c.grade -%}{%- assign col = c.color -%}{%- endif -%}{%- endfor -%}
+    <tr{% if p.ele >= 3000 %} class="high"{% endif %}>
+      <td>{{ p.name }}</td>
+      <td class="num">{% if p.ele > 0 %}{{ p.ele }} m{% endif %}</td>
+      <td><a href="{% include stage-url.html s=st %}">{{ p.stage }} · {% include tr.html o=st k="start" %} → {% include tr.html o=st k="end" %}</a></td>
+      <td>{% if col != "" %}<span class="tri {{ col }}"></span> {% endif %}{{ grade }}</td>
+    </tr>
+  {%- endunless -%}{%- endfor -%}
+  </tbody>
+</table></div>
+{%- else -%}
+<p class="prose muted">{{ t.s_empty }}</p>
+{%- endif %}

@@ -72,6 +72,18 @@ en:
   nl_email: Your email
   nl_button: Subscribe
   nl_note: Newsletter on Substack
+  nav_summits: Summits
+  s_title: The <em>summits</em>
+  s_eyebrow: Every summit on the line
+  s_intro: Found automatically by crossing our GPS tracks with the OpenStreetMap summit database. Only the summits the track really reaches are listed.
+  s_count: summits
+  s_over3000: over 3,000 m
+  s_highest: highest
+  s_col_name: Summit
+  s_col_alt: Altitude
+  s_col_stage: Stage
+  s_col_grade: Grade
+  s_empty: The list is being prepared.
   months: [January, February, March, April, May, June, July, August, September, October, November, December]
   days: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
   js:
@@ -163,6 +175,18 @@ it:
   nl_email: La tua email
   nl_button: Iscriviti
   nl_note: Newsletter su Substack
+  nav_summits: Cime
+  s_title: Le <em>cime</em>
+  s_eyebrow: Tutte le cime della linea
+  s_intro: Trovate automaticamente incrociando le nostre tracce GPS con il database delle cime di OpenStreetMap. Sono elencate solo le cime che la traccia raggiunge davvero.
+  s_count: cime
+  s_over3000: sopra i 3.000 m
+  s_highest: la più alta
+  s_col_name: Cima
+  s_col_alt: Quota
+  s_col_stage: Tappa
+  s_col_grade: Grado
+  s_empty: L'elenco è in preparazione.
   months: [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre]
   days: [domenica, lunedì, martedì, mercoledì, giovedì, venerdì, sabato]
   js:

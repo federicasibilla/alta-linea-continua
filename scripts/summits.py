@@ -23,6 +23,7 @@ def overpass(q):
         except Exception as e:
             print("overpass failed", url, e)
             time.sleep(5)
+    json.dump({"error": "no overpass server answered", "time": time.time()}, open("_data/summits_status.json", "w"))
     raise SystemExit("no overpass server answered")
 
 # one request for the whole route area, then check every peak against every stage
@@ -71,3 +72,4 @@ for p in sorted(out, key=lambda x: (x["stage"], x["km"])):
     seen.add(key); uniq.append(p)
 json.dump(uniq, open("_data/summits_auto.json", "w"), ensure_ascii=False, indent=1)
 print(len(uniq), "summits")
+json.dump({"ok": len(uniq), "peaks_in_area": len(peaks), "time": time.time()}, open("_data/summits_status.json", "w"))

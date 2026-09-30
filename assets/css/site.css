@@ -258,3 +258,15 @@ header nav .lang a:hover{border-bottom-color:transparent;color:var(--ink)}
 .nl-form .btn{background:var(--ink);color:var(--bg);cursor:pointer;padding:10px 16px}
 .nl-form .btn:hover{background:var(--accent);border-color:var(--accent)}
 .nl-note{flex-basis:100%;font:400 11px var(--f-data);letter-spacing:.08em;color:var(--muted);text-decoration:none}
+
+/* summits */
+.sstats{margin:6px 0 22px}
+.muted{color:var(--muted)}
+table.summits{border-collapse:collapse;width:100%;font-size:15px;margin-top:10px}
+table.summits th{font:400 10.5px var(--f-data);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;border-bottom:1px solid var(--ink);padding:8px 14px 8px 0}
+table.summits td{border-bottom:1px solid var(--line);padding:9px 14px 9px 0;vertical-align:baseline}
+table.summits td:first-child{font:400 20px/1.2 var(--f-display)}
+table.summits .num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f-data);font-size:13px;white-space:nowrap}
+table.summits tr.high td:first-child{color:var(--accent)}
+table.summits a{color:var(--muted);text-decoration:none} table.summits a:hover{color:var(--ink)}
+.tbl{overflow-x:auto}

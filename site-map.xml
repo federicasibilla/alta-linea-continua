@@ -6,6 +6,8 @@ permalink: /site-map.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>{{ '/' | absolute_url }}</loc><lastmod>{{ site.time | date_to_xmlschema }}</lastmod><priority>1.0</priority></url>
   <url><loc>{{ '/stages/' | absolute_url }}</loc><lastmod>{{ site.time | date_to_xmlschema }}</lastmod><priority>0.8</priority></url>
+  <url><loc>{{ '/summits/' | absolute_url }}</loc><lastmod>{{ site.time | date_to_xmlschema }}</lastmod><priority>0.7</priority></url>
+  <url><loc>{{ '/it/summits/' | absolute_url }}</loc><lastmod>{{ site.time | date_to_xmlschema }}</lastmod><priority>0.6</priority></url>
   <url><loc>{{ '/preparation/' | absolute_url }}</loc><lastmod>{{ site.time | date_to_xmlschema }}</lastmod><priority>0.7</priority></url>
 {%- assign ordered = site.stages | sort: "number" -%}
 {%- for s in ordered %}
