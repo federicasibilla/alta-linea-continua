@@ -23,7 +23,9 @@
 {%- else -%}
   {%- assign pdesc = t.desc_site -%}
 {%- endif %}
-<meta name="description" content="{{ pdesc | strip_html | escape }}">
+{% if page.noindex %}<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-title" content="ALC team">
+{% endif %}<meta name="description" content="{{ pdesc | strip_html | escape }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="alternate" hreflang="en" href="{{ en_url | absolute_url }}">
 <link rel="alternate" hreflang="it" href="{{ it_url | absolute_url }}">

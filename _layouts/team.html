@@ -1,0 +1,47 @@
+---
+layout: default
+---
+{%- assign sub = site.data.settings.substack_url | strip -%}
+{%- assign gc = site.data.settings.goatcounter_code | strip -%}
+<div class="pagehead">
+  <div class="eyebrow">Ema &amp; Federica · private links</div>
+  <h1>Control <em>room</em></h1>
+</div>
+<p class="prose muted">Everything for running the site in one place. Bookmark this page, or add it to your phone's home screen. It is not in the menu and search engines are asked not to list it.</p>
+
+<div class="team">
+  <section>
+    <div class="eyebrow">The site</div>
+    <a class="tile" href="{{ '/' | relative_url }}"><b>Site · English</b><span>federicasibilla.github.io/alta-linea-continua</span></a>
+    <a class="tile" href="{{ '/it/' | relative_url }}"><b>Sito · Italiano</b><span>…/alta-linea-continua/it/</span></a>
+  </section>
+  <section>
+    <div class="eyebrow">Edit</div>
+    <a class="tile main" href="{{ '/admin/' | relative_url }}" target="_blank" rel="noopener"><b>Editor (Sveltia)</b><span>Sign in with your GitHub token · photos resized automatically</span></a>
+    <a class="tile" href="https://app.pagescms.org/federicasibilla/alta-linea-continua/main" target="_blank" rel="noopener"><b>Pages CMS</b><span>Sign in with GitHub · photos up to ~4 MB</span></a>
+  </section>
+  <section>
+    <div class="eyebrow">Readers</div>
+    <a class="tile" href="https://tally.so/dashboard" target="_blank" rel="noopener"><b>Tally · comments &amp; questions</b><span>Messages waiting to be approved</span></a>
+    {%- if gc != "" %}<a class="tile" href="https://{{ gc }}.goatcounter.com" target="_blank" rel="noopener"><b>GoatCounter · statistics</b><span>Visits, pages, where people come from</span></a>{% endif %}
+    {%- if sub != "" %}<a class="tile" href="{{ sub }}/publish" target="_blank" rel="noopener"><b>Substack · newsletter</b><span>Write and send to subscribers</span></a>
+    {%- else %}<div class="tile off"><b>Substack · newsletter</b><span>Coming soon</span></div>{% endif %}
+  </section>
+  <section>
+    <div class="eyebrow">Behind the scenes</div>
+    <a class="tile" href="https://github.com/federicasibilla/alta-linea-continua" target="_blank" rel="noopener"><b>GitHub repository</b><span>All the files and the history of every change</span></a>
+    <a class="tile" href="https://github.com/federicasibilla/alta-linea-continua/actions" target="_blank" rel="noopener"><b>Site updates</b><span>Green tick = the latest change is online</span></a>
+    <a class="tile" href="https://search.google.com/search-console" target="_blank" rel="noopener"><b>Google Search Console</b><span>How the site appears on Google</span></a>
+  </section>
+</div>
+
+<section class="talk">
+  <div class="talk-head"><h2>Reminders</h2></div>
+  <ul class="remind">
+    <li><b>New token for the editor</b> (another computer, or a lost token): <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">create one on GitHub</a> → <i>Only select repositories</i>: alta-linea-continua → <i>Contents</i>: Read and write. Save it straight away: GitHub shows it only once.</li>
+    <li><b>Publishing a comment</b>: copy it from Tally into the stage in the editor → <i>Comments &amp; trail updates</i>.</li>
+    <li><b>Photo on the map</b>: in the stage gallery switch on <i>Show this photo on the map</i>. If it doesn't appear, fill in <i>Position on the route in km</i>.</li>
+    <li><b>Change not visible?</b> Wait 1–2 minutes, then reload with Ctrl/Cmd + Shift + R, or open a private window.</li>
+    <li><b>Hide the dashed "your text here" boxes</b> when the site is ready: editor → Site settings.</li>
+  </ul>
+</section>

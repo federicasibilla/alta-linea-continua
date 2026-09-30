@@ -271,3 +271,15 @@ table.summits tr.high td:first-child{color:var(--accent)}
 table.summits a{color:var(--muted);text-decoration:none} table.summits a:hover{color:var(--ink)}
 .tbl{overflow-x:auto}
 table.summits td:last-child{white-space:nowrap}
+
+/* control room */
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:26px}
+.team section{display:grid;gap:10px;align-content:start}
+.tile{display:grid;gap:3px;padding:14px 16px;border:1px solid var(--line);background:var(--paper);text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+.tile:hover{border-color:var(--accent);transform:translateY(-1px)}
+.tile b{font:400 22px/1.15 var(--f-display)}
+.tile span{font:400 12px var(--f-data);color:var(--muted);letter-spacing:.02em}
+.tile.main{border-color:var(--accent);background:var(--accent-soft)}
+.tile.off{opacity:.55}
+.remind{margin:0;padding-left:18px;display:grid;gap:10px;max-width:70ch}
+.remind a{color:var(--accent)}
