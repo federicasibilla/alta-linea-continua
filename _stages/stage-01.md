@@ -9,7 +9,7 @@ date_label: Saturday 25 July
 date_label_it: ''
 summary: ''
 summary_it: ''
-sleep: hut
+sleep: tent
 water: no
 resupply: false
 resupply_note: ''
@@ -56,7 +56,8 @@ gallery:
     caption_it: ''
     on_map: false
     km: null
-instagram: []
+instagram:
+  - https://www.instagram.com/p/DbbgB4aIscu/
 links: []
 climbing:
   - name: Punta Tino Prato
