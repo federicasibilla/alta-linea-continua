@@ -1,0 +1,4 @@
+---
+layout: null
+---
+<?xml version="1.0"?><t>{{ site.title }}</t>
