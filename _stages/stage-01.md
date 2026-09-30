@@ -40,7 +40,7 @@ gallery:
     caption: ''
     caption_it: ''
     on_map: true
-    km: null
+    km: 8
   - image: /alta-linea-continua/assets/images/IMG_7743.jpg
     caption: In the attempt to find the first anchor on Castello delle Aquile
     caption_it: ''
