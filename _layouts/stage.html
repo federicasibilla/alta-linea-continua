@@ -10,7 +10,7 @@ layout: default
   <div class="stagehead">
     <a class="back" href="{{ L | append: '/stages/' | relative_url }}">{{ t.all_stages }}</a>
     {%- capture summ -%}{% include tr.html o=S k="summary" %}{%- endcapture -%}{%- assign summ = summ | strip -%}
-    <div class="eyebrow">{{ t.stage }} {{ S.number }} · {% include sdate.html s=S %}{% if summ != "" %} · {{ summ }}{% endif %}</div>
+    <div class="eyebrow">{{ t.stage }} {{ S.number }}&emsp;{% include sdate.html s=S %}{% if summ != "" %}&emsp;{{ summ }}{% endif %}</div>
     <h1>{% include tr.html o=S k="start" %} <em>→</em> {% include tr.html o=S k="end" %}</h1>
     {% include glance.html %}
     {%- if S.climbing and S.climbing.size > 0 %}
@@ -66,7 +66,7 @@ layout: default
       <div class="eyebrow">{{ t.dl_track }}</div>
       <div class="dl">
         <a class="btn" href="{{ '/assets/tracks/' | append: st.slug | append: '.gpx' | relative_url }}" download>GPX</a>
-        <a class="btn" href="{{ '/assets/tracks/' | append: st.slug | append: '.kml' | relative_url }}" download>KML · Google Earth</a>
+        <a class="btn" href="{{ '/assets/tracks/' | append: st.slug | append: '.kml' | relative_url }}" download>KML (Google Earth)</a>
       </div>
       <p class="note">{{ t.dl_note }}</p>
     </aside>

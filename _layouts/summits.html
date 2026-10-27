@@ -15,7 +15,7 @@ layout: default
 <div class="stats sstats">
   <span><b>{{ count }}</b>{{ t.s_count }}</span>
   <span><b>{{ n3000 }}</b>{{ t.s_over3000 }}</span>
-  <span><b>{{ top.ele }} m</b>{{ t.s_highest }} · {{ top.name }}</span>
+  <span><b>{{ top.ele }} m</b>{{ t.s_highest }}&emsp;{{ top.name }}</span>
 </div>
 <p class="prose muted">{{ t.s_intro }}</p>
 <div class="tbl"><table class="summits">
@@ -28,7 +28,7 @@ layout: default
     <tr{% if p.ele >= 3000 %} class="high"{% endif %}>
       <td>{{ p.name }}</td>
       <td class="num">{% if p.ele > 0 %}{{ p.ele }} m{% endif %}</td>
-      <td><a href="{% include stage-url.html s=st %}">{{ p.stage }} · {% include tr.html o=st k="start" %} → {% include tr.html o=st k="end" %}</a></td>
+      <td><a href="{% include stage-url.html s=st %}">{{ p.stage }}&emsp;{% include tr.html o=st k="start" %} → {% include tr.html o=st k="end" %}</a></td>
       <td>{% if col != "" %}<span class="tri {{ col }}"></span> {% endif %}{{ grade }}</td>
     </tr>
   {%- endunless -%}{%- endfor -%}

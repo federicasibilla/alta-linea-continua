@@ -8,7 +8,7 @@
   <dl class="qa">
     {%- for q in qs %}
     {%- capture qq -%}{% include tr.html o=q k="question" %}{%- endcapture -%}{%- capture qa -%}{% include tr.html o=q k="answer" %}{%- endcapture -%}
-    <div class="qa-item"><dt>{{ qq | strip }}<span class="who">{{ q.name | default: t.c_reader }}{% if q.date %} · {{ q.date }}{% endif %}</span></dt><dd>{{ qa | markdownify }}</dd></div>
+    <div class="qa-item"><dt>{{ qq | strip }}<span class="who">{{ q.name | default: t.c_reader }}{% if q.date %}&emsp;{{ q.date }}{% endif %}</span></dt><dd>{{ qa | markdownify }}</dd></div>
     {%- endfor %}
   </dl>
   {%- endif %}

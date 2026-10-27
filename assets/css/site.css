@@ -6,7 +6,7 @@
   --green:#3F8F5B; --yellow:#E3B21C; --edge:#1E2328; --haze:#B9CDD1;
   --f-display:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
   --f-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
-  --f-data:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --f-data:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root{
@@ -32,7 +32,7 @@ nav{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
 header nav a{font:400 13px/1 var(--f-body);letter-spacing:.06em;text-decoration:none;color:var(--muted);padding-block:4px;border-bottom:1px solid transparent}
 header nav a[aria-current="page"],header nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
 
-.eyebrow{font:400 11px/1.5 var(--f-data);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font:500 11px/1.5 var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0}
 h1{font-size:clamp(42px,8vw,92px);line-height:.98;letter-spacing:-.01em}
 h1 em{font-style:italic;color:var(--accent)}

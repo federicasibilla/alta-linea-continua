@@ -5,8 +5,8 @@
 <li><a href="{% include stage-url.html s=s %}" data-n="{{ s.number }}">
   <span class="n">{{ s.number }}</span>
   <span class="d">{% include sdate.html s=s %}</span>
-  <span class="r">{% include tr.html o=s k="start" %} → {% include tr.html o=s k="end" %}{% for c in s.climbing %}<span class="tri {{ c.color }}" title="{{ c.name }}{% if c.grade != '' %} · {{ c.grade }}{% endif %}"></span>{% endfor %}</span>
-  <span class="k">{% include num.html v=st.km %} km · +{{ st.up }} m</span>
+  <span class="r">{% include tr.html o=s k="start" %} → {% include tr.html o=s k="end" %}{% for c in s.climbing %}<span class="tri {{ c.color }}" title="{{ c.name }}{% if c.grade != '' %}, {{ c.grade }}{% endif %}"></span>{% endfor %}</span>
+  <span class="k">{% include num.html v=st.km %} km&emsp;+{{ st.up }} m</span>
 </a></li>
 {%- endfor -%}
 </ol>

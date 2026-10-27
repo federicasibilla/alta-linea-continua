@@ -11,7 +11,7 @@ en:
   stages_word: stages
   of_ascent: m of ascent
   tagline_default: From Marguareis to Monviso
-  map_hint: Hover over the line to see each stage · click to open it
+  map_hint: Hover over the line to see each stage, click to open it
   map_aria: Map of the whole route
   profile_aria: Elevation profile of the whole route
   the_idea: The idea
@@ -19,11 +19,11 @@ en:
   ph_your_text: Your text
   ph_home: How the idea was born, who you are, why one continuous line from the Ligurian Alps to Monviso. Edit “Home page” in the editor.
   ph_cover: YOUR COVER PHOTO
-  stages_eyebrow: stages · 24 July – 18 August 2026
+  stages_eyebrow: stages — 24 July to 18 August 2026
   stages_title: The <em>stages</em>
   haze_aria: The route seen from the south
-  haze_idle: Seen from the south · hover a stage, click to open it
-  dl_full: Download the full route · GPX
+  haze_idle: Seen from the south — hover a stage, click to open it
+  dl_full: Download the full route (GPX)
   all_stages: ← All stages
   km: km
   moving: moving time
@@ -117,7 +117,7 @@ it:
   stages_word: tappe
   of_ascent: m di dislivello positivo
   tagline_default: Dal Marguareis al Monviso
-  map_hint: Passa sulla linea per vedere ogni tappa · clicca per aprirla
+  map_hint: Passa sulla linea per vedere ogni tappa, clicca per aprirla
   map_aria: Mappa di tutto il percorso
   profile_aria: Profilo altimetrico di tutto il percorso
   the_idea: L'idea
@@ -125,11 +125,11 @@ it:
   ph_your_text: Il tuo testo
   ph_home: Come è nata l'idea, chi siete, perché una linea continua dalle Alpi Liguri al Monviso. Modifica “Home page” nell'editor.
   ph_cover: LA TUA FOTO DI COPERTINA
-  stages_eyebrow: tappe · 24 luglio – 18 agosto 2026
+  stages_eyebrow: tappe — dal 24 luglio al 18 agosto 2026
   stages_title: Le <em>tappe</em>
   haze_aria: Il percorso visto da sud
-  haze_idle: Visto da sud · passa su una tappa, clicca per aprirla
-  dl_full: Scarica il percorso completo · GPX
+  haze_idle: Visto da sud — passa su una tappa, clicca per aprirla
+  dl_full: Scarica il percorso completo (GPX)
   all_stages: ← Tutte le tappe
   km: km
   moving: tempo in movimento
