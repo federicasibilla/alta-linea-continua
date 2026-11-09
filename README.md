@@ -1,21 +1,49 @@
 # Alta Linea Continua
 
-Sito di Federica & Ema. Pubblicato con GitHub Pages, modificabile con [Pages CMS](https://app.pagescms.org).
+**One continuous line across the Ligurian, Maritime and Cottian Alps, from Pian delle Gorre to Pian del Re.**
 
-## Editor di riserva (consigliato se Pages CMS non risponde)
-Vai su https://federicasibilla.github.io/alta-linea-continua/admin/ e accedi con **Sign In with Token** (un token GitHub con permesso "Contents: Read and write" su questo repository). Le foto vengono ridimensionate automaticamente (lato lungo 2400 px, formato WebP).
+In summer 2026 Ema and I walked from the Marguareis to the foot of Monviso in a single line, without coming down to the valleys in between. This repository holds the website we made about it.
 
-## Come si modifica
-1. Vai su https://app.pagescms.org e accedi con GitHub.
-2. Apri il repository `alta-linea-continua`.
-3. Nel menu a sinistra: **Home page**, **Stages**, **Preparation page**, **Site settings**.
-4. Modifica testi, foto, link e triangoli, poi premi **Save**. Il sito si aggiorna in circa un minuto.
+👉 **[federicasibilla.github.io/alta-linea-continua](https://federicasibilla.github.io/alta-linea-continua/)** · also in [Italian](https://federicasibilla.github.io/alta-linea-continua/it/)
 
-## Triangoli alpinistici
-Nella scheda di ogni tappa, sezione *Climbing sections*: nome, colore (verde F/F+, giallo PD− e oltre), grado, posizione in km dall'inizio della tappa, link alla relazione.
+| | |
+|---|---|
+| Stages | 24 (24 July – 18 August 2026) |
+| Distance | ~377 km |
+| Ascent | ~25,000 m |
+| Highest point | 3,331 m |
+| Summits crossed | 67 |
 
-## Dove sono le cose
-- `_stages/` una scheda per tappa
-- `assets/images/` le foto caricate
-- `assets/tracks/` tracce GPX, KML e FIT
-- `assets/data/stages.json` geometria e profili delle tracce (generato, non modificare a mano)
+## What's on the site
+
+- **[The project](https://federicasibilla.github.io/alta-linea-continua/)**: the idea behind the route.
+- **[Stages](https://federicasibilla.github.io/alta-linea-continua/stages/)**: an interactive map of the whole line and a page for every stage, with an elevation profile, photos placed on the track, climbing sections and their grades, and notes.
+- **[Summits](https://federicasibilla.github.io/alta-linea-continua/summits/)**: every peak the GPS track actually goes over.
+- **[Preparation](https://federicasibilla.github.io/alta-linea-continua/preparation/)**: how we prepared and organised the trip.
+
+## Download the tracks
+
+The recorded GPS tracks are free to download, either from each stage page or directly from [`assets/tracks/`](assets/tracks/):
+
+- [`alta-linea-continua-full-route.gpx`](assets/tracks/alta-linea-continua-full-route.gpx): the whole route as one light track, with a waypoint at the start of each stage.
+- `stage-00.gpx` … `stage-23.gpx`: one full-resolution track per stage, also available as `.kml` for Google Earth.
+
+They work with Komoot, Gaia, OsmAnd, Garmin and most other apps and GPS units.
+
+> ⚠️ These are the lines we actually walked, in summer conditions, and they include off-trail and climbing sections graded up to PD− and harder. They are a record of our trip, not a guide: check current conditions and your own experience before following any part of them.
+
+## How it's built
+
+- A static [Jekyll](https://jekyllrb.com/) site hosted on GitHub Pages, in English and Italian.
+- Maps with [Leaflet](https://leafletjs.com/) on [OpenTopoMap](https://opentopomap.org/) tiles; map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
+- Content is edited through [Pages CMS](https://pagescms.org/), so we can write without touching code.
+- A few Python scripts in [`scripts/`](scripts/) do the data work:
+  - `photos.py` places each photo on the track (from its GPS tag or its timestamp) and resizes it;
+  - `summits.py` finds the OpenStreetMap peaks the track really crosses;
+  - `full_route.py` builds the light full-route GPX from the stage tracks.
+
+## Contact
+
+Questions about the route? Ask us through the question form on the stage pages, or open an issue here.
+
+*Ema & Federica, summer 2026*
