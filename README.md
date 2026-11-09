@@ -2,7 +2,7 @@
 
 **One continuous line across the Ligurian, Maritime and Cottian Alps, from Pian delle Gorre to Pian del Re.**
 
-In summer 2026 Ema and I walked from the Marguareis to the foot of Monviso in a single line, without coming down to the valleys in between. This repository holds the website we made about it.
+In summer 2026 Ema and I walked from the Marguareis to the foot of Monviso in one continuous line. This repository holds the website we made about it.
 
 👉 **[federicasibilla.github.io/alta-linea-continua](https://federicasibilla.github.io/alta-linea-continua/)** · also in [Italian](https://federicasibilla.github.io/alta-linea-continua/it/)
 
@@ -30,7 +30,7 @@ The recorded GPS tracks are free to download, either from each stage page or dir
 
 They work with Komoot, Gaia, OsmAnd, Garmin and most other apps and GPS units.
 
-> ⚠️ These are the lines we actually walked, in summer conditions, and they include off-trail and climbing sections graded up to PD− and harder. They are a record of our trip, not a guide: check current conditions and your own experience before following any part of them.
+> ⚠️ These are the lines we actually walked, in summer conditions, and they include climbing sections, some graded PD− and harder. They are a record of our trip, not a guide: check current conditions and your own experience before following any part of them.
 
 ## How it's built
 
