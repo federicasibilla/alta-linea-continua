@@ -14,7 +14,10 @@ water: 'yes'
 resupply: true
 resupply_note: Resupply at Colle della Lombarda, potentially you could ask the kiosk to store a package here. The col is reachable by car. Very frequented in summer weekends.
 resupply_note_it: Rifornimento al Colle della Lombarda, potenzialmente possibile chiedere al chiosco di trattenere un pacco. Il colle è raggiungibile in auto.  Molto frequentato nei weekend estivi.
-story_it: ''
+story_it: |-
+  Partendo dai Laghi Superiori di Valscura, la salita al Monte Malinvern è breve e ben segnata. L’ultimo tratto richiede un po’ l’uso delle mani, ma non è mai esposto. Dalla prima cima si vede chiaramente la seconda. La traversata è facile e si svolge per lo più sul versante italiano, con qualche breve tratto su quello francese, facile da individuare. Raggiunta la seconda cima, siamo tornati alla prima (cioè la più occidentale) breccia evidente nella cresta, dove l’inizio della discesa sull’imponente parete sud-ovest del Malinvern ha l’aspetto di un camino. Durante la disarrampicata si trovano sempre passaggi facili a zig-zag per proseguire. Alla base della parete c’è un ghiaione che diventa via via più stabile man mano che si procede, tenendosi leggermente più a sinistra rispetto alla base immediata della parete. Abbiamo poi raggiunto il Pas du Loup su una pietraia. Sull’altro versante la discesa si svolge su pietraia segnata. Preparatevi a una salita finale molto assolata fino alla Cime de la Vermeille. Da qui si raggiunge rapidamente la Cima della Lombarda restando sulla linea di cresta. La discesa al Colle della Lombarda segue una via normale su roccia.
+
+  Ripartizione dei tempi: 40% scrambling fuori sentiero, 20% sentiero segnato, 40% pietraia segnata.
 gallery: []
 instagram: []
 links: []
