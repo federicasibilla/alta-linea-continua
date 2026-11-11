@@ -41,6 +41,12 @@ layout: default
       {%- if bs != "" -%}<div class="rich">{{ body }}</div>
       {%- else -%}{% include placeholder.html label=t.ph_story_label text=t.ph_story %}{%- endif -%}
 
+      {%- if S.links and S.links.size > 0 -%}
+      <div class="links"><div class="eyebrow">{{ t.links }}</div><ul>
+        {%- for l in S.links %}{%- capture lab -%}{% include tr.html o=l k="label" %}{%- endcapture -%}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ lab | strip | default: l.url }} ↗</a></li>{% endfor -%}
+      </ul></div>
+      {%- endif -%}
+
       {%- if S.gallery and S.gallery.size > 0 -%}
         {% include gallery.html items=S.gallery %}
       {%- elsif site.data.settings.show_placeholders -%}
@@ -54,11 +60,6 @@ layout: default
       {%- elsif site.data.settings.show_placeholders -%}{% include placeholder.html label="Instagram" text=t.ph_insta %}
       {%- endif -%}
 
-      {%- if S.links and S.links.size > 0 -%}
-      <div class="links"><div class="eyebrow">{{ t.links }}</div><ul>
-        {%- for l in S.links %}{%- capture lab -%}{% include tr.html o=l k="label" %}{%- endcapture -%}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ lab | strip | default: l.url }} ↗</a></li>{% endfor -%}
-      </ul></div>
-      {%- endif -%}
     </div>
 
     <aside class="side">
