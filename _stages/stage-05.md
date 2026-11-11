@@ -35,7 +35,7 @@ climbing:
     color: yellow
     grade: PD
     km: 11.22
-    link: ''
+    link: https://www.gulliver.it/itinerari/gelas-cima-dei-cresta-ne-traversata-degli-italiani/
 comments: []
 ---
 
