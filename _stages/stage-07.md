@@ -30,9 +30,9 @@ links:
 climbing:
   - name: Cima di Leccia
     color: yellow
-    grade: PD+
+    grade: PD
     km: 7.58
-    link: ''
+    link: https://www.gulliver.it/itinerari/mercantour-cima-di-traversata-colli-fremamorta-mercantour-per-le-cime-naucetas-leccia-ciriegia/
 comments: []
 ---
 
