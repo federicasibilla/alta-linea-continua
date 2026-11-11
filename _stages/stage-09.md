@@ -1,24 +1,32 @@
 ---
 number: 9
 start: Laghi di Valscura
+start_it: ''
 end: Lago di Lausfer
-date: '2026-08-02'
+end_it: ''
+date: 2026-08-02
 date_label: 2 & 4 August
 date_label_it: 2 e 4 agosto
 summary: ''
-climbing:
-- name: Monte Malinvern
-  color: green
-  grade: F
-  km: 2.78
-  link: ''
+summary_it: ''
+sleep: tent
+water: 'yes'
+resupply: true
+resupply_note: Resupply at Colle della Lombarda, potentially you could ask the kiosk to store a package here. The col is reachable by car. Very frequented in summer weekends.
+resupply_note_it: Rifornimento al Colle della Lombarda, potenzialmente possibile chiedere al chiosco di trattenere un pacco. Il colle è raggiungibile in auto.  Molto frequentato nei weekend estivi.
+story_it: ''
 gallery: []
 instagram: []
 links: []
+climbing:
+  - name: Monte Malinvern
+    color: green
+    grade: F
+    km: 2.78
+    link: ''
 comments: []
-sleep: tent
-water: "yes"
-resupply: true
-resupply_note: "Resupply at Colle della Lombarda, with a day back home"
-resupply_note_it: "Rifornimento al Colle della Lombarda, con un giorno a casa"
 ---
+
+Starting from the Superior lakes of Valscura, the way up to Monte Malinvern is short and well marked. The last section requires a bit of hands use but is never exposed. From the first peak, the second one is clearly visible. Traversing to it is easy, mostly staying on the Italian side with occasional short sections on the french one, which are easy to spot. After reaching the second top, we went back to the first (i.e. west-most) evident breach in the ridge, where the beginning of the down-climb of the imponent south-west face of malinvern looks like a chimney. During this downclimb one can always find easy zig-zag ways to procede. At the base of this face is a debrie field that becomes progressively more stable as you keep going, and keeping slightly more left than the immediate base of the wall. Then we reached pas du Loup on a rockfield. On the other side, the descent is on marked rocks. Be prepared for a very sunny final climb up to Cime de la Vermeille. From here, it is possible to fastly reach cime della Lombarda by remaining on the ridge line. The way down to colle della Lombarda is a rocky via normale.  
+
+40% of the time was off-path scramble, 20% on marked path and 40% on marked rock field
