@@ -10,7 +10,7 @@ date_label_it: 2 e 4 agosto
 summary: ''
 summary_it: ''
 sleep: tent
-water: 'yes'
+water: 'no'
 resupply: true
 resupply_note: Resupply at Colle della Lombarda, potentially you could ask the kiosk to store a package here. The col is reachable by car. Very frequented in summer weekends.
 resupply_note_it: Rifornimento al Colle della Lombarda, potenzialmente possibile chiedere al chiosco di trattenere un pacco. Il colle è raggiungibile in auto.  Molto frequentato nei weekend estivi.
