@@ -24,11 +24,11 @@ gallery: []
 instagram: []
 links: []
 climbing:
-  - name: Monte Malinvern
+  - name: Monte Malinvern versante SO
     color: green
-    grade: F
+    grade: F+
     km: 2.78
-    link: ''
+    link: https://www.gulliver.it/itinerari/malinvern-monte-versante-so-e-cresta-no/
 comments: []
 ---
 
